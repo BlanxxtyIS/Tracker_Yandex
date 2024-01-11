@@ -17,7 +17,6 @@ class TrackerViewController: UIViewController {
     weak var delegate: TrackerViewControllerDelegate?
     
     var selectedDate = Date()
-    var currentDate = Date()
     
     var headersName: [String] = ["Домашний уют", "Радостные мелочи"]
     
@@ -82,17 +81,6 @@ class TrackerViewController: UIViewController {
         updateViewController()
         datePickerSelected(datePicker)
     }
-    
-    func dateAndButton() {
-        if selectedDate > currentDate {
-            print("выбранная дата больше")
-            delegate?.fateOfButton(whre: false)
-        } else {
-            delegate?.fateOfButton(whre: true)
-            print("выбранная дата меньше или равна")
-        }
-    }
-    
         
     @objc func datePickerSelected(_ sender: UIDatePicker) {
         selectedDate = sender.date
@@ -358,7 +346,6 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
-
 //Делегат на добавление нового трекера
 extension TrackerViewController: CreatingTrackersDelegate {
     func createNewTracker(tracker: Tracker) {

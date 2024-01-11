@@ -23,97 +23,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CD198D55-6AF0-4AEB-B57B-C6976252AD90"
+            uuid = "C7884221-081E-4597-A26B-4507EE126929"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            filePath = "Tracker Home/View/TrackerViewControllerCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
-            landmarkName = "createNewTracker(tracker:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "plusButtonClicked()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CD198D55-6AF0-4AEB-B57B-C6976252AD90 - 65ae6d895109b9ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.createNewTracker(tracker: Tracker_Home.Tracker) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "378"
-                  endingLineNumber = "378"
-                  offsetFromSymbolStart = "1288">
-               </Location>
-               <Location
-                  uuid = "CD198D55-6AF0-4AEB-B57B-C6976252AD90 - 65ae6d895109b9ac"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.createNewTracker(tracker: Tracker_Home.Tracker) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "378"
-                  endingLineNumber = "378"
-                  offsetFromSymbolStart = "1236">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9C2CE167-0323-47F5-8303-03294F5EE946"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
-            landmarkName = "createNewTracker(tracker:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9C2CE167-0323-47F5-8303-03294F5EE946 - 65ae6d895109b9cb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.createNewTracker(tracker: Tracker_Home.Tracker) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "379"
-                  endingLineNumber = "379"
-                  offsetFromSymbolStart = "1320">
-               </Location>
-               <Location
-                  uuid = "9C2CE167-0323-47F5-8303-03294F5EE946 - 65ae6d895109b9cb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.createNewTracker(tracker: Tracker_Home.Tracker) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "379"
-                  endingLineNumber = "379"
-                  offsetFromSymbolStart = "1288">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

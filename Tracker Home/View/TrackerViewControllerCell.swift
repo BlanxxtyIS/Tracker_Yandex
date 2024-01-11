@@ -116,7 +116,6 @@ class TrackerViewControllerCell: UICollectionViewCell {
         }
 
         if selectedDate > currentDate {
-            plusButton.isEnabled = activeButton
             print("дата больше")
         } else {
             print("дата меньше")
@@ -125,7 +124,6 @@ class TrackerViewControllerCell: UICollectionViewCell {
             } else {
                 delegate?.completeTracker(id: trackerId, indexPath: indexPath)
             }
-            plusButton.isEnabled = activeButton
         }
     }
     
