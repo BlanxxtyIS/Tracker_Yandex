@@ -7,6 +7,7 @@
 
 import UIKit
 
+//HEADER ячеек
 class TrackerViewControllerHeader: UICollectionReusableView {
     
     let titleLabel: UILabel = {
