@@ -61,7 +61,7 @@ class CreatingTrackers: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
-        title = "Ваш заголовок"
+        title = "Создание трекера"
         setupAllViews()
     }
     
@@ -79,12 +79,12 @@ class CreatingTrackers: UIViewController {
     
     @objc private func newHabitClick() {
         let viewController = NewHabitViewController(delegate: self)
-        present(viewController, animated:  true)
+        present(UINavigationController(rootViewController: viewController), animated:  true)
         print("Привычка")
     }
     
     @objc private func irregularEventClick() {
-        self.present(IrregularEventViewController(), animated: true)
+        self.present(UINavigationController(rootViewController: IrregularEventViewController()), animated: true)
         print("Нерегулярное событие")
     }
 }

@@ -12,7 +12,7 @@ class IrregularEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .udGray
-        print("Нерегулярное событие")
+        view.backgroundColor = .udWhiteDay
+        title = "Нерегулярное событие"
     }
 }

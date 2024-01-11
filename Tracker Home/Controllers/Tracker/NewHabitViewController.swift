@@ -29,14 +29,6 @@ class NewHabitViewController: UIViewController {
     
     private var habit: [String] = ["Категория", "Расписание"]
     
-    private lazy var titleLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Новая привычка"
-        label.font = .systemFont(ofSize: 16, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     private lazy var textField: UITextField = {
        let textField = UITextField()
         textField.placeholder = "    Введите название трекера"
@@ -98,9 +90,8 @@ class NewHabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
-        self.title = "Новая привычка"
+        title = "Новая привычка"
         setupAllViews()
-        
         print("Привычка")
     }
     
@@ -127,12 +118,10 @@ class NewHabitViewController: UIViewController {
         let newHabit = Tracker(id: UUID(), name: trackerName, color: .colorSelection18, emoji: "❤️️️️️️️", schedule: schedule)
         self.delegate?.createNewHabit(tracker: newHabit)
         dismiss(animated: true)
-        dismiss(animated: true)
         print("Создать")
     }
     
     private func setupAllViews() {
-        view.addSubview(titleLabel)
         view.addSubview(textField)
         
         view.addSubview(tableView)
@@ -144,11 +133,9 @@ class NewHabitViewController: UIViewController {
         buttonStackView.addArrangedSubview(createButton)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
             
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 38),
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         
             tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
@@ -167,10 +154,10 @@ extension NewHabitViewController: UITableViewDelegate {
         if indexPath.row == 0 {
             print("Категория")
             let viewController = NewCategoryViewController()
-            present(viewController, animated: true)
+            present(UINavigationController(rootViewController: viewController), animated: true)
         } else if indexPath.row == 1 {
             let viewController = NewScheduleViewController(delegate: self)
-            present(viewController, animated: true)
+            present(UINavigationController(rootViewController: viewController), animated: true)
             print("Расписание")
         }
         tableView.deselectRow(at: indexPath, animated: true)

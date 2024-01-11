@@ -14,8 +14,13 @@ protocol TrackerViewControllerCellDelegate: AnyObject {
 
 //Ячейки коллекции
 class TrackerViewControllerCell: UICollectionViewCell {
-    
+        
     weak var delegate: TrackerViewControllerCellDelegate?
+    
+    let currentDate = Date()
+    var selectedDate = Date()
+    
+    var activeButton: Bool = true
     
     var trackerId: UUID?
     var indexPath: IndexPath?
@@ -74,7 +79,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
         button.layer.cornerRadius = 17
         button.tintColor = .udWhiteDay
         button.setImage(UIImage(systemName: "plus")!, for: .normal)
-        button.addTarget(self, action: #selector(testPlsButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(plusButtonClicked), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -103,16 +108,24 @@ class TrackerViewControllerCell: UICollectionViewCell {
             }
         }
     }
-    
-    @objc private func testPlsButton() {
+
+    @objc private func plusButtonClicked() {
         guard let trackerId = trackerId, let indexPath = indexPath else {
             assertionFailure("Не найден айди или индекс")
             return
         }
-        if completeCell {
-            delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
+
+        if selectedDate > currentDate {
+            plusButton.isEnabled = activeButton
+            print("дата больше")
         } else {
-            delegate?.completeTracker(id: trackerId, indexPath: indexPath)
+            print("дата меньше")
+            if completeCell {
+                delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
+            } else {
+                delegate?.completeTracker(id: trackerId, indexPath: indexPath)
+            }
+            plusButton.isEnabled = activeButton
         }
     }
     

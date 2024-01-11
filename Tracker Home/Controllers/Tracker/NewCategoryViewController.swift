@@ -9,15 +9,7 @@ import UIKit
 
 //Категория
 class NewCategoryViewController: UIViewController {
-    
-    private lazy var titleLabel: UILabel = {
-        let title = UILabel()
-        title.text = "Новая категория"
-        title.font = .systemFont(ofSize: 16, weight: .medium)
-        title.translatesAutoresizingMaskIntoConstraints = false
-        return title
-    }()
-    
+        
     private lazy var textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "   Введите название категории"
@@ -43,6 +35,7 @@ class NewCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Новая категория"
         view.backgroundColor = .udWhiteDay
         setupAllViews()
     }
@@ -70,15 +63,12 @@ class NewCategoryViewController: UIViewController {
     }
     
     private func setupAllViews() {
-        view.addSubview(titleLabel)
         view.addSubview(textField)
         view.addSubview(readyButton)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 14),
         
-            textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 38),
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
         

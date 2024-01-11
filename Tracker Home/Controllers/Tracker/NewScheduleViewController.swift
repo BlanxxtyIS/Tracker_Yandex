@@ -60,6 +60,7 @@ class NewScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Расписание"
         view.backgroundColor = .udWhiteDay
         tableView.delegate = self
         tableView.dataSource = self
@@ -94,7 +95,7 @@ class NewScheduleViewController: UIViewController {
         view.addSubview(readyButton)
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: readyButton.topAnchor, constant: -47),

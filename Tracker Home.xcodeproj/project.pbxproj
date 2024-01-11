@@ -15,7 +15,6 @@
 		F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A752B35BB0F009E2D14 /* ExtensionUIColors.swift */; };
 		F4102A782B35C4AC009E2D14 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */; };
 		F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */; };
-		F4215F542B4FD3D7008EE9B9 /* LockDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4215F532B4FD3D7008EE9B9 /* LockDate.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */; };
 		F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */; };
@@ -42,7 +41,6 @@
 		F4102A752B35BB0F009E2D14 /* ExtensionUIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColors.swift; sourceTree = "<group>"; };
 		F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		F4215F532B4FD3D7008EE9B9 /* LockDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockDate.swift; sourceTree = "<group>"; };
 		F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerHeader.swift; sourceTree = "<group>"; };
 		F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerCell.swift; sourceTree = "<group>"; };
 		F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTrackers.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */,
 				F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */,
 				F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */,
-				F4215F532B4FD3D7008EE9B9 /* LockDate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,7 +234,6 @@
 				F4A2F48C2B4828AC00D40710 /* NewCategoryViewController.swift in Sources */,
 				F4A2F4882B47239000D40710 /* IrregularEventViewController.swift in Sources */,
 				F4102A662B35AEBC009E2D14 /* MainTabBarController.swift in Sources */,
-				F4215F542B4FD3D7008EE9B9 /* LockDate.swift in Sources */,
 				F4A80AFC2B4D169500FCCAEF /* NewScheduleViewController.swift in Sources */,
 				F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */,
 				F4A80B002B4D796A00FCCAEF /* Weekday.swift in Sources */,

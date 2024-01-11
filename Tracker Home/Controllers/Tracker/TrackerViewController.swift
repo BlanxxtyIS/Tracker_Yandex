@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol TrackerViewControllerDelegate: AnyObject {
+    func fateOfButton(whre: Bool)
+}
+
 //Трекеры
 class TrackerViewController: UIViewController {
     
-    var lockDate: [LockDate] = []
+    weak var delegate: TrackerViewControllerDelegate?
     
     var selectedDate = Date()
+    var currentDate = Date()
     
     var headersName: [String] = ["Домашний уют", "Радостные мелочи"]
     
@@ -78,9 +83,21 @@ class TrackerViewController: UIViewController {
         datePickerSelected(datePicker)
     }
     
-    @objc func datePickerSelected(_ sender: UIDatePicker) {
-        let components = datePicker.calendar.dateComponents([.day, .weekday], from: datePicker.date)
+    func dateAndButton() {
+        if selectedDate > currentDate {
+            print("выбранная дата больше")
+            delegate?.fateOfButton(whre: false)
+        } else {
+            delegate?.fateOfButton(whre: true)
+            print("выбранная дата меньше или равна")
+        }
+    }
+    
         
+    @objc func datePickerSelected(_ sender: UIDatePicker) {
+        selectedDate = sender.date
+        
+        let components = datePicker.calendar.dateComponents([.day, .weekday], from: datePicker.date)
         guard let weekday = components.weekday else {
             return
         }
@@ -103,12 +120,10 @@ class TrackerViewController: UIViewController {
         collectionView.reloadData()
         updateViewController()
     }
-
-    
-    //MARK: - ДОДЕЛАТЬ ФУНКЦИОНАЛЬНОСТЬ
+        
     @objc private func addTracker() {
         let viewController = CreatingTrackers(delegate: self)
-        present(viewController, animated: true)
+        present(UINavigationController(rootViewController: viewController), animated: true)
         print("Добавляй трекер")
     }
     
@@ -229,8 +244,6 @@ class TrackerViewController: UIViewController {
         collectionView.reloadData()
     }
     
-    
-    
     //Выполнен ли в данный день
     private func isTrackerCompletedToday(id: UUID) -> Bool {
         completedTrackers.contains { trackerRecord in
@@ -238,13 +251,6 @@ class TrackerViewController: UIViewController {
             return trackerRecord.id == id && isSameDay
         }
     }
-    
-    //MARK: Реализовать функцию чтобы нельзя было нажимать на кнопку дальше даты
-//    func hasMissingDays(days: [Weekday], day: Weekday) -> Bool {
-//        
-//        
-//    }
-//    
 }
 
 //Расширение SearchBara, возвращает текст работает с экраном
@@ -252,6 +258,7 @@ extension TrackerViewController: UISearchTextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         setupPlugView()
+        collectionView.reloadData()
         return true
     }
 }
@@ -259,40 +266,11 @@ extension TrackerViewController: UISearchTextFieldDelegate {
 //MARK: UICollectionViewCell - Header
 extension TrackerViewController: UICollectionViewDataSource, TrackerViewControllerCellDelegate {
     func completeTracker(id: UUID, indexPath: IndexPath) {
-        
-        let components = datePicker.calendar.dateComponents([.weekday], from: datePicker.date)
-        guard let weekday = components.weekday else {
-            return
-        }
-        
-        guard let day = Weekday(rawValue: weekday) else { return }
-        
-        let tracker = visibleTrackers[indexPath.section].tracker[indexPath.row]
-        let schedule = tracker.schedule
-        
-//        for i in 0..<lockDate.count - 1 {
-//            lockDate[i].idAndSchedule[id]?.contains {
-//                $0 == day
-//                print("YES")
-//            }
-//        }
-        
         let trackerRecord = TrackerRecord(id: id, date: datePicker.date)
         completedTrackers.append(trackerRecord)
         collectionView.reloadItems(at: [indexPath])
-        
-        
-        var selectedDates = LockDate(idAndSchedule: [id: schedule])
-        if let days = selectedDates.idAndSchedule[id] {
-            selectedDates.idAndSchedule[id]?.removeAll {
-                $0 == day
-            }
-            lockDate.append(selectedDates)
-        }
     }
 
-        
-    
     func uncompleteTracker(id: UUID, indexPath: IndexPath) {
         completedTrackers.removeAll { trackerRecord in
             let isSameDay = Calendar.current.isDate(trackerRecord.date, inSameDayAs: datePicker.date)
@@ -329,6 +307,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
         let completedToday = isTrackerCompletedToday(id: tracker.id)
         cell.setupData(traker: tracker, dayCount: completedDay, isCompletedToday: completedToday, indexPath: indexPath)
         cell.delegate = self
+        cell.selectedDate = selectedDate
         return cell
     }
 }
@@ -386,6 +365,7 @@ extension TrackerViewController: CreatingTrackersDelegate {
 //        let header = "Одна категория для удобства"
         let header = "Радостные мелочи"
         let newTracker = TrackerCategory(header: header, tracker: [tracker])
+//        lockDate[tracker.id] = tracker.schedule
            
         if let index = headersName.firstIndex(of: header) {
             categories[index].tracker.append(tracker)
@@ -397,6 +377,7 @@ extension TrackerViewController: CreatingTrackersDelegate {
         }
         visibleTrackers = categories
         collectionView.reloadData()
+        updateViewController()
     }
 }
 
