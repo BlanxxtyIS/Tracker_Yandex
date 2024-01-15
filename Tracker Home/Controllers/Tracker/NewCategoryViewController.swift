@@ -7,12 +7,33 @@
 
 import UIKit
 
+protocol NewCategoryViewControllerDelegate: AnyObject {
+    func categoryName(name: String)
+}
+
 //Категория
 class NewCategoryViewController: UIViewController {
-        
+    
+    weak var delegate: NewCategoryViewControllerDelegate?
+    private var text = ""
+    private var categorysName: [String] = []
+    
+    init(delegate: NewCategoryViewControllerDelegate?) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "   Введите название категории"
+        textField.placeholder = "Введите название категории"
+        textField.clearButtonMode = .whileEditing
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
         textField.backgroundColor = .udBackground
         textField.layer.cornerRadius = 16
         textField.heightAnchor.constraint(equalToConstant: 75).isActive = true
@@ -36,13 +57,16 @@ class NewCategoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Новая категория"
+        textField.delegate = self
         view.backgroundColor = .udWhiteDay
+        textField.delegate = self
         setupAllViews()
     }
     
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
+        self.text = text
         if text.count >= 1 {
             textField.rightViewMode = .always
             readyButton.backgroundColor = .udBlackDay
@@ -55,11 +79,16 @@ class NewCategoryViewController: UIViewController {
         }
     }
     
+    func setupCategoryName() {
+        guard let category = categorysName.last else { return }
+        self.delegate?.categoryName(name: category)
+    }
+    
     @objc
     private func addTracker() {
+        self.delegate?.categoryName(name: text)
+        categorysName.append(text)
         dismiss(animated: true)
-        guard let category = textField.text else { return }
-        print(category)
     }
     
     private func setupAllViews() {
@@ -75,6 +104,16 @@ class NewCategoryViewController: UIViewController {
             readyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             readyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             readyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)])
+    }
+}
+
+extension NewCategoryViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
 

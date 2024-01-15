@@ -12,12 +12,13 @@ protocol TrackerViewControllerDelegate: AnyObject {
 }
 
 //Трекеры
-class TrackerViewController: UIViewController {
-    
+class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate {
+        
     weak var delegate: TrackerViewControllerDelegate?
     
     var selectedDate = Date()
     
+    var nowHeaderName: String = ""
     var headersName: [String] = ["Домашний уют", "Радостные мелочи"]
     
     var categories: [TrackerCategory] = [TrackerCategory(header: "Домашний уют", tracker: [Tracker(id: UUID(), name: "Бабушка прислала открытку в вотсапе", color: .colorSelection18, emoji: "❤️️️️️️️", schedule: [.friday, .monday]), Tracker(id: UUID(), name: "Свидание в январе", color: .udGray, emoji: "💫️️️️️️", schedule: [.friday, .monday])]), TrackerCategory(header: "Радостные мелочи", tracker: [Tracker(id: UUID(), name: "Кошка заслонила камеру на созвоне", color: .udBlue, emoji: "😂", schedule: [.friday, .monday])])]
@@ -115,6 +116,11 @@ class TrackerViewController: UIViewController {
         print("Добавляй трекер")
     }
     
+    //Метод делегата на получение категории
+    func categoryName(name: String) {
+        print(name)
+    }
+    
     //Обновление экрана
     private func updateViewController() {
         if visibleTrackers.isEmpty {
@@ -153,7 +159,7 @@ class TrackerViewController: UIViewController {
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             searchBar.heightAnchor.constraint(equalToConstant: 36),
             
-            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 24),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
@@ -319,11 +325,13 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        let indexPath = IndexPath(row: 0, section: section)
-        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
-        let targetSize = CGSize(width: collectionView.bounds.width, height: 42)
-        
-        return headerView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .required)
+//        let indexPath = IndexPath(row: 0, section: section)
+//        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+//        let targetSize = CGSize(width: collectionView.bounds.width, height: 42)
+//        
+//        return headerView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .required)
+        let sectionInsets = UIEdgeInsets(top: 16, left: 28, bottom: 12, right: 28)
+        return CGSize(width: collectionView.bounds.width - sectionInsets.left - sectionInsets.right, height: 18)
     }
     
     //Высота и ширина ячейки
@@ -346,14 +354,12 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
 //Делегат на добавление нового трекера
 extension TrackerViewController: CreatingTrackersDelegate {
-    func createNewTracker(tracker: Tracker) {
-//        let header = "Одна категория для удобства"
-        let header = "Радостные мелочи"
+    func createNewTracker(header: String, tracker: Tracker) {
         let newTracker = TrackerCategory(header: header, tracker: [tracker])
-//        lockDate[tracker.id] = tracker.schedule
-           
+        
         if let index = headersName.firstIndex(of: header) {
             categories[index].tracker.append(tracker)
             print("Есть в массиве, надо добавить ТОЛЬКО ТРЕКЕР")

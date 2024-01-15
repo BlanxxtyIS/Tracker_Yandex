@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CreatingTrackersDelegate: AnyObject {
-    func createNewTracker(tracker: Tracker)
+    func createNewTracker(header: String, tracker: Tracker)
 }
 
 //Страница создания Привычки/Нерегулярного события
@@ -90,8 +90,8 @@ class CreatingTrackers: UIViewController {
 }
 
 extension CreatingTrackers: NewHabitViewControllerDelegate {
-    func createNewHabit(tracker: Tracker) {
+    func createNewHabit(header: String, tracker: Tracker) {
         dismiss(animated: true)
-        delegate?.createNewTracker(tracker: tracker)
+        delegate?.createNewTracker(header: header, tracker: tracker)
     }
 }

@@ -8,12 +8,13 @@
 import UIKit
 
 protocol NewHabitViewControllerDelegate: AnyObject {
-    func createNewHabit(tracker: Tracker)
+    func createNewHabit(header: String, tracker: Tracker)
 }
 
 //Привычка
 class NewHabitViewController: UIViewController {
     
+    var category: String = ""
     var schedule: [Weekday] = []
     
     weak var delegate: NewHabitViewControllerDelegate?
@@ -31,7 +32,11 @@ class NewHabitViewController: UIViewController {
     
     private lazy var textField: UITextField = {
        let textField = UITextField()
-        textField.placeholder = "    Введите название трекера"
+        textField.placeholder = "Введите название трекера"
+        textField.clearButtonMode = .whileEditing
+        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
         textField.backgroundColor = .udBackground
         textField.layer.cornerRadius = 16
         textField.heightAnchor.constraint(equalToConstant: 75).isActive = true
@@ -91,6 +96,7 @@ class NewHabitViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
         title = "Новая привычка"
+        textField.delegate = self
         setupAllViews()
         print("Привычка")
     }
@@ -116,7 +122,7 @@ class NewHabitViewController: UIViewController {
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
         let newHabit = Tracker(id: UUID(), name: trackerName, color: .colorSelection18, emoji: "❤️️️️️️️", schedule: schedule)
-        self.delegate?.createNewHabit(tracker: newHabit)
+        self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
     }
@@ -153,7 +159,7 @@ extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             print("Категория")
-            let viewController = NewCategoryViewController()
+            let viewController = NewCategoryViewController(delegate: self)
             present(UINavigationController(rootViewController: viewController), animated: true)
         } else if indexPath.row == 1 {
             let viewController = NewScheduleViewController(delegate: self)
@@ -188,8 +194,23 @@ extension NewHabitViewController: UITableViewDataSource {
 }
 
 extension NewHabitViewController: NewScheduleViewControllerDelegate {
-    
     func getDay(day: [Weekday]) {
         schedule = day
+    }
+}
+
+extension NewHabitViewController: NewCategoryViewControllerDelegate {
+    func categoryName(name: String) {
+        category = name
+    }
+}
+
+extension NewHabitViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
