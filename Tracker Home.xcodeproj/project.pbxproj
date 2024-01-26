@@ -15,6 +15,8 @@
 		F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A752B35BB0F009E2D14 /* ExtensionUIColors.swift */; };
 		F4102A782B35C4AC009E2D14 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */; };
 		F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */; };
+		F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */; };
+		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */; };
 		F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */; };
@@ -41,6 +43,8 @@
 		F4102A752B35BB0F009E2D14 /* ExtensionUIColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColors.swift; sourceTree = "<group>"; };
 		F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionCell.swift; sourceTree = "<group>"; };
+		F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionHeader.swift; sourceTree = "<group>"; };
 		F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerHeader.swift; sourceTree = "<group>"; };
 		F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerCell.swift; sourceTree = "<group>"; };
 		F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTrackers.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 				F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */,
 				F4A2F4892B472EEF00D40710 /* TablewViewCell.swift */,
 				F4A80AFD2B4D189500FCCAEF /* ScheduleTableViewCell.swift */,
+				F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */,
+				F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,10 +244,12 @@
 				F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */,
 				F4A80B002B4D796A00FCCAEF /* Weekday.swift in Sources */,
 				F4102A622B35AEBC009E2D14 /* AppDelegate.swift in Sources */,
+				F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */,
 				F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */,
 				F4A80AFE2B4D189500FCCAEF /* ScheduleTableViewCell.swift in Sources */,
 				F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */,
 				F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */,
+				F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */,
 				F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */,
 				F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */,
 				F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */,

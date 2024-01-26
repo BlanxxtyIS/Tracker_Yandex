@@ -21,7 +21,7 @@ class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate
     var nowHeaderName: String = ""
     var headersName: [String] = ["Домашний уют", "Радостные мелочи"]
     
-    var categories: [TrackerCategory] = [TrackerCategory(header: "Домашний уют", tracker: [Tracker(id: UUID(), name: "Бабушка прислала открытку в вотсапе", color: .colorSelection18, emoji: "❤️️️️️️️", schedule: [.friday, .monday]), Tracker(id: UUID(), name: "Свидание в январе", color: .udGray, emoji: "💫️️️️️️", schedule: [.friday, .monday])]), TrackerCategory(header: "Радостные мелочи", tracker: [Tracker(id: UUID(), name: "Кошка заслонила камеру на созвоне", color: .udBlue, emoji: "😂", schedule: [.friday, .monday])])]
+    var categories: [TrackerCategory] = [TrackerCategory(header: "Домашний уют", tracker: [Tracker(id: UUID(), name: "Бабушка прислала открытку в вотсапе", color: .color10, emoji: "❤️️️️️️️", schedule: [.friday, .monday]), Tracker(id: UUID(), name: "Свидание в январе", color: .udGray, emoji: "💫️️️️️️", schedule: [.friday, .monday])]), TrackerCategory(header: "Радостные мелочи", tracker: [Tracker(id: UUID(), name: "Кошка заслонила камеру на созвоне", color: .udBlue, emoji: "😂", schedule: [.friday, .monday])])]
     
     var visibleTrackers: [TrackerCategory] = []
     
@@ -324,12 +324,6 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-//        let indexPath = IndexPath(row: 0, section: section)
-//        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
-//        let targetSize = CGSize(width: collectionView.bounds.width, height: 42)
-//        
-//        return headerView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .required)
         let sectionInsets = UIEdgeInsets(top: 16, left: 28, bottom: 12, right: 28)
         return CGSize(width: collectionView.bounds.width - sectionInsets.left - sectionInsets.right, height: 18)
     }

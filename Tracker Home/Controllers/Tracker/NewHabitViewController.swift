@@ -14,8 +14,19 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 //Привычка
 class NewHabitViewController: UIViewController {
     
+    var lastSectionIndexPath: IndexPath?
+    var lastIndexPath: IndexPath?
+    
+    var lastSelectedEmoji: String = ""
+    var lastSelectedColor: UIColor = .color1
+    
     var category: String = ""
     var schedule: [Weekday] = []
+    
+    let emojiSection = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝", "😪"]
+    let colorSection: [UIColor] = [UIColor.color1, UIColor.color2, UIColor.color3, UIColor.color4, UIColor.color5, UIColor.color6, UIColor.color7, UIColor.color8, UIColor.color9, UIColor.color10, UIColor.color11, UIColor.color12, UIColor.color13, UIColor.color14, UIColor.color15, UIColor.color16, UIColor.color17, UIColor.color18]
+    
+    var headerName: [String] = ["Emoji", "Цвет"]
     
     weak var delegate: NewHabitViewControllerDelegate?
     
@@ -57,6 +68,14 @@ class NewHabitViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.register(EmojiColorCollectionCell.self, forCellWithReuseIdentifier: "emojiColorCollectionCell")
+        collection.register(EmojiColorCollectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "emojiColorCollectionHeader")
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
+    }()
+    
     private lazy var cancelButton: UIButton = {
        let cancelButton = UIButton()
         cancelButton.setTitle("Отменить", for: .normal)
@@ -71,17 +90,17 @@ class NewHabitViewController: UIViewController {
         return cancelButton
     }()
     
-        private lazy var createButton: UIButton = {
-           let createButton = UIButton()
-            createButton.setTitle("Создать", for: .normal)
-            createButton.backgroundColor = .udGray
-            createButton.layer.cornerRadius = 16
-            createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-            createButton.addTarget(self, action: #selector(createButtonClicked), for: .touchUpInside)
-            createButton.translatesAutoresizingMaskIntoConstraints = false
-            createButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            return createButton
-        }()
+    private lazy var createButton: UIButton = {
+        let createButton = UIButton()
+        createButton.setTitle("Создать", for: .normal)
+        createButton.backgroundColor = .udGray
+        createButton.layer.cornerRadius = 16
+        createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        createButton.addTarget(self, action: #selector(createButtonClicked), for: .touchUpInside)
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        createButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        return createButton
+    }()
     
     private lazy var buttonStackView: UIStackView = {
        let stackView = UIStackView()
@@ -121,7 +140,7 @@ class NewHabitViewController: UIViewController {
     @objc
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: .colorSelection18, emoji: "❤️️️️️️️", schedule: schedule)
+        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: schedule)
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
@@ -133,6 +152,10 @@ class NewHabitViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         view.addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(cancelButton)
@@ -148,6 +171,11 @@ class NewHabitViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.heightAnchor.constraint(equalToConstant: 150),
+            
+            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
         
             buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -190,6 +218,116 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.backgroundColor = .udBackground
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
         return cell
+    }
+}
+
+extension NewHabitViewController: UICollectionViewDataSource {
+    //кол-во секций
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return headerName.count
+    }
+    
+    //кол-во ячеек в секции
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return emojiSection.count
+        } else {
+            return colorSection.count
+        }
+    }
+    
+    //сама ячейка в выбранной indexPath
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiColorCollectionCell", for: indexPath) as? EmojiColorCollectionCell else {
+            preconditionFailure("Ошибка с ячейкой")
+        }
+        var data: String
+        if indexPath.section == 0 {
+            data = emojiSection[indexPath.item]
+            cell.emoji.text = data
+        } else {
+            cell.color.backgroundColor = colorSection[indexPath.item]
+        }
+        return cell
+    }
+    
+    //Заголовок хедер
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "emojiColorCollectionHeader", for: indexPath) as! EmojiColorCollectionHeader
+            headerView.titleLabel.text = headerName[indexPath.section]
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+}
+
+extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
+    //Выбор ячейки
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard var cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
+        if indexPath.section == 0 {
+            cell.contentView.backgroundColor = .udLightGray
+            
+            lastSelectedEmoji = emojiSection[indexPath.item]
+            print(emojiSection[indexPath.item])
+        } else {
+            cell.contentView.layer.masksToBounds = true
+            cell.contentView.layer.borderWidth = 3.0
+            let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+            cell.contentView.layer.borderColor = borderColor
+            
+            lastSelectedColor = colorSection[indexPath.item]
+            print(colorSection[indexPath.item])
+        }
+        
+        if lastIndexPath == nil {
+            lastIndexPath = indexPath
+        } else {
+            cell = (collectionView.cellForItem(at: lastIndexPath!) as! EmojiColorCollectionCell)
+            if indexPath.section == lastIndexPath?.section {
+                cell.destroyCell(lastIndexPath!)
+                lastIndexPath = indexPath
+            } else {
+                print("Разные секции")
+                if lastSectionIndexPath == nil {
+                    lastSectionIndexPath = lastIndexPath
+                    lastIndexPath = indexPath
+                } else {
+                    cell = (collectionView.cellForItem(at: lastSectionIndexPath!) as! EmojiColorCollectionCell)
+                    cell.destroyCell(lastSectionIndexPath!)
+                    lastSectionIndexPath = lastIndexPath
+                    lastIndexPath = indexPath
+                }
+            }
+        }
+    }
+    
+    //Отступы от краев коллекции
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 24, left: 18, bottom: 31, right: 19)
+    }
+    
+    //Размер ячейки
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 52, height: 52)
+    }
+    
+    //Горизонтальные отступы между ячейками
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    //Вертикальные отступы между ячейками
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    //настройки Хедера
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
     }
 }
 
