@@ -13,6 +13,7 @@ extension UIColor {
     static var udGray: UIColor {UIColor(named: "YP Gray") ?? UIColor.gray}
     static var udWhiteDay: UIColor {UIColor(named: "YP White [day]") ?? UIColor.white}
     static var udBackground: UIColor {UIColor(named: "YP Background") ?? UIColor.systemBackground}
+    static var udRed: UIColor {UIColor(named: "YP Red") ?? UIColor.red}
     
     static var colorSelection18: UIColor {UIColor(named: "Color selection 18") ?? UIColor.green}
 }

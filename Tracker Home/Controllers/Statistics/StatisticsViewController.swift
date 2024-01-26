@@ -7,6 +7,8 @@
 
 import UIKit
 
+//Статистика
+
 class StatisticsViewController: UIViewController {
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {

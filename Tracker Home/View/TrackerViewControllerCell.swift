@@ -7,11 +7,27 @@
 
 import UIKit
 
+protocol TrackerViewControllerCellDelegate: AnyObject {
+    func completeTracker(id: UUID, indexPath: IndexPath)
+    func uncompleteTracker(id: UUID, indexPath: IndexPath)
+}
+
+//Ячейки коллекции
 class TrackerViewControllerCell: UICollectionViewCell {
+        
+    weak var delegate: TrackerViewControllerCellDelegate?
+    
+    let currentDate = Date()
+    var selectedDate = Date()
+    
+    var activeButton: Bool = true
+    
+    var trackerId: UUID?
+    var indexPath: IndexPath?
     
     let identifier: String = "trackerCell"
     
-    var isCompleteToday = false
+    var completeCell = false
     
     private lazy var trackerView: UIView = {
        let view = UIView()
@@ -63,7 +79,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
         button.layer.cornerRadius = 17
         button.tintColor = .udWhiteDay
         button.setImage(UIImage(systemName: "plus")!, for: .normal)
-        button.addTarget(self, action: #selector(testPlsButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(plusButtonClicked), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -71,33 +87,62 @@ class TrackerViewControllerCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupAllViews()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func testPlsButton() {
-        if isCompleteToday {
-            isCompleteToday = false
+    private func completionCountDaysText(completedDays: Int){
+        let remainder = completedDays % 100
+        if (11...14).contains(remainder) {
+            dayLabel.text = "\(completedDays) дней"
         } else {
-            isCompleteToday = true
+            switch remainder % 10 {
+            case 1:
+                dayLabel.text = "\(completedDays) день"
+            case 2...4:
+                dayLabel.text = "\(completedDays) дня"
+            default:
+                dayLabel.text = "\(completedDays) дней"
+            }
         }
-        print("TEEEST")
+    }
+
+    @objc private func plusButtonClicked() {
+        guard let trackerId = trackerId, let indexPath = indexPath else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+
+        if selectedDate > currentDate {
+            print("дата больше")
+        } else {
+            print("дата меньше")
+            if completeCell {
+                delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
+            } else {
+                delegate?.completeTracker(id: trackerId, indexPath: indexPath)
+            }
+        }
     }
     
-    func setupData(traker: Tracker, dayCount: String) {
+    func setupData(traker: Tracker, dayCount: Int, isCompletedToday: Bool, indexPath: IndexPath) {
         colorView.backgroundColor = traker.color
         plusButton.backgroundColor = traker.color
         emoji.text = traker.emoji
         textLabel.text = traker.name
-        dayLabel.text = dayCount
+        completionCountDaysText(completedDays: dayCount)
         
-        let image = isCompleteToday ? UIImage(systemName: "checkmark") : UIImage(systemName: "plus")
+        self.completeCell = isCompletedToday
+        
+        self.trackerId = traker.id
+        self.indexPath = indexPath
+        
+        let image = isCompletedToday ? UIImage(systemName: "checkmark") : UIImage(systemName: "plus")
+        let imageView = UIImageView(image: image)
+        plusButton.backgroundColor = isCompletedToday ? traker.color.withAlphaComponent(0.3) : traker.color
         plusButton.setImage(image, for: .normal)
-        
-        //ДЕЛЕГАТ ДОБАВИТЬ ЧТОБЫ ОБНОВЛЯЛСЯ и БЭКРАУНД ТОЖЕ ЗАМЕНА
     }
     
     private func setupAllViews() {
