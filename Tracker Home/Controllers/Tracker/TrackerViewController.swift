@@ -13,15 +13,16 @@ protocol TrackerViewControllerDelegate: AnyObject {
 
 //Трекеры
 class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate {
+    
+    let trackerStore = TrackerStore.shared
+    let trackerCategoryStore = TrackerCategoryStore.shared
+    let trackerRecordStore = TrackerRecordStore.shared
         
     weak var delegate: TrackerViewControllerDelegate?
     
     var selectedDate = Date()
     
-    var nowHeaderName: String = ""
-    var headersName: [String] = ["Домашний уют", "Радостные мелочи"]
-    
-    var categories: [TrackerCategory] = [TrackerCategory(header: "Домашний уют", tracker: [Tracker(id: UUID(), name: "Бабушка прислала открытку в вотсапе", color: .color10, emoji: "❤️️️️️️️", schedule: [.friday, .monday]), Tracker(id: UUID(), name: "Свидание в январе", color: .udGray, emoji: "💫️️️️️️", schedule: [.friday, .monday])]), TrackerCategory(header: "Радостные мелочи", tracker: [Tracker(id: UUID(), name: "Кошка заслонила камеру на созвоне", color: .udBlue, emoji: "😂", schedule: [.friday, .monday])])]
+    var categories = TrackerCategoryStore.shared.getAllTrackerCategories()
     
     var visibleTrackers: [TrackerCategory] = []
     
@@ -102,7 +103,7 @@ class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate
                 }
             }
             if !searchedTrackers.isEmpty {
-                searchedCategories.append(TrackerCategory(header: category.header, tracker: searchedTrackers))
+                searchedCategories.append(TrackerCategory(header: category.header, tracker: searchedTrackers, id: UUID()))
             }
         }
         visibleTrackers = searchedCategories
@@ -229,7 +230,7 @@ class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate
                 }
             }
             if !searchedTrackers.isEmpty {
-                searchedCategories.append(TrackerCategory(header: category.header, tracker: searchedTrackers))
+                searchedCategories.append(TrackerCategory(header: category.header, tracker: searchedTrackers, id: UUID()))
             }
         }
         visibleTrackers = searchedCategories
@@ -352,19 +353,22 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
 //Делегат на добавление нового трекера
 extension TrackerViewController: CreatingTrackersDelegate {
     func createNewTracker(header: String, tracker: Tracker) {
-        let newTracker = TrackerCategory(header: header, tracker: [tracker])
-        
-        if let index = headersName.firstIndex(of: header) {
-            categories[index].tracker.append(tracker)
-            print("Есть в массиве, надо добавить ТОЛЬКО ТРЕКЕР")
+        let newTracker = TrackerCategory(header: header, tracker: [tracker], id: UUID())
+        if let categoryCoreData = trackerCategoryStore.fetchTrackerCategory(with: header) {
+            print("Есть такая шляпка в CoreData")
+            //НАДО ЕЙ ДОБАВИТЬ ТРЭКЕР
+            let trackerCD = trackerStore.trackerConvert(tracker)
+            trackerStore.addTrackerToCategory(tracker: trackerCD, category: categoryCoreData)
         } else {
-            print("Нету надо добавить ПОЛНОСТЬЮ")
-            headersName.append(header)
-            categories.append(newTracker)
+            print("Нету такой шляпки в CoreData")
+            trackerCategoryStore.addTrackerCategory(trackerCategory: newTracker, trackers: [tracker])
+            //Надо добавить полную категорию
         }
+        categories = TrackerCategoryStore.shared.getAllTrackerCategories()
         visibleTrackers = categories
         collectionView.reloadData()
         updateViewController()
     }
 }
+
 

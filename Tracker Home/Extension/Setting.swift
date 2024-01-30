@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Setting {
+    let name: String
+    var pickedParameter: String?
+    let handler: () -> Void
+}
