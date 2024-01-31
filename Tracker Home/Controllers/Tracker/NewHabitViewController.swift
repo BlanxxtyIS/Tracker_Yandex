@@ -251,13 +251,10 @@ extension NewHabitViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
         
-        if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "TableViewCell") as! TablewViewCell
-           }
         cell.textLabel?.text = settings[indexPath.row].name
-        cell.detailTextLabel?.text = settings[indexPath.row].pickedParameter
-        cell.detailTextLabel?.textColor = .udGray
-        cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+        cell.detailTextLabel!.text = "Hello"
+        cell.detailTextLabel!.textColor = .udRed
+        cell.detailTextLabel!.font = .systemFont(ofSize: 17, weight: .regular)
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .udBackground
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
