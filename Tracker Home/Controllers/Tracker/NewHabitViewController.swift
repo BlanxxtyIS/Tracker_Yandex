@@ -77,6 +77,7 @@ class NewHabitViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.backgroundColor = .udBackground
         tableView.layer.cornerRadius = 16
+        tableView.isScrollEnabled = false
         if habit {
             tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         } else {
@@ -133,6 +134,7 @@ class NewHabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
+        allCellFilled.tableViewSchedule = true
         title = "Новая привычка"
         textField.delegate = self
         setupAllViews()
@@ -162,7 +164,8 @@ class NewHabitViewController: UIViewController {
     @objc
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: schedule)
+        let irregularSchedule: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
+        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: habit ? schedule : irregularSchedule)
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")

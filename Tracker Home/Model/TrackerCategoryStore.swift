@@ -28,10 +28,7 @@ final class TrackerCategoryStore {
             trackerCoreData.name = tracker.name
             trackerCoreData.color = tracker.color
             trackerCoreData.emoji = tracker.emoji
-            
-            let trackerRecord = TrackerRecordCoreData(context: coreDataManager.context)
-            trackerRecord.id = tracker.id
-            trackerCoreData.record = trackerRecord
+            trackerCoreData.createdDate = Date()
             if !tracker.schedule.isEmpty {
                 let schedule = tracker.schedule.map { $0.toData() }
                 trackerCoreData.schedule = schedule as NSObject?

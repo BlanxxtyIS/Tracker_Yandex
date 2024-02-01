@@ -13,65 +13,54 @@ final class TrackerRecordStore {
     static let shared = TrackerRecordStore()
     private init() {}
     
+    let trackerStore = TrackerStore.shared
     let coreDataManager = CoreDataManager.shared
     
-    //MARK: Сохранить TrackerRecord в CoreData
-    func addTrackerRecord(_ trackerId: UUID, count completedDaysCount: Int, button isButtonChecked: Bool)  {
+    //конвертируем - добавляем
+    func trackerRecordConvert(_ trackerRecord: TrackerRecord) -> TrackerRecordCoreData {
         let trackerRecordCoreData = TrackerRecordCoreData(context: coreDataManager.context)
-        
-        trackerRecordCoreData.id = trackerId
-        trackerRecordCoreData.completedDaysCount = Int16(completedDaysCount)
-        trackerRecordCoreData.isButtonChecked = isButtonChecked
+        trackerRecordCoreData.id = trackerRecord.id
+        trackerRecordCoreData.date = trackerRecord.date
         do {
-            try coreDataManager.context.save()
+            try coreDataManager.saveContext()
         } catch {
             print("Ошибка в TrackerStore при добавлении \(error)")
         }
+        return trackerRecordCoreData
     }
     
-    //MARK: Достать из CoreData
-    //Из CoreData TrackerRecordCoreData по ID
-    func fetchTrackerRecord(withID id: UUID) -> TrackerRecordCoreData? {
+    //удаляем
+    func removeRecord(forId id: UUID, onDate date: Date) {
+        let context = coreDataManager.context
+        
+        let startDate = Calendar.current.startOfDay(for: date)
+        
         let fetchRequest: NSFetchRequest<TrackerRecordCoreData> = TrackerRecordCoreData.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "id == %@ AND date >= %@ AND date < %@", id as CVarArg, startDate as CVarArg, startDate.addingTimeInterval(24 * 60 * 60) as CVarArg)
         
         do {
-            let result = try coreDataManager.context.fetch(fetchRequest)
-            return result.first
-        } catch {
-            print("Ошибка в TrackerRecordStore в методе fetchTracker \(error)")
-            return nil
-        }
-    }
-    
-    //Удалить из CoreData
-    func deleteRecord(withID id: UUID) {
-        let fetchRequest: NSFetchRequest<TrackerRecordCoreData> = TrackerRecordCoreData.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id== %@", id as CVarArg)
-        
-        do {
-            let result = try coreDataManager.context.fetch(fetchRequest)
-            
-            for item in result {
-                coreDataManager.context.delete(item)
+            let result = try context.fetch(fetchRequest)
+            for trackerRecord in result {
+                context.delete(trackerRecord)
             }
             try coreDataManager.saveContext()
+            print("удалили \(id) на дату \(date)")
         } catch {
-            print("Ошибка при сохранении удаления \(error)")
+            print("Ошибка удаления записи \(error)")
         }
     }
     
-    //Все значения TrackerRecord
-    func getAllTrackerRecords() -> [TrackerRecordCoreData]? {
+    //поулчаем все
+    func fetchAllRecord() -> [TrackerRecordCoreData] {
         let fetchRequest: NSFetchRequest<TrackerRecordCoreData> = TrackerRecordCoreData.fetchRequest()
-
         do {
-            let trackerRecords = try coreDataManager.context.fetch(fetchRequest)
-            return trackerRecords
+            let result = try coreDataManager.context.fetch(fetchRequest)
+            return result
         } catch {
-            print("Ошибка при получении TrackerRecordCoreData: \(error)")
-            return nil
+            print("ERRROR")
+            return []
         }
+        
     }
-
+    
 }
