@@ -263,10 +263,40 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     func completeTracker(id: UUID, indexPath: IndexPath) {
         let trackerRecord = TrackerRecord(id: id, date: datePicker.date)
         completedTrackers.append(trackerRecord)
+        let completedDay = completedTrackers.filter { $0.id == id}.count
+        let completedToday = isTrackerCompletedToday(id: id)
+        do {
+            let tracker =  try trackerStore.fetchTracker(withID: id)
+            try trackerStore.updateTrackerCategory(tracker: tracker!, days: completedDay, button: completedToday)
+//            let allTrackers = trackerStore.fetchTrackerCategoryWithRecord()
+//            for tracker in allTrackers {
+//                print("Tracker Name: \(tracker.name)")
+//                
+//                if let state = tracker.record {
+//                    print("Completed Days: \(state.completedDaysCount)")
+//                    print("Button Checked: \(state.isButtonChecked)")
+//                    trackerStore.updateTrackerCategory(tracker: tracker, days: completedDay, button: completedToday)
+//                } else {
+//                    print("State not available")
+//                }
+//            }
+        } catch {
+            print("\(error)")
+        }
+        print(trackerRecordStore.fetchTrackerRecord(withID: id))
         collectionView.reloadItems(at: [indexPath])
     }
 
     func uncompleteTracker(id: UUID, indexPath: IndexPath) {
+        let completedDay = completedTrackers.filter { $0.id == id}.count
+        let completedToday = isTrackerCompletedToday(id: id)
+        do {
+            let tracker =  try trackerStore.fetchTracker(withID: id)
+            try trackerStore.updateTrackerCategory(tracker: tracker!, days: completedDay, button: completedToday)
+        } catch {
+            print("\(error)")
+        }
+    
         completedTrackers.removeAll { trackerRecord in
             let isSameDay = Calendar.current.isDate(trackerRecord.date, inSameDayAs: datePicker.date)
             return trackerRecord.id == id && isSameDay
@@ -298,8 +328,19 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
             preconditionFailure("Ошибка с ячейкой")
         }
         let tracker = visibleTrackers[indexPath.section].tracker[indexPath.row]
-        let completedDay = completedTrackers.filter { $0.id == tracker.id}.count
-        let completedToday = isTrackerCompletedToday(id: tracker.id)
+        
+        var completedDay = completedTrackers.filter { $0.id == tracker.id}.count
+        var completedToday = isTrackerCompletedToday(id: tracker.id)
+        
+        let cdDayCount = trackerRecordStore.fetchTrackerRecord(withID: tracker.id)?.completedDaysCount
+        let cdButtonClicked = trackerRecordStore.fetchTrackerRecord(withID: tracker.id)?.isButtonChecked
+        if cdDayCount == nil && cdButtonClicked == nil {
+            print("заглушка")
+        } else {
+            completedDay = Int(cdDayCount!)
+            completedToday = cdButtonClicked!
+        }
+        
         cell.setupData(traker: tracker, dayCount: completedDay, isCompletedToday: completedToday, indexPath: indexPath)
         cell.delegate = self
         cell.selectedDate = selectedDate
@@ -361,8 +402,8 @@ extension TrackerViewController: CreatingTrackersDelegate {
             trackerStore.addTrackerToCategory(tracker: trackerCD, category: categoryCoreData)
         } else {
             print("Нету такой шляпки в CoreData")
-            trackerCategoryStore.addTrackerCategory(trackerCategory: newTracker, trackers: [tracker])
             //Надо добавить полную категорию
+            trackerCategoryStore.addTrackerCategory(trackerCategory: newTracker, trackers: [tracker])
         }
         categories = TrackerCategoryStore.shared.getAllTrackerCategories()
         visibleTrackers = categories
@@ -370,5 +411,9 @@ extension TrackerViewController: CreatingTrackersDelegate {
         updateViewController()
     }
 }
+
+
+
+
 
 

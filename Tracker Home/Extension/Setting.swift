@@ -12,3 +12,5 @@ struct Setting {
     var pickedParameter: String?
     let handler: () -> Void
 }
+
+

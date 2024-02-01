@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct UserSelected {
+    let category: String
+    let schedule: String
+}
+
 protocol NewHabitViewControllerDelegate: AnyObject {
     func createNewHabit(header: String, tracker: Tracker)
 }
@@ -18,6 +23,11 @@ class NewHabitViewController: UIViewController {
     var isEdit: Bool = false
     private var pickedCategory: TrackerCategory?
     private var settings: Array<Setting> = []
+    private var allCellFilled = AllCellFilled(textField: false, tableViewCategory: false, tableViewSchedule: false, collectionViewEmoji: false, collectionViewColor: false) {
+        didSet {
+            updateButtonCondition()
+        }
+    }
     
     var lastSectionIndexPath: IndexPath?
     var lastIndexPath: IndexPath?
@@ -27,6 +37,7 @@ class NewHabitViewController: UIViewController {
     
     var category: String = ""
     var schedule: [Weekday] = []
+    private lazy var userSelected: [String] = ["", ""]
     
     let emojiSection = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝", "😪"]
     let colorSection: [UIColor] = [UIColor.color1, UIColor.color2, UIColor.color3, UIColor.color4, UIColor.color5, UIColor.color6, UIColor.color7, UIColor.color8, UIColor.color9, UIColor.color10, UIColor.color11, UIColor.color12, UIColor.color13, UIColor.color14, UIColor.color15, UIColor.color16, UIColor.color17, UIColor.color18]
@@ -126,12 +137,16 @@ class NewHabitViewController: UIViewController {
         textField.delegate = self
         setupAllViews()
         appendSettings()
+        createButton.isEnabled = false
         print("Привычка")
     }
     
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
+        if !text.isEmpty {
+            allCellFilled.textField = true
+        }
         if text.count > 38 {
             textField.deleteBackward()
             print("Ограничение 38 символов")
@@ -151,6 +166,15 @@ class NewHabitViewController: UIViewController {
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
+    }
+    
+    private func updateButtonCondition() {
+        if allCellFilled.allValuesAreTrue() {
+            createButton.backgroundColor = .udBlackDay
+            createButton.isEnabled = true
+        } else {
+            createButton.isEnabled = false
+        }
     }
     
     private func appendSettings() {
@@ -252,9 +276,9 @@ extension NewHabitViewController: UITableViewDataSource {
         var cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
         
         cell.textLabel?.text = settings[indexPath.row].name
-        cell.detailTextLabel!.text = "Hello"
-        cell.detailTextLabel!.textColor = .udRed
-        cell.detailTextLabel!.font = .systemFont(ofSize: 17, weight: .regular)
+        cell.detailTextLabel?.text = userSelected[indexPath.row]
+        cell.detailTextLabel?.textColor = .udGray
+        cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .udBackground
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
@@ -312,6 +336,7 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
             
             lastSelectedEmoji = emojiSection[indexPath.item]
             print(emojiSection[indexPath.item])
+            allCellFilled.collectionViewEmoji = true
         } else {
             cell.contentView.layer.masksToBounds = true
             cell.contentView.layer.borderWidth = 3.0
@@ -320,6 +345,7 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
             
             lastSelectedColor = colorSection[indexPath.item]
             print(colorSection[indexPath.item])
+            allCellFilled.collectionViewColor = true
         }
         
         if lastIndexPath == nil {
@@ -375,12 +401,19 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
 extension NewHabitViewController: NewScheduleViewControllerDelegate {
     func getDay(day: [Weekday]) {
         schedule = day
+        let scheduleString = weekdaysToString(weekdays: schedule)
+        userSelected[1] = scheduleString
+        allCellFilled.tableViewSchedule = true
+        tableView.reloadData()
     }
 }
 
 extension NewHabitViewController: NewCategoryViewControllerDelegate {
     func categoryName(name: String) {
         category = name
+        userSelected[0] = category
+        allCellFilled.tableViewCategory = true
+        tableView.reloadData()
     }
 }
 
@@ -391,5 +424,26 @@ extension NewHabitViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+    }
+}
+
+extension NewHabitViewController {
+    
+    //MARK: - Weekday to String
+    func weekdaysToString(weekdays: [Weekday]) -> String {
+        let weekdaysStrings = weekdays.map { weekdayToString(weekday: $0) }
+        return weekdaysStrings.joined(separator: ", ")
+    }
+    
+    func weekdayToString(weekday: Weekday) -> String {
+        switch weekday {
+        case .monday: return "Пн"
+        case .tuesday: return "Вт"
+        case .wednesday: return "Ср"
+        case .thursday: return "Чт"
+        case .friday: return "Пт"
+        case .saturday: return "Сб"
+        case .sunday: return "Вс"
+        }
     }
 }

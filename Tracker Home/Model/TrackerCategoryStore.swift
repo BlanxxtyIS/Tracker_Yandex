@@ -22,17 +22,21 @@ final class TrackerCategoryStore {
         let trackerCategoryCoreData = TrackerCategoryCoreData(context: coreDataManager.context)
         trackerCategoryCoreData.id = trackerCategory.id
         trackerCategoryCoreData.header = trackerCategory.header
-        
         for tracker in trackers {
             let trackerCoreData = TrackerCoreData(context: coreDataManager.context)
             trackerCoreData.id = tracker.id
             trackerCoreData.name = tracker.name
             trackerCoreData.color = tracker.color
             trackerCoreData.emoji = tracker.emoji
+            
+            let trackerRecord = TrackerRecordCoreData(context: coreDataManager.context)
+            trackerRecord.id = tracker.id
+            trackerCoreData.record = trackerRecord
             if !tracker.schedule.isEmpty {
                 let schedule = tracker.schedule.map { $0.toData() }
                 trackerCoreData.schedule = schedule as NSObject?
             }
+
             trackerCategoryCoreData.addToTrackers(trackerCoreData)
         }
         do {
@@ -43,7 +47,7 @@ final class TrackerCategoryStore {
     }
     
     //MARK: Достать из CoreData
-    //Из CoreData TrackerCategoryCoreData по ID
+    //Из CoreData TrackerCategoryCoreData по header
     func fetchTrackerCategory(with header: String) -> TrackerCategoryCoreData? {
         let fetchRequest: NSFetchRequest<TrackerCategoryCoreData> = TrackerCategoryCoreData.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "header == %@", header)
@@ -88,6 +92,20 @@ final class TrackerCategoryStore {
         } catch {
             print("Error fetching tracker categories: \(error)")
             return []
+        }
+    }
+    
+    //Из CoreData TrackerRecordCoreData по ID
+    func fetchTrackerCategory(withID id: UUID) -> TrackerCategoryCoreData? {
+        let fetchRequest: NSFetchRequest<TrackerCategoryCoreData> = TrackerCategoryCoreData.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let result = try coreDataManager.context.fetch(fetchRequest)
+            return result.first
+        } catch {
+            print("Ошибка в TrackerRecordStore в методе fetchTracker \(error)")
+            return nil
         }
     }
 }

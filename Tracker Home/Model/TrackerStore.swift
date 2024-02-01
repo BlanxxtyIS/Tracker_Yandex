@@ -27,6 +27,10 @@ final class TrackerStore {
             let schedule = tracker.schedule.map { $0.toData() }
             trackerCoreData.schedule = schedule as NSObject?
         }
+        
+        let trackerRecord = TrackerRecordCoreData(context: coreDataManager.context)
+        trackerRecord.id = tracker.id
+        trackerCoreData.record = trackerRecord
         return trackerCoreData
     }
     
@@ -44,7 +48,7 @@ final class TrackerStore {
         }
         trackerCategoryCoreData.addToTrackers(trackerCoreData)
         do {
-            try coreDataManager.context.save()
+            try coreDataManager.saveContext()
         } catch {
             print("Ошибка в TrackerStore при добавлении \(error)")
         }
@@ -62,6 +66,20 @@ final class TrackerStore {
         } catch {
             print("Ошибка в TrackerStore в методе fetchTracker \(error)")
             return nil
+        }
+    }
+    
+    //Все значения Tracker
+    func getAllTrackers() -> [Tracker] {
+        let fetchRequest: NSFetchRequest<TrackerCoreData> = TrackerCoreData.fetchRequest()
+
+        do {
+            let trackerCoreDataObjects = try coreDataManager.context.fetch(fetchRequest)
+            let tracker = trackerCoreDataObjects.map { trackerFromCoreData($0) }
+            return tracker
+        } catch {
+            print("Error fetching tracker categories: \(error)")
+            return []
         }
     }
     
@@ -91,6 +109,35 @@ final class TrackerStore {
             print("Ошибка в TrackerStore в методе addTrackerToCategory \(error)")
         }
     }
+    
+    //обновление состояние кнопок/дней
+    func updateTrackerCategory(tracker: TrackerCoreData,  days completionDays: Int, button isButtonChecked: Bool) {
+        if let trackerRecord = tracker.record {
+            trackerRecord.completedDaysCount = Int16(completionDays)
+            trackerRecord.isButtonChecked = isButtonChecked
+            
+            do {
+                try coreDataManager.saveContext()
+            } catch {
+                print("Ошибка в методе updateTrackerCategory, класса TrackerCategoryStore, \(error)")
+            }
+        }
+    }
+    
+    //Запрос TrackerCategory с состояниями
+    func fetchTrackerCategoryWithRecord() -> [TrackerCoreData] {
+        let fetchRequest: NSFetchRequest<TrackerCoreData> = TrackerCoreData.fetchRequest()
+        fetchRequest.relationshipKeyPathsForPrefetching = ["record"]
+        
+        do {
+            let trackers = try coreDataManager.context.fetch(fetchRequest)
+            return trackers
+        } catch {
+            print("ОШИБКА в TrackerCategoryStore, в методе fetchTrackerCategoryWithRecord \(error)")
+            return []
+        }
+    }
+    
 }
 
 //как связать 1-1

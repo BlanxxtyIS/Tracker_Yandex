@@ -32,14 +32,3 @@ extension Weekday {
     }
 }
 
-//Сохранение
-//let weekdays: [Weekday] = [.monday, .tuesday, .wednesday]
-//let weekdaysData = weekdays.map { $0.toData() }
-//entityObject.schedule = weekdaysData as NSObject?
-//
-// Извлечение
-//if let storedWeekdaysData = entityObject.schedule as? [Data] {
-//    let storedWeekdays = storedWeekdaysData.compactMap { Weekday.fromData($0) }
-//    print(storedWeekdays)
-//}
-

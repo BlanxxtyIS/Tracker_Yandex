@@ -17,6 +17,8 @@ class TrackerViewControllerCell: UICollectionViewCell {
         
     weak var delegate: TrackerViewControllerCellDelegate?
     
+    
+    
     let currentDate = Date()
     var selectedDate = Date()
     
@@ -121,6 +123,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
             print("дата меньше")
             if completeCell {
                 delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
+                
             } else {
                 delegate?.completeTracker(id: trackerId, indexPath: indexPath)
             }
