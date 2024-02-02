@@ -33,6 +33,7 @@ class NewScheduleViewController: UIViewController {
        let table = UITableView()
         table.register(ScheduleTableViewCell.self, forCellReuseIdentifier: "ScheduleTableViewCell")
         table.separatorStyle = .singleLine
+        table.isScrollEnabled = false
         table.separatorColor = .udGray
         table.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         table.backgroundColor = .udWhiteDay

@@ -146,6 +146,7 @@ class NewHabitViewController: UIViewController {
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
+        
         if !text.isEmpty {
             allCellFilled.textField = true
         }
@@ -256,6 +257,7 @@ class NewHabitViewController: UIViewController {
 
 extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
         if indexPath.row == 0 {
             let viewController = NewCategoryViewController(delegate: self)
             present(UINavigationController(rootViewController: viewController), animated: true)
@@ -426,7 +428,8 @@ extension NewHabitViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        view.endEditing(true)
+        return textField.resignFirstResponder()
     }
 }
 
