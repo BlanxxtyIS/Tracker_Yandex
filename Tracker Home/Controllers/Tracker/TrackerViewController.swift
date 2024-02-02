@@ -281,7 +281,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
             let calendar = Date()
             let selectedDate = Calendar.current.startOfDay(for: datePicker.date)
             
-            if selectedDate <= sevenDayLater || selectedDate > calendar {
+            if selectedDate > calendar {
                 print("ЗАГЛУШКА")
             } else {
                 print("Можно")
