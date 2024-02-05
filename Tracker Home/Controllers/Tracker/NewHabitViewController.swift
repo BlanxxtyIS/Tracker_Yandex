@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct UserSelected {
+    let category: String
+    let schedule: String
+}
+
 protocol NewHabitViewControllerDelegate: AnyObject {
     func createNewHabit(header: String, tracker: Tracker)
 }
@@ -14,8 +19,30 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 //Привычка
 class NewHabitViewController: UIViewController {
     
+    var habit: Bool = true
+    var isEdit: Bool = false
+    private var pickedCategory: TrackerCategory?
+    private var settings: Array<Setting> = []
+    private var allCellFilled = AllCellFilled(textField: false, tableViewCategory: false, tableViewSchedule: false, collectionViewEmoji: false, collectionViewColor: false) {
+        didSet {
+            updateButtonCondition()
+        }
+    }
+    
+    var lastSectionIndexPath: IndexPath?
+    var lastIndexPath: IndexPath?
+    
+    var lastSelectedEmoji: String = ""
+    var lastSelectedColor: UIColor = .color1
+    
     var category: String = ""
     var schedule: [Weekday] = []
+    private lazy var userSelected: [String] = ["", ""]
+    
+    let emojiSection = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝", "😪"]
+    let colorSection: [UIColor] = [UIColor.color1, UIColor.color2, UIColor.color3, UIColor.color4, UIColor.color5, UIColor.color6, UIColor.color7, UIColor.color8, UIColor.color9, UIColor.color10, UIColor.color11, UIColor.color12, UIColor.color13, UIColor.color14, UIColor.color15, UIColor.color16, UIColor.color17, UIColor.color18]
+    
+    var headerName: [String] = ["Emoji", "Цвет"]
     
     weak var delegate: NewHabitViewControllerDelegate?
     
@@ -27,8 +54,6 @@ class NewHabitViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private var habit: [String] = ["Категория", "Расписание"]
     
     private lazy var textField: UITextField = {
        let textField = UITextField()
@@ -52,9 +77,23 @@ class NewHabitViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         tableView.backgroundColor = .udBackground
         tableView.layer.cornerRadius = 16
+        tableView.isScrollEnabled = false
+        if habit {
+            tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        } else {
+            tableView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        }
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.register(EmojiColorCollectionCell.self, forCellWithReuseIdentifier: "emojiColorCollectionCell")
+        collection.register(EmojiColorCollectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "emojiColorCollectionHeader")
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
     }()
     
     private lazy var cancelButton: UIButton = {
@@ -71,17 +110,17 @@ class NewHabitViewController: UIViewController {
         return cancelButton
     }()
     
-        private lazy var createButton: UIButton = {
-           let createButton = UIButton()
-            createButton.setTitle("Создать", for: .normal)
-            createButton.backgroundColor = .udGray
-            createButton.layer.cornerRadius = 16
-            createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-            createButton.addTarget(self, action: #selector(createButtonClicked), for: .touchUpInside)
-            createButton.translatesAutoresizingMaskIntoConstraints = false
-            createButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-            return createButton
-        }()
+    private lazy var createButton: UIButton = {
+        let createButton = UIButton()
+        createButton.setTitle("Создать", for: .normal)
+        createButton.backgroundColor = .udGray
+        createButton.layer.cornerRadius = 16
+        createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        createButton.addTarget(self, action: #selector(createButtonClicked), for: .touchUpInside)
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        createButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        return createButton
+    }()
     
     private lazy var buttonStackView: UIStackView = {
        let stackView = UIStackView()
@@ -95,15 +134,22 @@ class NewHabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
+        allCellFilled.tableViewSchedule = true
         title = "Новая привычка"
         textField.delegate = self
         setupAllViews()
+        appendSettings()
+        createButton.isEnabled = false
         print("Привычка")
     }
     
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
+        
+        if !text.isEmpty {
+            allCellFilled.textField = true
+        }
         if text.count > 38 {
             textField.deleteBackward()
             print("Ограничение 38 символов")
@@ -116,15 +162,60 @@ class NewHabitViewController: UIViewController {
         print("Отменить")
     }
 
-    //MARK: ДОБАВИТЬ ДЕЛЕГАТ на schedule и обновить таблицу
-    //Создаем новый трекер
     @objc
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: .colorSelection18, emoji: "❤️️️️️️️", schedule: schedule)
+        let irregularSchedule: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
+        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: habit ? schedule : irregularSchedule)
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
+    }
+    
+    private func updateButtonCondition() {
+        if allCellFilled.allValuesAreTrue() {
+            createButton.backgroundColor = .udBlackDay
+            createButton.isEnabled = true
+        } else {
+            createButton.isEnabled = false
+        }
+    }
+    
+    private func appendSettings() {
+        settings.append(
+            Setting(
+                name: NSLocalizedString("Категория", comment: ""),
+                pickedParameter: isEdit ? pickedCategory?.header : nil,
+                handler: { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    self.setCategory()
+                }
+            ))
+        if habit {
+            settings.append(
+                Setting(
+                    name: NSLocalizedString("Расписание", comment: ""),
+                    pickedParameter: nil,
+                    handler: { [weak self] in
+                        guard let self = self else {
+                            return
+                        }
+                        self.setCategory()
+                    }))
+        }
+        
+    }
+    
+    private func setCategory() {
+        let setCategoryController = NewCategoryViewController(delegate: self)
+        present(UINavigationController(rootViewController: setCategoryController), animated: true)
+    }
+    
+    private func setSchedule() {
+        let setScheduleController = NewScheduleViewController(delegate: self)
+        present(UINavigationController(rootViewController: setScheduleController), animated: true)
     }
     
     private func setupAllViews() {
@@ -133,6 +224,10 @@ class NewHabitViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         view.addSubview(buttonStackView)
         buttonStackView.addArrangedSubview(cancelButton)
@@ -148,6 +243,11 @@ class NewHabitViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             tableView.heightAnchor.constraint(equalToConstant: 150),
+            
+            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
         
             buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
             buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -157,33 +257,31 @@ class NewHabitViewController: UIViewController {
 
 extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
         if indexPath.row == 0 {
-            print("Категория")
             let viewController = NewCategoryViewController(delegate: self)
             present(UINavigationController(rootViewController: viewController), animated: true)
         } else if indexPath.row == 1 {
             let viewController = NewScheduleViewController(delegate: self)
             present(UINavigationController(rootViewController: viewController), animated: true)
-            print("Расписание")
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        settings[indexPath.row].handler()
     }
 }
 
 extension NewHabitViewController: UITableViewDataSource {
     //общее кол-во строк в таблице
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return habit.count
+        return settings.count
     }
     
     //экземпляр ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "TableViewCell") as! TablewViewCell
-           }
-        cell.textLabel?.text = self.habit[indexPath.row]
-        cell.detailTextLabel?.text = "Подтекст"
+        
+        cell.textLabel?.text = settings[indexPath.row].name
+        cell.detailTextLabel?.text = userSelected[indexPath.row]
         cell.detailTextLabel?.textColor = .udGray
         cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
         cell.accessoryType = .disclosureIndicator
@@ -193,15 +291,134 @@ extension NewHabitViewController: UITableViewDataSource {
     }
 }
 
+extension NewHabitViewController: UICollectionViewDataSource {
+    //кол-во секций
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return headerName.count
+    }
+    
+    //кол-во ячеек в секции
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return emojiSection.count
+        } else {
+            return colorSection.count
+        }
+    }
+    
+    //сама ячейка в выбранной indexPath
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiColorCollectionCell", for: indexPath) as? EmojiColorCollectionCell else {
+            preconditionFailure("Ошибка с ячейкой")
+        }
+        var data: String
+        if indexPath.section == 0 {
+            data = emojiSection[indexPath.item]
+            cell.emoji.text = data
+        } else {
+            cell.color.backgroundColor = colorSection[indexPath.item]
+        }
+        return cell
+    }
+    
+    //Заголовок хедер
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "emojiColorCollectionHeader", for: indexPath) as! EmojiColorCollectionHeader
+            headerView.titleLabel.text = headerName[indexPath.section]
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+}
+
+extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
+    //Выбор ячейки
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard var cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
+        if indexPath.section == 0 {
+            cell.contentView.backgroundColor = .udLightGray
+            
+            lastSelectedEmoji = emojiSection[indexPath.item]
+            print(emojiSection[indexPath.item])
+            allCellFilled.collectionViewEmoji = true
+        } else {
+            cell.contentView.layer.masksToBounds = true
+            cell.contentView.layer.borderWidth = 3.0
+            let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+            cell.contentView.layer.borderColor = borderColor
+            
+            lastSelectedColor = colorSection[indexPath.item]
+            print(colorSection[indexPath.item])
+            allCellFilled.collectionViewColor = true
+        }
+        
+        if lastIndexPath == nil {
+            lastIndexPath = indexPath
+        } else {
+            cell = (collectionView.cellForItem(at: lastIndexPath!) as! EmojiColorCollectionCell)
+            if indexPath.section == lastIndexPath?.section {
+                cell.destroyCell(lastIndexPath!)
+                lastIndexPath = indexPath
+            } else {
+                print("Разные секции")
+                if lastSectionIndexPath == nil {
+                    lastSectionIndexPath = lastIndexPath
+                    lastIndexPath = indexPath
+                } else {
+                    cell = (collectionView.cellForItem(at: lastSectionIndexPath!) as! EmojiColorCollectionCell)
+                    cell.destroyCell(lastSectionIndexPath!)
+                    lastSectionIndexPath = lastIndexPath
+                    lastIndexPath = indexPath
+                }
+            }
+        }
+    }
+    
+    //Отступы от краев коллекции
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 24, left: 18, bottom: 31, right: 19)
+    }
+    
+    //Размер ячейки
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 52, height: 52)
+    }
+    
+    //Горизонтальные отступы между ячейками
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
+    //Вертикальные отступы между ячейками
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    //настройки Хедера
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingCompressedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+    }
+}
+
 extension NewHabitViewController: NewScheduleViewControllerDelegate {
     func getDay(day: [Weekday]) {
         schedule = day
+        let scheduleString = weekdaysToString(weekdays: schedule)
+        userSelected[1] = scheduleString
+        allCellFilled.tableViewSchedule = true
+        tableView.reloadData()
     }
 }
 
 extension NewHabitViewController: NewCategoryViewControllerDelegate {
     func categoryName(name: String) {
         category = name
+        userSelected[0] = category
+        allCellFilled.tableViewCategory = true
+        tableView.reloadData()
     }
 }
 
@@ -211,6 +428,28 @@ extension NewHabitViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        view.endEditing(true)
+        return textField.resignFirstResponder()
+    }
+}
+
+extension NewHabitViewController {
+    
+    //MARK: - Weekday to String
+    func weekdaysToString(weekdays: [Weekday]) -> String {
+        let weekdaysStrings = weekdays.map { weekdayToString(weekday: $0) }
+        return weekdaysStrings.joined(separator: ", ")
+    }
+    
+    func weekdayToString(weekday: Weekday) -> String {
+        switch weekday {
+        case .monday: return "Пн"
+        case .tuesday: return "Вт"
+        case .wednesday: return "Ср"
+        case .thursday: return "Чт"
+        case .friday: return "Пт"
+        case .saturday: return "Сб"
+        case .sunday: return "Вс"
+        }
     }
 }

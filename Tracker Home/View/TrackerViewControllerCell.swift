@@ -17,6 +17,8 @@ class TrackerViewControllerCell: UICollectionViewCell {
         
     weak var delegate: TrackerViewControllerCellDelegate?
     
+    
+    
     let currentDate = Date()
     var selectedDate = Date()
     
@@ -114,16 +116,10 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
-
-        if selectedDate > currentDate {
-            print("дата больше")
+        if completeCell {
+            delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
         } else {
-            print("дата меньше")
-            if completeCell {
-                delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
-            } else {
-                delegate?.completeTracker(id: trackerId, indexPath: indexPath)
-            }
+            delegate?.completeTracker(id: trackerId, indexPath: indexPath)
         }
     }
     
