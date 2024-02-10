@@ -5,7 +5,6 @@
 //  Created by Марат Хасанов on 09.02.2024.
 //
 
-import Foundation
 import UIKit
 
 protocol AllCategoryViewControllerDelegate: AnyObject {
@@ -14,9 +13,12 @@ protocol AllCategoryViewControllerDelegate: AnyObject {
 
 class AllCategoryViewController: UIViewController, NewCategoryViewControllerDelegate {
     
+    private var viewModel: AllCategoryViewModel!
+    
     weak var delegate: AllCategoryViewControllerDelegate?
-    init(delegate: AllCategoryViewControllerDelegate?) {
+    init(delegate: AllCategoryViewControllerDelegate?, viewModel: AllCategoryViewModel) {
         self.delegate = delegate
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -87,6 +89,8 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         } else {
             setupView()
         }
+        setupViewModel()
+        viewModel.loadData()
     }
     
     @objc
@@ -96,11 +100,21 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         print("Перешли")
     }
     
+    private func setupViewModel() {
+        viewModel.reloadTableViewClosure = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                if self?.viewModel.categories.isEmpty ?? true {
+                    self?.setupEmptyView()
+                } else {
+                    self?.setupView()
+                }
+            }}
+    }
+    
     func didAddNewCategory() {
-        categories = categoryStore.categoryGive()
-        let newCategoryVC = NewCategoryViewController(delegate: self)
+        viewModel.loadData()
         dismiss(animated: true)
-        self.tableView.reloadData()
     }
     
     func updateCategories() {
@@ -145,15 +159,14 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
 extension AllCategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
-        delegate?.setupCategories(categories: categories[indexPath.row])
-        print(indexPath.row)
+        delegate?.setupCategories(categories: viewModel.categories[indexPath.row].name)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension AllCategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return viewModel.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,8 +176,7 @@ extension AllCategoryViewController: UITableViewDataSource {
         } else {
             cell = UITableViewCell(style: .default, reuseIdentifier: "AllCategoryViewControllerCell")
         }
-        
-        cell.textLabel?.text = categories[indexPath.row]
+        cell.textLabel?.text = viewModel.categories[indexPath.row].name
         cell.backgroundColor = .udBackground
         let height = tableView.bounds.height / 7
         print(height)

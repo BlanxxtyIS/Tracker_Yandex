@@ -33,6 +33,8 @@
 		F4A80AFC2B4D169500FCCAEF /* NewScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */; };
 		F4A80AFE2B4D189500FCCAEF /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A80AFD2B4D189500FCCAEF /* ScheduleTableViewCell.swift */; };
 		F4A80B002B4D796A00FCCAEF /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */; };
+		F4AC15C22B77A1C0001213DB /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC15C12B77A1C0001213DB /* CategoryModel.swift */; };
+		F4AC15C42B77A22C001213DB /* AllCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */; };
 		F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */; };
 		F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */; };
 		F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */; };
@@ -72,6 +74,8 @@
 		F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScheduleViewController.swift; sourceTree = "<group>"; };
 		F4A80AFD2B4D189500FCCAEF /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		F4AC15C12B77A1C0001213DB /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewModel.swift; sourceTree = "<group>"; };
 		F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategory.swift; sourceTree = "<group>"; };
 		F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecord.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				F4A80AFD2B4D189500FCCAEF /* ScheduleTableViewCell.swift */,
 				F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */,
 				F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */,
+				F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				F4C797062B67967600636046 /* TrackerRecordStore.swift */,
 				F499738E2B75F9F90040C883 /* IsLoginStore.swift */,
 				F49973982B7655830040C883 /* CategoryStore.swift */,
+				F4AC15C12B77A1C0001213DB /* CategoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +282,7 @@
 				F4C797072B67967600636046 /* TrackerRecordStore.swift in Sources */,
 				F4A80AFC2B4D169500FCCAEF /* NewScheduleViewController.swift in Sources */,
 				F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */,
+				F4AC15C22B77A1C0001213DB /* CategoryModel.swift in Sources */,
 				F4A80B002B4D796A00FCCAEF /* Weekday.swift in Sources */,
 				F4102A622B35AEBC009E2D14 /* AppDelegate.swift in Sources */,
 				F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */,
@@ -300,6 +307,7 @@
 				F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */,
 				F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */,
 				F4A2F48A2B472EEF00D40710 /* TablewViewCell.swift in Sources */,
+				F4AC15C42B77A22C001213DB /* AllCategoryViewModel.swift in Sources */,
 				F49973952B7601450040C883 /* AllCategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

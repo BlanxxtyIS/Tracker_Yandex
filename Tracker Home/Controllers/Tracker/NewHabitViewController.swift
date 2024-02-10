@@ -264,7 +264,7 @@ extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
         if indexPath.row == 0 {
-            let viewController = AllCategoryViewController(delegate: self)
+            let viewController = AllCategoryViewController(delegate: self, viewModel: AllCategoryViewModel())
             present(UINavigationController(rootViewController: viewController), animated: true)
         } else if indexPath.row == 1 {
             let viewController = NewScheduleViewController(delegate: self)
