@@ -22,7 +22,9 @@
 		F47487ED2B68D77F0039D671 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47487EC2B68D77F0039D671 /* Setting.swift */; };
 		F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */; };
 		F499738F2B75F9F90040C883 /* IsLoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499738E2B75F9F90040C883 /* IsLoginStore.swift */; };
-		F49973922B75FBC60040C883 /* IsLoginCoreData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973902B75FBC60040C883 /* IsLoginCoreData+CoreDataClass.swift */; };
+		F49973952B7601450040C883 /* AllCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973942B7601450040C883 /* AllCategoryViewController.swift */; };
+		F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */; };
+		F49973992B7655830040C883 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973982B7655830040C883 /* CategoryStore.swift */; };
 		F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */; };
 		F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */; };
 		F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */; };
@@ -59,7 +61,9 @@
 		F47487EC2B68D77F0039D671 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F499738E2B75F9F90040C883 /* IsLoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoginStore.swift; sourceTree = "<group>"; };
-		F49973902B75FBC60040C883 /* IsLoginCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IsLoginCoreData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F49973942B7601450040C883 /* AllCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewController.swift; sourceTree = "<group>"; };
+		F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewControllerCell.swift; sourceTree = "<group>"; };
+		F49973982B7655830040C883 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerCell.swift; sourceTree = "<group>"; };
 		F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTrackers.swift; sourceTree = "<group>"; };
 		F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */,
 				F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */,
 				F4A2F4892B472EEF00D40710 /* TablewViewCell.swift */,
+				F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */,
 				F4A80AFD2B4D189500FCCAEF /* ScheduleTableViewCell.swift */,
 				F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */,
 				F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */,
@@ -142,6 +147,7 @@
 				F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */,
 				F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */,
 				F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */,
+				F49973942B7601450040C883 /* AllCategoryViewController.swift */,
 				F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */,
 				F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */,
 			);
@@ -187,8 +193,8 @@
 				F4C797022B67966100636046 /* TrackerStore.swift */,
 				F4C797042B67966C00636046 /* TrackerCategoryStore.swift */,
 				F4C797062B67967600636046 /* TrackerRecordStore.swift */,
-				F49973902B75FBC60040C883 /* IsLoginCoreData+CoreDataClass.swift */,
 				F499738E2B75F9F90040C883 /* IsLoginStore.swift */,
+				F49973982B7655830040C883 /* CategoryStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,16 +289,18 @@
 				F4C797032B67966100636046 /* TrackerStore.swift in Sources */,
 				F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */,
 				F47487ED2B68D77F0039D671 /* Setting.swift in Sources */,
+				F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */,
 				F4C797052B67966C00636046 /* TrackerCategoryStore.swift in Sources */,
 				F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */,
-				F49973922B75FBC60040C883 /* IsLoginCoreData+CoreDataClass.swift in Sources */,
 				F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */,
 				F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */,
+				F49973992B7655830040C883 /* CategoryStore.swift in Sources */,
 				F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */,
 				F4102A642B35AEBC009E2D14 /* SceneDelegate.swift in Sources */,
 				F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */,
 				F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */,
 				F4A2F48A2B472EEF00D40710 /* TablewViewCell.swift in Sources */,
+				F49973952B7601450040C883 /* AllCategoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

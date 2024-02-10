@@ -6,34 +6,21 @@
 //
 
 import UIKit
-import CoreData
 
 final class IsLoginStore {
+    
+    let key = "IsLoginStore"
     
     static let shared = IsLoginStore()
     init() {}
     
-    let coreDataManager = CoreDataManager.shared
-    
-    func addInfoForLogin(info: Bool) {
-        let isLoginCoreData = IsLoginCoreData(context: coreDataManager.context)
-        isLoginCoreData.isLogin = info
-        do {
-            try coreDataManager.saveContext()
-        } catch {
-            print("Ошибка в TrackerStore при добавлении \(error)")
-        }
+    //Сохранить значение
+    func isLogin(condition: Bool) {
+        UserDefaults.standard.setValue(condition, forKey: key)
     }
     
-    func fetchAllInfo() -> [IsLoginCoreData] {
-        let fetchRequest: NSFetchRequest<IsLoginCoreData> = IsLoginCoreData.fetchRequest()
-        do {
-            let result = try coreDataManager.context.fetch(fetchRequest)
-            return result
-        } catch {
-            print("ERRROR")
-            return []
-        }
-        
+    //Узнать значение
+    func isLoginCondition() -> Bool {
+        UserDefaults.standard.bool(forKey: key)
     }
 }

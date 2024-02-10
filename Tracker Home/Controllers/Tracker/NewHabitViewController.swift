@@ -17,8 +17,8 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 }
 
 //Привычка
-class NewHabitViewController: UIViewController {
-    
+class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegate {
+            
     var habit: Bool = true
     var isEdit: Bool = false
     private var pickedCategory: TrackerCategory?
@@ -172,6 +172,11 @@ class NewHabitViewController: UIViewController {
         print("Создать")
     }
     
+    func setupCategories(categories: String) {
+        categoryName(name: categories)
+        dismiss(animated: true)
+    }
+    
     private func updateButtonCondition() {
         if allCellFilled.allValuesAreTrue() {
             createButton.backgroundColor = .udBlackDay
@@ -259,7 +264,7 @@ extension NewHabitViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
         if indexPath.row == 0 {
-            let viewController = NewCategoryViewController(delegate: self)
+            let viewController = AllCategoryViewController(delegate: self)
             present(UINavigationController(rootViewController: viewController), animated: true)
         } else if indexPath.row == 1 {
             let viewController = NewScheduleViewController(delegate: self)
@@ -413,7 +418,7 @@ extension NewHabitViewController: NewScheduleViewControllerDelegate {
     }
 }
 
-extension NewHabitViewController: NewCategoryViewControllerDelegate {
+extension NewHabitViewController {
     func categoryName(name: String) {
         category = name
         userSelected[0] = category
@@ -451,5 +456,11 @@ extension NewHabitViewController {
         case .saturday: return "Сб"
         case .sunday: return "Вс"
         }
+    }
+}
+
+extension NewHabitViewController: NewCategoryViewControllerDelegate {
+    func didAddNewCategory() {
+        print("Заглушка")
     }
 }

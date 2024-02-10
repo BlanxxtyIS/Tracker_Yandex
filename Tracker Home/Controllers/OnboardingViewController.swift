@@ -99,7 +99,7 @@ final class OnboardingViewController: UIPageViewController {
         let vc = MainTabBarController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
-        isLogin.addInfoForLogin(info: true)
+        isLogin.isLogin(condition: true)
     }
     
     private lazy var pageControl: UIPageControl = {

@@ -14,7 +14,7 @@ protocol TrackerViewControllerDelegate: AnyObject {
 }
 
 //Трекеры
-class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate {
+class TrackerViewController: UIViewController {
     
     let trackerStore = TrackerStore.shared
     let trackerCategoryStore = TrackerCategoryStore.shared
@@ -183,7 +183,7 @@ class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate
             emptyImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             emptyImage.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 230),
             emptyLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            emptyLabel.topAnchor.constraint(equalTo: emptyImage.bottomAnchor, constant: 8),
+            emptyLabel.topAnchor.constraint(equalTo: emptyImage.bottomAnchor, constant: 8)
             ])
     }
     
@@ -218,9 +218,10 @@ class TrackerViewController: UIViewController, NewCategoryViewControllerDelegate
     }
     
     //Установка заглушки при пустом/неверном поиске
+    //MARK: - после пустого поиск
     private func setupPlugView() {
         guard let searchText = searchBar.text, !searchText.isEmpty else {
-            visibleTrackers = categories
+            updateVisibleTrackers(forDate: datePicker.date)
             errorView(visibleTrackers.isEmpty)
             visibleTrackers.isEmpty ? emptyView(true) : collectionView.reloadData()
             collectionView.reloadData()
@@ -279,11 +280,10 @@ extension TrackerViewController: UISearchTextFieldDelegate {
 extension TrackerViewController: UICollectionViewDataSource, TrackerViewControllerCellDelegate {
     func completeTracker(id: UUID, indexPath: IndexPath) {
         if let createdDate = trackerStore.fetchTracker(withID: id)?.createdDate {
-            let sevenDayLater = Calendar.current.date(byAdding: .day, value: -7, to: createdDate)!
             let calendar = Date()
             let selectedDate = Calendar.current.startOfDay(for: datePicker.date)
             
-            if selectedDate <= sevenDayLater || selectedDate > calendar {
+            if selectedDate > calendar {
                 print("ЗАГЛУШКА")
             } else {
                 print("Можно")

@@ -8,16 +8,13 @@
 import UIKit
 
 protocol NewCategoryViewControllerDelegate: AnyObject {
-    func categoryName(name: String)
+    func didAddNewCategory()
 }
 
 //Категория
 class NewCategoryViewController: UIViewController {
     
     weak var delegate: NewCategoryViewControllerDelegate?
-    private var text = ""
-    private var categorysName: [String] = []
-    
     init(delegate: NewCategoryViewControllerDelegate?) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
@@ -26,6 +23,10 @@ class NewCategoryViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private let categoryStore = CategoryStore.shared
+    private var text = ""
+    private let userDefaults = UserDefaults.standard
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
@@ -56,6 +57,8 @@ class NewCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let categories = [String]()
+        userDefaults.set(categories, forKey: "CategoriesKey")
         title = "Новая категория"
         textField.delegate = self
         view.backgroundColor = .udWhiteDay
@@ -79,15 +82,10 @@ class NewCategoryViewController: UIViewController {
         }
     }
     
-    func setupCategoryName() {
-        guard let category = categorysName.last else { return }
-        self.delegate?.categoryName(name: category)
-    }
-    
     @objc
     private func addTracker() {
-        self.delegate?.categoryName(name: text)
-        categorysName.append(text)
+        categoryStore.categorySave(condition: text)
+        delegate?.didAddNewCategory()
         dismiss(animated: true)
     }
     

@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        if isLogin.fetchAllInfo().isEmpty {
-            window?.rootViewController = OnboardingViewController()
-        } else {
+        if isLogin.isLoginCondition() {
             window?.rootViewController = MainTabBarController()
+        } else {
+            window?.rootViewController = OnboardingViewController()
         }
         window?.makeKeyAndVisible()
     }
