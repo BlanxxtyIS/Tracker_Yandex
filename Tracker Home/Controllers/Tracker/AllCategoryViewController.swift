@@ -29,7 +29,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
     private var categoryStore = CategoryStore.shared
     private var categories: [String] = []
     
-    lazy var emptyImage: UIImageView = {
+    private lazy var emptyImage: UIImageView = {
        let image = UIImage(named: "Empty Image")
         let emptyImage = UIImageView(image: image)
         emptyImage.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -38,7 +38,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         return emptyImage
     }()
     
-    lazy var emptyLabel: UILabel = {
+    private lazy var emptyLabel: UILabel = {
        let label = UILabel()
         label.text = "Привычки и события можно объеденить по смыслу"
         label.font = .systemFont(ofSize: 12, weight: .medium)
@@ -48,7 +48,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         return label
     }()
     
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
        let table = UITableView()
         table.register(AllCategoryViewControllerCell.self, forCellReuseIdentifier: "AllCategoryViewControllerCell")
         table.separatorStyle = .singleLine
@@ -64,7 +64,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         return table
     }()
     
-    lazy var addCategoryButton: UIButton = {
+    private lazy var addCategoryButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .udBlackDay
         button.setTitle("Добавить категорию", for: .normal)
@@ -117,7 +117,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
         dismiss(animated: true)
     }
     
-    func updateCategories() {
+    private func updateCategories() {
         categories = categoryStore.categoryGive()
         tableView.reloadData()
     }

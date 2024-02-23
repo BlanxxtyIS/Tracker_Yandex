@@ -9,7 +9,7 @@ import UIKit
 
 final class OnboardingViewController: UIPageViewController {
     
-    let isLogin = IsLoginStore.shared
+    let isLogin = AppSettingsStorage.shared
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)

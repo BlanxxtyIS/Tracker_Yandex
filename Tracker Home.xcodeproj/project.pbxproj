@@ -21,7 +21,7 @@
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F47487ED2B68D77F0039D671 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47487EC2B68D77F0039D671 /* Setting.swift */; };
 		F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */; };
-		F499738F2B75F9F90040C883 /* IsLoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499738E2B75F9F90040C883 /* IsLoginStore.swift */; };
+		F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */; };
 		F49973952B7601450040C883 /* AllCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973942B7601450040C883 /* AllCategoryViewController.swift */; };
 		F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */; };
 		F49973992B7655830040C883 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973982B7655830040C883 /* CategoryStore.swift */; };
@@ -62,7 +62,7 @@
 		F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerHeader.swift; sourceTree = "<group>"; };
 		F47487EC2B68D77F0039D671 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		F499738E2B75F9F90040C883 /* IsLoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsLoginStore.swift; sourceTree = "<group>"; };
+		F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsStorage.swift; sourceTree = "<group>"; };
 		F49973942B7601450040C883 /* AllCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewController.swift; sourceTree = "<group>"; };
 		F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewControllerCell.swift; sourceTree = "<group>"; };
 		F49973982B7655830040C883 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				F4C797022B67966100636046 /* TrackerStore.swift */,
 				F4C797042B67966C00636046 /* TrackerCategoryStore.swift */,
 				F4C797062B67967600636046 /* TrackerRecordStore.swift */,
-				F499738E2B75F9F90040C883 /* IsLoginStore.swift */,
+				F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */,
 				F49973982B7655830040C883 /* CategoryStore.swift */,
 				F4AC15C12B77A1C0001213DB /* CategoryModel.swift */,
 			);
@@ -289,7 +289,7 @@
 				F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */,
 				F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */,
 				F41ECF542B6A2E0500BC0EDB /* AllCellFilled.swift in Sources */,
-				F499738F2B75F9F90040C883 /* IsLoginStore.swift in Sources */,
+				F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */,
 				F4C796FE2B678EAF00636046 /* CoreDataManager.swift in Sources */,
 				F4A80AFE2B4D189500FCCAEF /* ScheduleTableViewCell.swift in Sources */,
 				F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */,

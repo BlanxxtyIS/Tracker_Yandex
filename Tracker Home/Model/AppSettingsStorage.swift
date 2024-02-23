@@ -7,12 +7,12 @@
 
 import UIKit
 
-final class IsLoginStore {
+final class AppSettingsStorage {
     
     let key = "IsLoginStore"
     
-    static let shared = IsLoginStore()
-    init() {}
+    static let shared = AppSettingsStorage()
+    private init() {}
     
     //Сохранить значение
     func isLogin(condition: Bool) {
