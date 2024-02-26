@@ -12,7 +12,7 @@ protocol CreatingTrackersDelegate: AnyObject {
 }
 
 //Страница создания Привычки/Нерегулярного события
-class CreatingTrackers: UIViewController {
+class CreatingTrackersViewController: UIViewController {
     
     weak var delegate: CreatingTrackersDelegate?
     
@@ -28,7 +28,8 @@ class CreatingTrackers: UIViewController {
     private lazy var newHabitButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .udBlackDay
-        button.setTitle("Привычка", for: .normal)
+        let habit = NSLocalizedString("habit", comment: "Экран создания привычки")
+        button.setTitle(habit, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(newHabitClick), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -40,7 +41,8 @@ class CreatingTrackers: UIViewController {
     private lazy var irregularEventButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .udBlackDay
-        button.setTitle("Нерегулярное событие", for: .normal)
+        let anIrregularEvent = NSLocalizedString("irregularEvent", comment: "Экран создания нерегулярного события")
+        button.setTitle(anIrregularEvent, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(irregularEventClick), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -61,7 +63,8 @@ class CreatingTrackers: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
-        title = "Создание трекера"
+        let creatingTrackerTitle = NSLocalizedString("creatingTrackerTitle", comment: "Заголовок страницы создания трекера")
+        title = creatingTrackerTitle
         setupAllViews()
     }
     
@@ -92,7 +95,7 @@ class CreatingTrackers: UIViewController {
     }
 }
 
-extension CreatingTrackers: NewHabitViewControllerDelegate {
+extension CreatingTrackersViewController: NewHabitViewControllerDelegate {
     func createNewHabit(header: String, tracker: Tracker) {
         dismiss(animated: true)
         delegate?.createNewTracker(header: header, tracker: tracker)

@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  Tracker Home
+
+  Created by Марат Хасанов on 26.02.2024.
+  
+*/
+
+//Плюрализация фразы "N дней"
+"completedDays" = "completedDays";
+
+//OnboardingViewController
+"onboardingTitleTextOne" = "Отслеживайте только то, что хотите";
+"onboardingTitleTextTwo" = "Даже если это не литры воды и йога";
+"onboardingButtonText" = "Вот это технологии";
+
+//MainTabBarController
+"trackerTitleText" = "Трекеры";
+"statisticTitleText" = "Статистика";
+
+//TrackerViewController
+"emptyState.title" = "Что будем отслеживать?";
+"searchPlaceholder" = "Поиск";
+"errorSearchText" = "Ничего не найдено";
+
+//StatisticViewController
+"emptyText" = "Анализировать пока нечего";
+
+//CreatingTrackersViewController
+"habit" = "Привычка";
+"irregularEvent" = "Нерегулярное событие";
+"creatingTrackerTitle" = "Создание трекера";
+
+//NewHabbitViewController
+"newHabbitVCTitle" = "Новая привычка";
+"placeholderText" = "Введите название трекера";
+"newHabbitCategory" = "Категория";
+"newHabbitSchedule" = "Расписание";
+"emojiText" = "Emoji";
+"colorText" = "Цвет";
+"newHabbitCancelButton" = "Отменить";
+"newHabbitCreateButton" = "Создать";
+
+//AllCategoryViewController
+"categoryTitle" = "Категория";
+"emptyCategoryText" = "Привычки и события можно объеденить по смыслу";
+"addCategoryButtonText" = "Добавить категорию";
+
+//NewCategoryViewController
+"newCategoryTitle" = "Новая категория";
+"newCategoryPlaceholder" = "Введите название категории";
+"newCategoryButton" = "Готово";
+
+//NewScheduleViewContoller
+"newScheduleTitle" = "Расписание";
+"monday" = "Понедельник";
+"tuesday" = "Всторник";
+"wednesday" = "Среда";
+"thursday" = "Четверг";
+"friday" = "Пятница";
+"saturday" = "Суббота";
+"sunday" = "Воскресенье";
+"newScheduleButton" = "Готово";

@@ -27,7 +27,7 @@ class NewScheduleViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let weekDay: [String] = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
+    private let weekDay: [String] = [NSLocalizedString("monday", comment: "Понедельник"), NSLocalizedString("tuesday", comment: "Вторник"), NSLocalizedString("wednesday", comment: "Среда"), NSLocalizedString("thursday", comment: "Четверг"), NSLocalizedString("friday", comment: "Пятница"), NSLocalizedString("saturday", comment: "Суббота"), NSLocalizedString("sunday", comment: "Воскресенье")]
     
     let tableView: UITableView = {
        let table = UITableView()
@@ -49,7 +49,8 @@ class NewScheduleViewController: UIViewController {
     
     let readyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        let readyButtonText = NSLocalizedString("newScheduleButton", comment: "Кнопка готово")
+        button.setTitle(readyButtonText, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = .udBlackDay
         button.addTarget(self, action: #selector(readyButtonClicked), for: .touchUpInside)
@@ -61,7 +62,8 @@ class NewScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Расписание"
+        let newSchedultTitleText = NSLocalizedString("newScheduleTitle", comment: "Заголовок")
+        title = newSchedultTitleText
         view.backgroundColor = .udWhiteDay
         tableView.delegate = self
         tableView.dataSource = self

@@ -11,6 +11,8 @@ final class OnboardingViewController: UIPageViewController {
     
     let isLogin = AppSettingsStorage.shared
     
+    let onboardingButtonText = NSLocalizedString("onboardingButtonText", comment: "Текст кнопки на экране онбоардинга")
+    
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: options)
     }
@@ -29,7 +31,8 @@ final class OnboardingViewController: UIPageViewController {
         first.view.addSubview(firstBackgroundImage)
         
         let firstTitle = UILabel()
-        firstTitle.text = "Отслеживайте только то, что хотите"
+        let onboardingTextOne = NSLocalizedString("onboardingTitleTextOne", comment: "Текст на экране онбоардинга #1")
+        firstTitle.text = onboardingTextOne
         firstTitle.font = .systemFont(ofSize: 32, weight: .bold)
         firstTitle.numberOfLines = 2
         firstTitle.textAlignment = .center
@@ -38,7 +41,7 @@ final class OnboardingViewController: UIPageViewController {
         
         let onboardingFirstButton = UIButton()
         onboardingFirstButton.backgroundColor = .udBlackDay
-        onboardingFirstButton.setTitle("Вот это технологии!", for: .normal)
+        onboardingFirstButton.setTitle(onboardingButtonText, for: .normal)
         onboardingFirstButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         onboardingFirstButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         onboardingFirstButton.layer.cornerRadius = 16
@@ -55,7 +58,8 @@ final class OnboardingViewController: UIPageViewController {
         second.view.addSubview(secondBackgroundImage)
         
         let secondTitle = UILabel()
-        secondTitle.text = "Даже если это не литры воды и йога"
+        let onboardingTextTwo = NSLocalizedString("onboardingTitleTextTwo", comment: "Текст на экране онбоардинга #2")
+        secondTitle.text = onboardingTextTwo
         secondTitle.font = .systemFont(ofSize: 32, weight: .bold)
         secondTitle.numberOfLines = 2
         secondTitle.textAlignment = .center
@@ -64,7 +68,7 @@ final class OnboardingViewController: UIPageViewController {
         
         let onboardingSecondButton = UIButton()
         onboardingSecondButton.backgroundColor = .udBlackDay
-        onboardingSecondButton.setTitle("Вот это технологии!", for: .normal)
+        onboardingSecondButton.setTitle(onboardingButtonText, for: .normal)
         onboardingSecondButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         onboardingSecondButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         onboardingSecondButton.layer.cornerRadius = 16

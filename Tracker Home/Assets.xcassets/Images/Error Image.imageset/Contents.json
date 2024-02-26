@@ -14,10 +14,49 @@
       "filename" : "2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
+    },
+    {
+      "filename" : "2@1x 1.png",
+      "idiom" : "universal",
+      "locale" : "en",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "2@2x 1.png",
+      "idiom" : "universal",
+      "locale" : "en",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "2@3x 1.png",
+      "idiom" : "universal",
+      "locale" : "en",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "2@1x 2.png",
+      "idiom" : "universal",
+      "locale" : "ru",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "2@2x 2.png",
+      "idiom" : "universal",
+      "locale" : "ru",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "2@3x 2.png",
+      "idiom" : "universal",
+      "locale" : "ru",
+      "scale" : "3x"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
   }
 }

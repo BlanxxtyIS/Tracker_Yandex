@@ -16,6 +16,7 @@
 		F4102A782B35C4AC009E2D14 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */; };
 		F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */; };
 		F41ECF542B6A2E0500BC0EDB /* AllCellFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41ECF532B6A2E0500BC0EDB /* AllCellFilled.swift */; };
+		F4286CB82B8C7659003624EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4286CBA2B8C7659003624EE /* Localizable.strings */; };
 		F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */; };
 		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
@@ -26,7 +27,7 @@
 		F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */; };
 		F49973992B7655830040C883 /* CategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973982B7655830040C883 /* CategoryStore.swift */; };
 		F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */; };
-		F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */; };
+		F4A2F4842B46DB7200D40710 /* CreatingTrackersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4832B46DB7200D40710 /* CreatingTrackersViewController.swift */; };
 		F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */; };
 		F4A2F48A2B472EEF00D40710 /* TablewViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F4892B472EEF00D40710 /* TablewViewCell.swift */; };
 		F4A2F48C2B4828AC00D40710 /* NewCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */; };
@@ -38,6 +39,7 @@
 		F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */; };
 		F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */; };
 		F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */; };
+		F4C1D3A32B8CC1EF002AAD4C /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F4C1D3A52B8CC1EF002AAD4C /* Localizable.stringsdict */; };
 		F4C796FE2B678EAF00636046 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C796FD2B678EAF00636046 /* CoreDataManager.swift */; };
 		F4C797012B67908900636046 /* TrackerCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4C796FF2B67908900636046 /* TrackerCoreData.xcdatamodeld */; };
 		F4C797032B67966100636046 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797022B67966100636046 /* TrackerStore.swift */; };
@@ -67,7 +69,7 @@
 		F49973962B760DD70040C883 /* AllCategoryViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewControllerCell.swift; sourceTree = "<group>"; };
 		F49973982B7655830040C883 /* CategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStore.swift; sourceTree = "<group>"; };
 		F4A138EC2B3A459E006FE0C0 /* TrackerViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerCell.swift; sourceTree = "<group>"; };
-		F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTrackers.swift; sourceTree = "<group>"; };
+		F4A2F4832B46DB7200D40710 /* CreatingTrackersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingTrackersViewController.swift; sourceTree = "<group>"; };
 		F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabitViewController.swift; sourceTree = "<group>"; };
 		F4A2F4892B472EEF00D40710 /* TablewViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablewViewCell.swift; sourceTree = "<group>"; };
 		F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,10 @@
 		F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategory.swift; sourceTree = "<group>"; };
 		F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecord.swift; sourceTree = "<group>"; };
+		F4C1D3962B8C7760002AAD4C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F4C1D3972B8C78C3002AAD4C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F4C1D3A02B8C85D0002AAD4C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F4C1D3A42B8CC1EF002AAD4C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F4C796FD2B678EAF00636046 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F4C797002B67908900636046 /* TrackerCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TrackerCoreData.xcdatamodel; sourceTree = "<group>"; };
 		F4C797022B67966100636046 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 		F4102A602B35AEBC009E2D14 /* Tracker Home */ = {
 			isa = PBXGroup;
 			children = (
+				F4286CB52B8C6BC7003624EE /* Resourses */,
 				F4BF2C9F2B3A3A6F00FC88DD /* Model */,
 				F4BF2C9E2B3A3A5F00FC88DD /* Controllers */,
 				F4A138EB2B3A458C006FE0C0 /* View */,
@@ -129,6 +136,15 @@
 				F4C796FF2B67908900636046 /* TrackerCoreData.xcdatamodeld */,
 			);
 			path = "Tracker Home";
+			sourceTree = "<group>";
+		};
+		F4286CB52B8C6BC7003624EE /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				F4286CBA2B8C7659003624EE /* Localizable.strings */,
+				F4C1D3A52B8CC1EF002AAD4C /* Localizable.stringsdict */,
+			);
+			path = Resourses;
 			sourceTree = "<group>";
 		};
 		F4A138EB2B3A458C006FE0C0 /* View */ = {
@@ -150,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */,
-				F4A2F4832B46DB7200D40710 /* CreatingTrackers.swift */,
+				F4A2F4832B46DB7200D40710 /* CreatingTrackersViewController.swift */,
 				F4A2F4852B47233D00D40710 /* NewHabitViewController.swift */,
 				F49973942B7601450040C883 /* AllCategoryViewController.swift */,
 				F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */,
@@ -247,6 +263,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = F4102A552B35AEBC009E2D14;
 			productRefGroup = F4102A5F2B35AEBC009E2D14 /* Products */;
@@ -264,6 +281,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4102A6E2B35AEBD009E2D14 /* LaunchScreen.storyboard in Resources */,
+				F4C1D3A32B8CC1EF002AAD4C /* Localizable.stringsdict in Resources */,
+				F4286CB82B8C7659003624EE /* Localizable.strings in Resources */,
 				F4102A6B2B35AEBD009E2D14 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,7 +311,7 @@
 				F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */,
 				F4C796FE2B678EAF00636046 /* CoreDataManager.swift in Sources */,
 				F4A80AFE2B4D189500FCCAEF /* ScheduleTableViewCell.swift in Sources */,
-				F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */,
+				F4A2F4842B46DB7200D40710 /* CreatingTrackersViewController.swift in Sources */,
 				F4C797032B67966100636046 /* TrackerStore.swift in Sources */,
 				F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */,
 				F47487ED2B68D77F0039D671 /* Setting.swift in Sources */,
@@ -319,8 +338,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				F4102A6D2B35AEBD009E2D14 /* Base */,
+				F4C1D3962B8C7760002AAD4C /* en */,
+				F4C1D3972B8C78C3002AAD4C /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F4286CBA2B8C7659003624EE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4C1D3A02B8C85D0002AAD4C /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F4C1D3A52B8CC1EF002AAD4C /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4C1D3A42B8CC1EF002AAD4C /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -330,6 +367,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -391,6 +429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

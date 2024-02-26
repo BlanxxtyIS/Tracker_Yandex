@@ -30,7 +30,8 @@ class NewCategoryViewController: UIViewController {
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Введите название категории"
+        let placeholderText = NSLocalizedString("newCategoryPlaceholder", comment: "текст плейсхолдера")
+        textField.placeholder = placeholderText
         textField.clearButtonMode = .whileEditing
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = leftView
@@ -45,7 +46,8 @@ class NewCategoryViewController: UIViewController {
     
     private lazy var readyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        let buttonText = NSLocalizedString("newCategoryButton", comment: "Кнопка готово")
+        button.setTitle(buttonText, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = .udGray
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -59,7 +61,8 @@ class NewCategoryViewController: UIViewController {
         super.viewDidLoad()
         let categories = [String]()
         userDefaults.set(categories, forKey: "CategoriesKey")
-        title = "Новая категория"
+        let newCategoryTitle = NSLocalizedString("newCategoryTitle", comment: "Заголовок страницы")
+        title = newCategoryTitle
         textField.delegate = self
         view.backgroundColor = .udWhiteDay
         textField.delegate = self

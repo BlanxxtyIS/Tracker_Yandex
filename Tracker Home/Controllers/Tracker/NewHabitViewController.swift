@@ -42,7 +42,9 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     let emojiSection = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝", "😪"]
     let colorSection: [UIColor] = [UIColor.color1, UIColor.color2, UIColor.color3, UIColor.color4, UIColor.color5, UIColor.color6, UIColor.color7, UIColor.color8, UIColor.color9, UIColor.color10, UIColor.color11, UIColor.color12, UIColor.color13, UIColor.color14, UIColor.color15, UIColor.color16, UIColor.color17, UIColor.color18]
     
-    var headerName: [String] = ["Emoji", "Цвет"]
+    let emojiText = NSLocalizedString("emojiText", comment: "Шапка коллекции с эмоциями")
+    let colorText = NSLocalizedString("colorText", comment: "Шапка коллекции с цветами")
+    var headerName: [String] = []
     
     weak var delegate: NewHabitViewControllerDelegate?
     
@@ -57,7 +59,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var textField: UITextField = {
        let textField = UITextField()
-        textField.placeholder = "Введите название трекера"
+        let placeholderText = NSLocalizedString("placeholderText", comment: "плэйсхолдер поиска")
+        textField.placeholder = placeholderText
         textField.clearButtonMode = .whileEditing
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = leftView
@@ -98,7 +101,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var cancelButton: UIButton = {
        let cancelButton = UIButton()
-        cancelButton.setTitle("Отменить", for: .normal)
+        let newHabbitCancelButton = NSLocalizedString("newHabbitCancelButton", comment: "Отменить")
+        cancelButton.setTitle(newHabbitCancelButton, for: .normal)
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = UIColor.udRed.cgColor
         cancelButton.setTitleColor(.udRed, for: .normal)
@@ -112,7 +116,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var createButton: UIButton = {
         let createButton = UIButton()
-        createButton.setTitle("Создать", for: .normal)
+        let newHabbitCreateButton = NSLocalizedString("newHabbitCreateButton", comment: "Создать")
+        createButton.setTitle(newHabbitCreateButton, for: .normal)
         createButton.backgroundColor = .udGray
         createButton.layer.cornerRadius = 16
         createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
@@ -134,8 +139,10 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
+        headerName = [emojiText, colorText]
         allCellFilled.tableViewSchedule = true
-        title = "Новая привычка"
+        let newHabbitVCTitle = NSLocalizedString("newHabbitVCTitle", comment: "Заголовок страницы")
+        title = newHabbitVCTitle
         textField.delegate = self
         setupAllViews()
         appendSettings()
@@ -187,9 +194,11 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     }
     
     private func appendSettings() {
+        let newHabbitCategory = NSLocalizedString("newHabbitCategory", comment: "Категория")
+        let newHabbitSchedule = NSLocalizedString("newHabbitSchedule", comment: "Расписание")
         settings.append(
             Setting(
-                name: NSLocalizedString("Категория", comment: ""),
+                name: NSLocalizedString(newHabbitCategory, comment: ""),
                 pickedParameter: isEdit ? pickedCategory?.header : nil,
                 handler: { [weak self] in
                     guard let self = self else {
@@ -201,7 +210,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         if habit {
             settings.append(
                 Setting(
-                    name: NSLocalizedString("Расписание", comment: ""),
+                    name: NSLocalizedString(newHabbitSchedule, comment: ""),
                     pickedParameter: nil,
                     handler: { [weak self] in
                         guard let self = self else {

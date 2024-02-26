@@ -34,7 +34,8 @@ class TrackerViewController: UIViewController {
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {
         let label = UILabel()
-        label.text = "Что будем отслеживать?"
+        let emptyStateText = NSLocalizedString("emptyState.title", comment: "Текст пустого экрана")
+        label.text = emptyStateText
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .udBlackDay
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +62,8 @@ class TrackerViewController: UIViewController {
         let search = UISearchTextField()
         search.delegate = self
         search.textColor = .udBlackDay
-        search.placeholder = "Поиск"
+        let searchPlaceholder = NSLocalizedString("searchPlaceholder", comment: "Текст поиска на UISearchTextField")
+        search.placeholder = searchPlaceholder
         search.translatesAutoresizingMaskIntoConstraints = false
         return search
     }()
@@ -118,9 +120,8 @@ class TrackerViewController: UIViewController {
     }
         
     @objc private func addTracker() {
-        let viewController = CreatingTrackers(delegate: self)
+        let viewController = CreatingTrackersViewController(delegate: self)
         present(UINavigationController(rootViewController: viewController), animated: true)
-        print("Добавляй трекер")
     }
     
     //Метод делегата на получение категории
@@ -189,7 +190,8 @@ class TrackerViewController: UIViewController {
     
     private func errorView(_ result: Bool) {
         emptyImage.image = UIImage(named: "Error Image")
-        emptyLabel.text = "Ничего не найдено"
+        let errorSearchText = NSLocalizedString("errorSearchText", comment: "Текст при ошибке поиска")
+        emptyLabel.text = errorSearchText
         
         if result {
             // to show
@@ -204,7 +206,8 @@ class TrackerViewController: UIViewController {
     
     private func emptyView(_ result: Bool) {
         emptyImage.image = UIImage(named: "Empty Image")
-        emptyLabel.text = "Что будем отслеживать?"
+        let emptyStateText = NSLocalizedString("emptyState.title", comment: "Текст пустого экрана")
+        emptyLabel.text = emptyStateText
         
         if result {
             // to show
@@ -396,7 +399,6 @@ extension TrackerViewController: CreatingTrackersDelegate {
         categories = TrackerCategoryStore.shared.getAllTrackerCategories()
         visibleTrackers = categories
         collectionView.reloadData()
-//        updateViewController()
         updateVisibleTrackers(forDate: datePicker.date)
     }
 }

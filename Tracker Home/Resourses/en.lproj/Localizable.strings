@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Tracker Home
+
+  Created by Марат Хасанов on 26.02.2024.
+  
+*/
+
+"emptyState.title" = "What are we going to track?";
+"delete" = "Remove";
+"delete.confirmation" = "Are you sure you want to delete the tracker?";
+"cancel" = "Cancel";
+"numberOfTasks" = "%d days";
