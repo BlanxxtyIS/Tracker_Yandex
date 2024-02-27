@@ -15,6 +15,8 @@ protocol TrackerViewControllerDelegate: AnyObject {
 
 //Трекеры
 class TrackerViewController: UIViewController {
+    //для темного/cветлого режима
+    let colors = Colors()
     
     let trackerStore = TrackerStore.shared
     let trackerCategoryStore = TrackerCategoryStore.shared
@@ -80,7 +82,7 @@ class TrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         visibleTrackers = categories
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.udWhiteDay
         settingNavBarItems()
         setupAllViews()
         setupAllConstraints()
