@@ -6,8 +6,58 @@
   
 */
 
-"emptyState.title" = "What are we going to track?";
-"delete" = "Remove";
-"delete.confirmation" = "Are you sure you want to delete the tracker?";
-"cancel" = "Cancel";
-"numberOfTasks" = "%d days";
+//Плюрализация фразы "N дней"
+"completedDays" = "completedDays";
+
+//OnboardingViewController
+"onboardingTitleTextOne" = "Track only what you want";
+"onboardingTitleTextTwo" = "Even if it's not liters of water and yoga";
+"onboardingButtonText" = "These are the technologies";
+
+//MainTabBarController
+"trackerTitleText" = "Trackers";
+"statisticTitleText" = "Statistics";
+
+//TrackerViewController
+"emptyState.title" = "What will we track?";
+"searchPlaceholder" = "Search";
+"errorSearchText" = "Nothing found";
+
+//StatisticViewController
+"emptyText" = "There is nothing to analyze yet";
+
+//CreatingTrackersViewController
+"habit" = "Habit";
+"irregularEvent" = "Irregular event";
+"creatingTrackerTitle" = "Creating a tracker";
+
+//NewHabbitViewController
+"newHabbitVCTitle" = "New habit";
+"placeholderText" = "Enter the name of the tracker";
+"newHabbitCategory" = "Category";
+"newHabbitSchedule" = "Schedule";
+"emojiText" = "Emoji";
+"colorText" = "Color";
+"newHabbitCancelButton" = "Cancel";
+"newHabbitCreateButton" = "Create";
+
+//AllCategoryViewController
+"categoryTitle" = "Category";
+"emptyCategoryText" = "Habits and events can be combined in meaning";
+"addCategoryButtonText" = "Add a category";
+
+//NewCategoryViewController
+"newCategoryTitle" = "New category";
+"newCategoryPlaceholder" = "Enter the category name";
+"newCategoryButton" = "Done";
+
+//NewScheduleViewContoller
+"newScheduleTitle" = "Schedule";
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"sunday" = "Sunday";
+"newScheduleButton" = "Done";
