@@ -76,7 +76,8 @@ class NewCategoryViewController: UIViewController {
         if text.count >= 1 {
             textField.rightViewMode = .always
             readyButton.backgroundColor = .udBlackDay
-            readyButton.setTitle("Добавить категорию", for: .normal)
+            let localizedText = NSLocalizedString("addCategoryButtonText", comment: "Добавить категорию")
+            readyButton.setTitle(localizedText, for: .normal)
             readyButton.isEnabled = true
         } else {
             textField.rightViewMode = .never

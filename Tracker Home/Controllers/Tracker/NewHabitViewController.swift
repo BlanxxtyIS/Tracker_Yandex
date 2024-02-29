@@ -457,13 +457,13 @@ extension NewHabitViewController {
     
     func weekdayToString(weekday: Weekday) -> String {
         switch weekday {
-        case .monday: return "Пн"
-        case .tuesday: return "Вт"
-        case .wednesday: return "Ср"
-        case .thursday: return "Чт"
-        case .friday: return "Пт"
-        case .saturday: return "Сб"
-        case .sunday: return "Вс"
+        case .monday: return NSLocalizedString("mon", comment: "Понедельник")
+        case .tuesday: return NSLocalizedString("tues", comment: "Вторник")
+        case .wednesday: return NSLocalizedString("wed", comment: "Среда")
+        case .thursday: return NSLocalizedString("thurs", comment: "Четверг")
+        case .friday: return NSLocalizedString("fri", comment: "Пятница")
+        case .saturday: return NSLocalizedString("sat", comment: "Суббота")
+        case .sunday: return NSLocalizedString("sun", comment: "Воскресенье")
         }
     }
 }

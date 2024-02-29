@@ -61,3 +61,11 @@
 "saturday" = "Saturday";
 "sunday" = "Sunday";
 "newScheduleButton" = "Done";
+
+"mon" = "Mon";
+"tues" = "Tues";
+"wed" = "Wed";
+"thurs" = "Thurs";
+"fri" = "Fri";
+"sat" = "Sat";
+"sun" = "Sun";

@@ -16,7 +16,21 @@ final class TrackerCategoryStore {
     
     let coreDataManager = CoreDataManager.shared
     let trackerStore = TrackerStore.shared
-    
+        
+    func deleteTracker(trackerCoreData: TrackerCoreData) {
+        do {
+            // Удаляем трекер из контекста
+            coreDataManager.context.delete(trackerCoreData)
+            
+            // Сохраняем изменения
+            try coreDataManager.context.save()
+            print("Трекер успешно удален")
+        } catch {
+            print("Ошибка при удалении трекера: \(error)")
+        }
+    }
+
+
     //MARK: Сохранить TrackerCategory в CoreData
     func addTrackerCategory(trackerCategory: TrackerCategory, trackers: [Tracker]) {
         let trackerCategoryCoreData = TrackerCategoryCoreData(context: coreDataManager.context)
@@ -65,18 +79,23 @@ final class TrackerCategoryStore {
             return nil
         }
     }
-    
+
     //Из CoreData TrackerCategory по TrackerCategoryCoreData
     func trackerFromCoreData(_ trackerCategoryCoreData: TrackerCategoryCoreData) -> TrackerCategory {
-        let id = trackerCategoryCoreData.id!
-        let header = trackerCategoryCoreData.header!
-        
+        guard let id = trackerCategoryCoreData.id,
+              let header = trackerCategoryCoreData.header else {
+            // Handle the case where id or header is nil
+            fatalError("Failed to unwrap id or header in trackerFromCoreData")
+        }
+
         var trackers: [Tracker] = []
         if let trackerCoreDataObjects = trackerCategoryCoreData.trackers?.allObjects as? [TrackerCoreData] {
             trackers = trackerCoreDataObjects.map { trackerStore.trackerFromCoreData($0) }
         }
+
         return TrackerCategory(header: header, tracker: trackers, id: id)
     }
+
     
     //Все значения TrackerCategory
     func getAllTrackerCategories() -> [TrackerCategory] {

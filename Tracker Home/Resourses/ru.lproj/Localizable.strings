@@ -61,3 +61,11 @@
 "saturday" = "Суббота";
 "sunday" = "Воскресенье";
 "newScheduleButton" = "Готово";
+
+"mon" = "Пн";
+"tues" = "Вт";
+"wed" = "Ср";
+"thurs" = "Чт";
+"fri" = "Пт";
+"sat" = "Сб";
+"sun" = "Вскр";

@@ -8,6 +8,9 @@
 import UIKit
 import CoreData
 
+extension NSManagedObject {
+    @NSManaged public var previousHeader: String?
+}
 
 final class TrackerStore {
     
@@ -51,7 +54,7 @@ final class TrackerStore {
             print("Ошибка в TrackerStore при добавлении \(error)")
         }
     }
-        
+    
     //MARK: Достать из CoreData
     //Из CoreData TrackerCoreData по ID
     func fetchTracker(withID id: UUID) -> TrackerCoreData? {
@@ -66,7 +69,7 @@ final class TrackerStore {
             return nil
         }
     }
-    
+     
     //Все значения Tracker
     func getAllTrackers() -> [Tracker] {
         let fetchRequest: NSFetchRequest<TrackerCoreData> = TrackerCoreData.fetchRequest()

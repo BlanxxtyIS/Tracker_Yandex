@@ -22,7 +22,6 @@
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F47487ED2B68D77F0039D671 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47487EC2B68D77F0039D671 /* Setting.swift */; };
 		F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */; };
-		F4827A612B8DCC9E00ED2149 /* Tracker_HomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4827A602B8DCC9E00ED2149 /* Tracker_HomeTests.swift */; };
 		F4827A6B2B8DDEA600ED2149 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4827A6A2B8DDEA600ED2149 /* Colors.swift */; };
 		F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */; };
 		F49973952B7601450040C883 /* AllCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49973942B7601450040C883 /* AllCategoryViewController.swift */; };
@@ -77,7 +76,6 @@
 		F47487EC2B68D77F0039D671 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F4827A5E2B8DCC9E00ED2149 /* Tracker HomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tracker HomeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4827A602B8DCC9E00ED2149 /* Tracker_HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker_HomeTests.swift; sourceTree = "<group>"; };
 		F4827A6A2B8DDEA600ED2149 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsStorage.swift; sourceTree = "<group>"; };
 		F49973942B7601450040C883 /* AllCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewController.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				F4102A602B35AEBC009E2D14 /* Tracker Home */,
-				F4827A5F2B8DCC9E00ED2149 /* Tracker HomeTests */,
 				F4102A5F2B35AEBC009E2D14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -171,14 +168,6 @@
 				F4C1D3A52B8CC1EF002AAD4C /* Localizable.stringsdict */,
 			);
 			path = Resourses;
-			sourceTree = "<group>";
-		};
-		F4827A5F2B8DCC9E00ED2149 /* Tracker HomeTests */ = {
-			isa = PBXGroup;
-			children = (
-				F4827A602B8DCC9E00ED2149 /* Tracker_HomeTests.swift */,
-			);
-			path = "Tracker HomeTests";
 			sourceTree = "<group>";
 		};
 		F4A138EB2B3A458C006FE0C0 /* View */ = {
@@ -324,7 +313,6 @@
 			);
 			mainGroup = F4102A552B35AEBC009E2D14;
 			packageReferences = (
-				F4827A692B8DD09E00ED2149 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = F4102A5F2B35AEBC009E2D14 /* Products */;
 			projectDirPath = "";
@@ -404,7 +392,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4827A612B8DCC9E00ED2149 /* Tracker_HomeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,17 +687,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		F4827A692B8DD09E00ED2149 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		F4C796FF2B67908900636046 /* TrackerCoreData.xcdatamodeld */ = {

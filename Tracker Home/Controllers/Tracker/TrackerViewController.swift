@@ -15,8 +15,11 @@ protocol TrackerViewControllerDelegate: AnyObject {
 
 //Трекеры
 class TrackerViewController: UIViewController {
+    
     //для темного/cветлого режима
     let colors = Colors()
+    
+    var oldHeader: [UUID : String] = [:]
     
     let trackerStore = TrackerStore.shared
     let trackerCategoryStore = TrackerCategoryStore.shared
@@ -43,6 +46,7 @@ class TrackerViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
     private lazy var emptyImage: UIImageView = {
         let image = UIImage(named: "Empty Image")
         let imageView = UIImageView(image: image)
@@ -74,6 +78,8 @@ class TrackerViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.register(TrackerViewControllerCell.self, forCellWithReuseIdentifier: "trackerCell")
         collectionView.register(TrackerViewControllerHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        //Чтобы коллекция знала, что нужно выбирать лишь одну ячейку
+        collectionView.allowsMultipleSelection = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -283,6 +289,47 @@ extension TrackerViewController: UISearchTextFieldDelegate {
 
 //MARK: UICollectionViewCell - Header
 extension TrackerViewController: UICollectionViewDataSource, TrackerViewControllerCellDelegate {
+    //MARK: - НАДО сохранить старый хедер, удалить трекер, создавть новый в "Закрепленные", При откреплении все тоже самое только, передадим туда старый хедер
+    func pinnedTracker(id: UUID, indexPath: IndexPath) {
+        print("Надо закрепить")
+        let header = "Закрепленные"
+        if let trackerCD = trackerStore.fetchTracker(withID: id) {
+            if let foundCategory = categories.first(where: { $0.tracker.contains { $0.id == id } }) {
+                oldHeader[id] = foundCategory.header
+            }
+            let tracker = trackerStore.trackerFromCoreData(trackerCD)
+            createNewTracker(header: header, tracker: tracker)
+            trackerCategoryStore.deleteTracker(trackerCoreData: trackerCD)
+        }
+        updateTrackerViews()
+    }
+
+    func unPinnedTracker(id: UUID, indexPath: IndexPath) {
+        print("Надо открепить")
+        let header = oldHeader[id]!
+        if let trackerCD = trackerStore.fetchTracker(withID: id) {
+            let tracker = trackerStore.trackerFromCoreData(trackerCD)
+            createNewTracker(header: header, tracker: tracker)
+            trackerCategoryStore.deleteTracker(trackerCoreData: trackerCD)
+        }
+        updateTrackerViews()
+    }
+    
+    func removeTracker(id: UUID, indexPath: IndexPath) {
+        if let trackerCD = trackerStore.fetchTracker(withID: id) {
+            trackerCategoryStore.deleteTracker(trackerCoreData: trackerCD)
+            updateTrackerViews()
+            print("Удалить")
+        }
+    }
+
+    
+    func editTracker(id: UUID, indexPath: IndexPath) {
+        print("Изменить")
+    }
+
+    
+    
     func completeTracker(id: UUID, indexPath: IndexPath) {
         if let createdDate = trackerStore.fetchTracker(withID: id)?.createdDate {
             let calendar = Date()
@@ -312,7 +359,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row) нажали на ячейку реализация в дальнейшем мб")
+        print("Нажали на ячейку \(indexPath)")
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {        return visibleTrackers.count
@@ -354,6 +401,7 @@ extension TrackerViewController: UICollectionViewDelegateFlowLayout {
             id = ""
         }
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: id, for: indexPath) as! TrackerViewControllerHeader
+            
         view.titleLabel.text = visibleTrackers.isEmpty ? "" : visibleTrackers[indexPath.section].header
         return view
     }
@@ -398,13 +446,17 @@ extension TrackerViewController: CreatingTrackersDelegate {
             //Надо добавить полную категорию
             trackerCategoryStore.addTrackerCategory(trackerCategory: newTracker, trackers: [tracker])
         }
+        updateTrackerViews()
+    }
+    
+    func updateTrackerViews() {
         categories = TrackerCategoryStore.shared.getAllTrackerCategories()
         visibleTrackers = categories
         collectionView.reloadData()
         updateVisibleTrackers(forDate: datePicker.date)
     }
 }
-
+    
 
 
 
