@@ -19,7 +19,7 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 //Привычка
 class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegate {
             
-    var habit: Bool = true
+    var habit: String = ""
     var isEdit: Bool = false
     private var pickedCategory: TrackerCategory?
     private var settings: Array<Setting> = []
@@ -28,6 +28,12 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
             updateButtonCondition()
         }
     }
+    var firstSelected = true
+    var editingTextField = ""
+    var editingCategory = ""
+    var editingSchedule: [Weekday] = []
+    var selectedColorIndexes: UIColor?
+    var selectedEmojiIndexes: String?
     
     var lastSectionIndexPath: IndexPath?
     var lastIndexPath: IndexPath?
@@ -81,10 +87,12 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         tableView.backgroundColor = .udBackground
         tableView.layer.cornerRadius = 16
         tableView.isScrollEnabled = false
-        if habit {
+        if habit == "CategoryAndSchedule" {
             tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        } else {
+        } else if habit == "Category" {
             tableView.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        } else if habit == "Edit"{
+            tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +150,21 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         headerName = [emojiText, colorText]
         allCellFilled.tableViewSchedule = true
         let newHabbitVCTitle = NSLocalizedString("newHabbitVCTitle", comment: "Заголовок страницы")
-        title = newHabbitVCTitle
+        let newIrregularVCtitle = NSLocalizedString("newIrregularVCtitle", comment: "заголовок страницы")
+        let editingVCTitle = NSLocalizedString("editingVCTitle", comment: "заголовок редактирования страницы")
+        if habit == "CategoryAndSchedule" {
+            title = newHabbitVCTitle
+        } else if habit == "Category" {
+            title = newIrregularVCtitle
+        } else if habit == "Edit" {
+            title = editingVCTitle
+        }
+        
+        if !editingTextField.isEmpty {
+            textField.text = editingTextField
+        }
+        
+        print(editingTextField, editingCategory, editingSchedule)
         textField.delegate = self
         setupAllViews()
         appendSettings()
@@ -150,6 +172,55 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         print("Привычка")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Проверяем, есть ли выбранная эмоджи
+        guard let selectedEmoji = selectedEmojiIndexes else {
+            return
+        }
+        
+        // Находим IndexPath для выбранной эмоджи в секции 0
+        if let indexOfSelectedEmoji = emojiSection.firstIndex(of: selectedEmoji), indexOfSelectedEmoji < emojiSection.count {
+            let indexPath = IndexPath(item: indexOfSelectedEmoji, section: 0)
+            
+            // Обновляем фоновый цвет ячейки
+            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                cell.contentView.backgroundColor = .udLightGray
+                lastSelectedEmoji = emojiSection[indexPath.item]
+                print(emojiSection[indexPath.item])
+                allCellFilled.collectionViewEmoji = true
+            }
+        }
+        
+        //Идентично для color
+        guard let selectedColor = selectedColorIndexes else {
+            return
+        }
+        
+        if let indexOfSelectedColor = colorSection.firstIndex(of: selectedColor), indexOfSelectedColor < colorSection.count {
+            let indexPath = IndexPath(item: indexOfSelectedColor, section: 1)
+
+            // Обновляем фоновый цвет ячейки
+            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                cell.contentView.layer.masksToBounds = true
+                cell.contentView.layer.borderWidth = 3.0
+                let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+                cell.contentView.layer.borderColor = borderColor
+                
+                lastSelectedColor = colorSection[indexPath.item]
+                print(colorSection[indexPath.item])
+                allCellFilled.collectionViewColor = true
+            }
+        }
+        
+        allCellFilled.tableViewSchedule = true
+        allCellFilled.collectionViewColor = true
+        allCellFilled.collectionViewEmoji = true
+        allCellFilled.tableViewCategory = true
+        allCellFilled.textField = true
+    }
+
     @objc
     private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
@@ -173,12 +244,13 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
         let irregularSchedule: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: habit ? schedule : irregularSchedule)
+        let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? schedule : irregularSchedule
+        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen)
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
     }
-    
+
     func setupCategories(categories: String) {
         categoryName(name: categories)
         dismiss(animated: true)
@@ -207,7 +279,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
                     self.setCategory()
                 }
             ))
-        if habit {
+        if habit == "CategoryAndSchedule" || habit == "Edit" {
             settings.append(
                 Setting(
                     name: NSLocalizedString(newHabbitSchedule, comment: ""),
@@ -298,6 +370,12 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = userSelected[indexPath.row]
         cell.detailTextLabel?.textColor = .udGray
         cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+        if cell.textLabel?.text == "Категория" {
+            cell.detailTextLabel?.text = editingCategory
+        }
+        if cell.textLabel?.text == "Расписание" {
+            cell.detailTextLabel?.text = weekdaysToString(weekdays: editingSchedule)
+        }
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .udBackground
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
@@ -349,6 +427,17 @@ extension NewHabitViewController: UICollectionViewDataSource {
 extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
     //Выбор ячейки
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if firstSelected {
+            if let previousCell = collectionView.cellForItem(at: IndexPath(item: emojiSection.firstIndex(of: lastSelectedEmoji) ?? 0, section: 0)) as? EmojiColorCollectionCell {
+                previousCell.contentView.backgroundColor = .clear
+            }
+            if let previousIndexPath = collectionView.indexPathsForSelectedItems?.first,
+               let previousCell = collectionView.cellForItem(at: previousIndexPath) as? EmojiColorCollectionCell {
+                previousCell.contentView.layer.borderWidth = 0.0
+                previousCell.contentView.layer.borderColor = nil
+            }
+            firstSelected = false
+        }
         guard var cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
         if indexPath.section == 0 {
             cell.contentView.backgroundColor = .udLightGray

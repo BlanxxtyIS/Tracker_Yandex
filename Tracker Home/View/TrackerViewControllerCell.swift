@@ -224,9 +224,11 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         if isPinned {
             print("\(indexPath) закрепить надо")
             delegate?.pinnedTracker(id: trackerId, indexPath: indexPath)
+            isPinned = true
         } else {
             print("\(indexPath) открепить надо")
             delegate?.unPinnedTracker(id: trackerId, indexPath: indexPath)
+            isPinned = false
         }
     }
         

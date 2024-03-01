@@ -33,6 +33,8 @@
 
 //NewHabbitViewController
 "newHabbitVCTitle" = "Новая привычка";
+"newIrregularVCtitle" = "Новое нерегулярное событие";
+"editingVCTitle" = "Редактирование привычки";
 "placeholderText" = "Введите название трекера";
 "newHabbitCategory" = "Категория";
 "newHabbitSchedule" = "Расписание";

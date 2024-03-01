@@ -18,9 +18,8 @@ class TrackerViewController: UIViewController {
     
     //для темного/cветлого режима
     let colors = Colors()
-    
-    var oldHeader: [UUID : String] = [:]
-    
+    var selectedRowInSection0: Int?
+
     let trackerStore = TrackerStore.shared
     let trackerCategoryStore = TrackerCategoryStore.shared
     let trackerRecordStore = TrackerRecordStore.shared
@@ -293,9 +292,10 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     func pinnedTracker(id: UUID, indexPath: IndexPath) {
         print("Надо закрепить")
         let header = "Закрепленные"
+        var oldHeader = ""
         if let trackerCD = trackerStore.fetchTracker(withID: id) {
             if let foundCategory = categories.first(where: { $0.tracker.contains { $0.id == id } }) {
-                oldHeader[id] = foundCategory.header
+                oldHeader = foundCategory.header
             }
             let tracker = trackerStore.trackerFromCoreData(trackerCD)
             createNewTracker(header: header, tracker: tracker)
@@ -303,16 +303,15 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
         }
         updateTrackerViews()
     }
-
+    
     func unPinnedTracker(id: UUID, indexPath: IndexPath) {
         print("Надо открепить")
-        let header = oldHeader[id]!
+        var header = ""
         if let trackerCD = trackerStore.fetchTracker(withID: id) {
             let tracker = trackerStore.trackerFromCoreData(trackerCD)
             createNewTracker(header: header, tracker: tracker)
             trackerCategoryStore.deleteTracker(trackerCoreData: trackerCD)
         }
-        updateTrackerViews()
     }
     
     func removeTracker(id: UUID, indexPath: IndexPath) {
@@ -322,14 +321,30 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
             print("Удалить")
         }
     }
-
+    
     
     func editTracker(id: UUID, indexPath: IndexPath) {
+        editHabit(indexPath, id: id)
         print("Изменить")
     }
+    
+    private func editHabit(_ indexPath: IndexPath, id: UUID) {
+        let viewController = NewHabitViewController(delegate: self)
+        viewController.habit = "Edit"
+        if let trackerCD = trackerStore.fetchTracker(withID: id) {
+            if let foundCategory = categories.first(where: { $0.tracker.contains { $0.id == id } }) {
+                if let tracker = foundCategory.tracker.first(where: { $0.id == id }) {
+                    viewController.editingTextField = tracker.name
+                    viewController.editingSchedule = tracker.schedule
+                    viewController.selectedColorIndexes = tracker.color
+                    viewController.selectedEmojiIndexes = tracker.emoji
+                }
+                viewController.editingCategory = foundCategory.header
+            }
+        }
+        present(UINavigationController(rootViewController: viewController), animated: true)
+    }
 
-    
-    
     func completeTracker(id: UUID, indexPath: IndexPath) {
         if let createdDate = trackerStore.fetchTracker(withID: id)?.createdDate {
             let calendar = Date()
@@ -359,6 +374,9 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            selectedRowInSection0 = indexPath.row
+        }
         print("Нажали на ячейку \(indexPath)")
     }
     
@@ -457,6 +475,14 @@ extension TrackerViewController: CreatingTrackersDelegate {
     }
 }
     
+
+extension TrackerViewController: NewHabitViewControllerDelegate {
+    func createNewHabit(header: String, tracker: Tracker) {
+        print("yoooou")
+        print(header)
+        print(tracker)
+    }
+}
 
 
 

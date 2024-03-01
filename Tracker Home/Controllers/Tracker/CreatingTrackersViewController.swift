@@ -82,14 +82,14 @@ class CreatingTrackersViewController: UIViewController {
     
     @objc private func newHabitClick() {
         let viewController = NewHabitViewController(delegate: self)
-        viewController.habit = true
+        viewController.habit = "CategoryAndSchedule"
         present(UINavigationController(rootViewController: viewController), animated:  true)
         print("Привычка")
     }
     
     @objc private func irregularEventClick() {
         let viewController = NewHabitViewController(delegate: self)
-        viewController.habit = false
+        viewController.habit = "Category"
         present(UINavigationController(rootViewController: viewController), animated:  true)
         print("Нерегулярное событие")
     }

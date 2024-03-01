@@ -33,6 +33,8 @@
 
 //NewHabbitViewController
 "newHabbitVCTitle" = "New habit";
+"newIrregularVCtitle" = "New irregular habit";
+"editingVCTitle" = "Editing a habit";
 "placeholderText" = "Enter the name of the tracker";
 "newHabbitCategory" = "Category";
 "newHabbitSchedule" = "Schedule";
