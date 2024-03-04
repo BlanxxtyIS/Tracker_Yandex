@@ -83,6 +83,17 @@ class TrackerViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var filtrButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("Фильтры", for: .normal)
+        button.backgroundColor = .udBlue
+        button.layer.cornerRadius = 16
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+        button.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - Functional
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,12 +104,17 @@ class TrackerViewController: UIViewController {
         setupAllConstraints()
         updateViewController()
         datePickerSelected(datePicker)
-        print(trackerRecordStore.fetchAllRecord())
     }
         
     @objc func datePickerSelected(_ sender: UIDatePicker) {
         selectedDate = sender.date
         updateVisibleTrackers(forDate: selectedDate)
+    }
+    
+    @objc func filterButtonClicked(_ sender: UIButton) {
+        let vc = UINavigationController(rootViewController: FilterViewController(delegate: self))
+        present(vc, animated: true)
+        print("Фильтр, фильтр")
     }
     
     func updateVisibleTrackers(forDate: Date) {
@@ -140,9 +156,11 @@ class TrackerViewController: UIViewController {
     private func updateViewController() {
         if visibleTrackers.isEmpty {
             collectionView.isHidden = false
+            filtrButton.isHidden = true
             setupEmptyErrorViews()
             emptyView(true)
         } else {
+            filtrButton.isHidden = false
             setupAllViews()
             setupAllConstraints()
         }
@@ -161,6 +179,7 @@ class TrackerViewController: UIViewController {
     private func setupAllViews(){
         view.addSubview(searchBar)
         view.addSubview(collectionView)
+        view.addSubview(filtrButton)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -177,7 +196,12 @@ class TrackerViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 24),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            filtrButton.heightAnchor.constraint(equalToConstant: 50),
+            filtrButton.widthAnchor.constraint(equalToConstant: 114),
+            filtrButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            filtrButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
     
@@ -323,12 +347,12 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     }
     
     
-    func editTracker(id: UUID, indexPath: IndexPath) {
-        editHabit(indexPath, id: id)
+    func editTracker(id: UUID, indexPath: IndexPath, dayLabel: String) {
+        editHabit(indexPath, id: id, dayLabel: dayLabel)
         print("Изменить")
     }
     
-    private func editHabit(_ indexPath: IndexPath, id: UUID) {
+    private func editHabit(_ indexPath: IndexPath, id: UUID, dayLabel: String) {
         let viewController = NewHabitViewController(delegate: self)
         viewController.habit = "Edit"
         if let trackerCD = trackerStore.fetchTracker(withID: id) {
@@ -338,6 +362,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
                     viewController.editingSchedule = tracker.schedule
                     viewController.selectedColorIndexes = tracker.color
                     viewController.selectedEmojiIndexes = tracker.emoji
+                    viewController.dayCount = dayLabel
                 }
                 viewController.editingCategory = foundCategory.header
             }
@@ -484,7 +509,61 @@ extension TrackerViewController: NewHabitViewControllerDelegate {
     }
 }
 
-
+extension TrackerViewController: FilterViewControllerProtocol {
+    func filterSetting(_ setting: Int) {
+        switch setting {
+        case 0:
+            //Отображаются все трекеры на выбранный день в клаендаре
+            print("Все трекеры")
+        case 1:
+            print("Трекеры на сегодня")
+            //Отображаются все трекеры на Текущую дату
+            updateVisibleTrackers(forDate: Date())
+        case 2:
+            print("Завершенные")
+            sortReadyOrNotTracker(isIt: true)
+        case 3:
+            print("Не завершенные")
+        default:
+            var allTracker: [TrackerCategory] = []
+            categories = TrackerCategoryStore.shared.getAllTrackerCategories()
+            categories.forEach({
+                if $0.tracker.isEmpty {
+                    print("Пустой заголовок")
+                } else {
+                    allTracker.append($0)
+                }
+            })
+            visibleTrackers = allTracker
+            collectionView.reloadData()
+            print("Ошибочка")
+        }
+    }
+    
+    func sortReadyOrNotTracker(isIt: Bool) {
+        categories = TrackerCategoryStore.shared.getAllTrackerCategories()
+        var allRecord: [TrackerCategory] = []
+        visibleTrackers = []
+        
+        categories.forEach { category in
+            let filteredTrackers = category.tracker.filter { isTrackerCompletedToday(id: $0.id) }
+            if !filteredTrackers.isEmpty {
+                // Добавляем отфильтрованные трекеры в общий список
+                guard let trackerCD = trackerCategoryStore.fetchTrackerCategory(withID: category.id) else { return }
+                let tracker = trackerCategoryStore.trackerFromCoreData(trackerCD)
+                let filteredCategory = TrackerCategory(header: category.header, tracker: filteredTrackers, id: UUID())
+                print("Существуют завершенные трекеры в этот день в категории: \(category.header), \(filteredCategory)")
+                    allRecord.append(filteredCategory)
+            } else {
+                print("Нет завершенных трекеров в этот день в категории: \(category.header)")
+            }
+        }
+        visibleTrackers = allRecord
+        updateViewController()
+        collectionView.reloadData()
+    }
+    
+}
 
 
 

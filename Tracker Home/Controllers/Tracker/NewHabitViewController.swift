@@ -34,6 +34,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     var editingSchedule: [Weekday] = []
     var selectedColorIndexes: UIColor?
     var selectedEmojiIndexes: String?
+    var dayCount: String = ""
     
     var lastSectionIndexPath: IndexPath?
     var lastIndexPath: IndexPath?
@@ -144,6 +145,15 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         return stackView
     }()
     
+    private lazy var dayCountLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.heightAnchor.constraint(equalToConstant: 38).isActive = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
@@ -158,6 +168,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
             title = newIrregularVCtitle
         } else if habit == "Edit" {
             title = editingVCTitle
+            dayCountLabel.text = dayCount
         }
         
         if !editingTextField.isEmpty {
@@ -174,7 +185,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+    
         // Проверяем, есть ли выбранная эмоджи
         guard let selectedEmoji = selectedEmojiIndexes else {
             return
@@ -250,6 +261,52 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         dismiss(animated: true)
         print("Создать")
     }
+    
+    func setConstraintsDay() {
+        if habit == "Edit" {
+            NSLayoutConstraint.activate([
+            dayCountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            dayCountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            dayCountLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            
+            textField.topAnchor.constraint(equalTo: dayCountLabel.bottomAnchor, constant: 40),
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.heightAnchor.constraint(equalToConstant: 150),
+            
+            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
+        
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        } else {
+            NSLayoutConstraint.activate([
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
+            tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            tableView.heightAnchor.constraint(equalToConstant: 150),
+            
+            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
+        
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        }
+    }
 
     func setupCategories(categories: String) {
         categoryName(name: categories)
@@ -305,6 +362,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     }
     
     private func setupAllViews() {
+        view.addSubview(dayCountLabel)
+        
         view.addSubview(textField)
         
         view.addSubview(tableView)
@@ -319,25 +378,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(createButton)
         
-        NSLayoutConstraint.activate([
-            
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-        
-            tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableView.heightAnchor.constraint(equalToConstant: 150),
-            
-            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
-        
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        setConstraintsDay()
     }
 }
 
@@ -364,7 +405,7 @@ extension NewHabitViewController: UITableViewDataSource {
     
     //экземпляр ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
         
         cell.textLabel?.text = settings[indexPath.row].name
         cell.detailTextLabel?.text = userSelected[indexPath.row]

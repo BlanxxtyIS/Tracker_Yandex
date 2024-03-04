@@ -16,6 +16,8 @@
 		F4102A782B35C4AC009E2D14 /* TrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */; };
 		F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */; };
 		F41ECF542B6A2E0500BC0EDB /* AllCellFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41ECF532B6A2E0500BC0EDB /* AllCellFilled.swift */; };
+		F4210ABD2B95ABA6000990E6 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4210ABC2B95ABA6000990E6 /* FilterViewController.swift */; };
+		F4210ABF2B95AD02000990E6 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4210ABE2B95AD02000990E6 /* FilterCell.swift */; };
 		F4286CB82B8C7659003624EE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4286CBA2B8C7659003624EE /* Localizable.strings */; };
 		F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */; };
 		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
@@ -70,6 +72,8 @@
 		F4102A772B35C4AC009E2D14 /* TrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewController.swift; sourceTree = "<group>"; };
 		F4102A792B35C4B7009E2D14 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
 		F41ECF532B6A2E0500BC0EDB /* AllCellFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCellFilled.swift; sourceTree = "<group>"; };
+		F4210ABC2B95ABA6000990E6 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		F4210ABE2B95AD02000990E6 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionCell.swift; sourceTree = "<group>"; };
 		F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionHeader.swift; sourceTree = "<group>"; };
 		F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerHeader.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */,
 				F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */,
 				F4827A6A2B8DDEA600ED2149 /* Colors.swift */,
+				F4210ABE2B95AD02000990E6 /* FilterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				F49973942B7601450040C883 /* AllCategoryViewController.swift */,
 				F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */,
 				F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */,
+				F4210ABC2B95ABA6000990E6 /* FilterViewController.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 				F4C797032B67966100636046 /* TrackerStore.swift in Sources */,
 				F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */,
 				F47487ED2B68D77F0039D671 /* Setting.swift in Sources */,
+				F4210ABF2B95AD02000990E6 /* FilterCell.swift in Sources */,
 				F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */,
 				F4C797052B67966C00636046 /* TrackerCategoryStore.swift in Sources */,
 				F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */,
@@ -380,6 +387,7 @@
 				F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */,
 				F4102A642B35AEBC009E2D14 /* SceneDelegate.swift in Sources */,
 				F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */,
+				F4210ABD2B95ABA6000990E6 /* FilterViewController.swift in Sources */,
 				F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */,
 				F4827A6B2B8DDEA600ED2149 /* Colors.swift in Sources */,
 				F4A2F48A2B472EEF00D40710 /* TablewViewCell.swift in Sources */,
