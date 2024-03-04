@@ -40,6 +40,17 @@
                ReferencedContainer = "container:Tracker Home.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F48625132B96249100E39BDB"
+               BuildableName = "Tracker_HomeTests.xctest"
+               BlueprintName = "Tracker_HomeTests"
+               ReferencedContainer = "container:Tracker Home.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

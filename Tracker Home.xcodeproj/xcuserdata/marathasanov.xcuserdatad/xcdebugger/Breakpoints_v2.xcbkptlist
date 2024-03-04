@@ -135,17 +135,124 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5D166A19-712A-454E-8394-8EED95CD3923"
+            uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            filePath = "Tracker_HomeTests/Tracker_HomeTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "isTrackerCompletedToday(id:comleted:)"
-            landmarkType = "7">
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "Tracker_HomeTests"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - 8a16ba33e4e81dbf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.__allocating_init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - 7c6a4f14ad7f4210"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - d151c6a2e9025fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.__allocating_init(selector: ObjectiveC.Selector) -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - d037208f8e75b830"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.init(selector: ObjectiveC.Selector) -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - 37c2e7aec07a5079"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.__allocating_init() -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - ce4299777c9c5960"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.init() -&gt; Tracker_HomeTests.Tracker_HomeTests"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "6D5F5AFB-26B1-4283-BF30-31AEBFFCFFE5 - dd4258e51f729a32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_HomeTests.Tracker_HomeTests.__deallocating_deinit"
+                  moduleName = "Tracker_HomeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Traker%20Home/Tracker%20Home/Tracker_HomeTests/Tracker_HomeTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
