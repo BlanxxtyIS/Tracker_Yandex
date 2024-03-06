@@ -24,6 +24,7 @@ final class TrackerStore {
         trackerCoreData.color = tracker.color
         trackerCoreData.emoji = tracker.emoji
         trackerCoreData.createdDate = Date()
+        trackerCoreData.isPinned = tracker.isPinned
         if !tracker.schedule.isEmpty {
             let schedule = tracker.schedule.map { $0.toData() }
             trackerCoreData.schedule = schedule as NSObject?
@@ -87,13 +88,14 @@ final class TrackerStore {
         let name = trackerCoreData.name!
         let color = trackerCoreData.color as! UIColor
         let emoji = trackerCoreData.emoji!
+        let isPinned = trackerCoreData.isPinned
         
         var schedule: [Weekday] = []
         if let scheduleData = trackerCoreData.schedule as? [Data] {
             schedule = scheduleData.compactMap { Weekday.fromData($0) }
         }
         
-        return Tracker(id: id, name: name, color: color, emoji: emoji, schedule: schedule)
+        return Tracker(id: id, name: name, color: color, emoji: emoji, schedule: schedule, isPinned: isPinned)
     }
     
     //Добавлении трэкера в категорию
@@ -107,6 +109,7 @@ final class TrackerStore {
             print("Ошибка в TrackerStore в методе addTrackerToCategory \(error)")
         }
     }
+
 }
 
 //как связать 1-1

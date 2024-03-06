@@ -10,6 +10,9 @@ import UIKit
 protocol TrackerViewControllerCellDelegate: AnyObject {
     func completeTracker(id: UUID, indexPath: IndexPath)
     func uncompleteTracker(id: UUID, indexPath: IndexPath)
+    func toFix(id: UUID)
+    func toEdit(id: UUID)
+    func toRemove(id: UUID)
 }
 
 //Ячейки коллекции
@@ -17,7 +20,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
         
     weak var delegate: TrackerViewControllerCellDelegate?
     
-    
+    let trackerStore = TrackerStore.shared
     
     let currentDate = Date()
     var selectedDate = Date()
@@ -89,6 +92,9 @@ class TrackerViewControllerCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupAllViews()
+        
+        let contextMenu = UIContextMenuInteraction(delegate: self)
+        colorView.addInteraction(contextMenu)
     }
     
     required init?(coder: NSCoder) {
@@ -180,5 +186,60 @@ class TrackerViewControllerCell: UICollectionViewCell {
             plusButton.topAnchor.constraint(equalTo: colorView.bottomAnchor, constant: 8),
             plusButton.trailingAnchor.constraint(equalTo: trackerView.trailingAnchor, constant: -12)
         ])
+    }
+}
+
+//MARK: - Контекстное меню
+extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return nil
+        }
+        let boolean = trackerStore.fetchTracker(withID: trackerId)?.isPinned
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+        return UIMenu(children: [
+            UIAction(title: !boolean! ? "Закрепить" : "Открепить") { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toFixed()
+                }},
+            UIAction(title: "Редактировать") { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toEdited()
+                }},
+            UIAction(title: "Удалить", attributes: [.destructive]) { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toRemoved()
+                }},
+        ])}
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: actionProvider)
+        return configuration
+    }
+    
+    private func toFixed() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        delegate?.toFix(id: trackerId)
+        print("Закрепить")
+    }
+    
+    private func toEdited() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        delegate?.toEdit(id: trackerId)
+        print("Изменить")
+    }
+    
+    private func toRemoved() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        delegate?.toRemove(id: trackerId)
+        print("Удалить")
     }
 }

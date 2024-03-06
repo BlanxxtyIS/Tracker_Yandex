@@ -254,6 +254,13 @@ class TrackerViewController: UIViewController {
             return trackerRecord.id == id && isSameDay
         }
     }
+    
+    func updateTrackerViews() {
+        categories = TrackerCategoryStore.shared.getAllTrackerCategories()
+        visibleTrackers = categories
+        collectionView.reloadData()
+        updateVisibleTrackers(forDate: datePicker.date)
+    }
 }
 
 //Расширение SearchBara, возвращает текст работает с экраном
@@ -278,6 +285,61 @@ extension TrackerViewController: UISearchTextFieldDelegate {
 
 //MARK: UICollectionViewCell - Header
 extension TrackerViewController: UICollectionViewDataSource, TrackerViewControllerCellDelegate {
+    func toFix(id: UUID) {
+        if var (category, tracker) = trackerCategoryStore.getAllTrackerCategories()
+            .flatMap({ category in category.tracker.map { (category, $0) } })
+            .first(where: { $0.1.id == id }) {
+            print("Найден трекер \(tracker) в категории \(category.header)")
+            if tracker.isPinned {
+                let removedTracker = trackerStore.fetchTracker(withID: id)
+                let newTracker = Tracker(id: tracker.id, name: tracker.name, color: tracker.color, emoji: tracker.emoji, schedule: tracker.schedule, isPinned: false)
+                let oldHeader = UserDefaults.standard.string(forKey: "\(id)")!
+                createNewTracker(header: oldHeader, tracker: newTracker)
+                trackerCategoryStore.deleteTracker(trackerCoreData: removedTracker!)
+            } else {
+                let newTracker = Tracker(id: tracker.id, name: tracker.name, color: tracker.color, emoji: tracker.emoji, schedule: tracker.schedule, isPinned: true)
+                UserDefaults.standard.set(category.header, forKey: "\(id)")
+                UserDefaults.standard.synchronize()
+                let removedTracker = trackerStore.fetchTracker(withID: id)
+                createNewTracker(header: "Закрепленные", tracker: newTracker)
+                trackerCategoryStore.deleteTracker(trackerCoreData: removedTracker!)
+            }
+        } else {
+            print("Трекер \(id) не найден")
+        }
+        updateTrackerViews()
+    }
+
+    
+    func toEdit(id: UUID) {
+        if let (category, tracker) = trackerCategoryStore.getAllTrackerCategories()
+            .flatMap({ category in category.tracker.map { (category, $0) } })
+            .first(where: { $0.1.id == id }) {
+            print("Найден трекер \(tracker) в категории \(category.header)")
+            let vc = NewHabitViewController(delegate: self)
+            vc.habit = "Edit"
+            vc.dayCount = "5 дней"
+            vc.editingText = tracker.name
+            vc.editingCategory = category.header
+            vc.editingSchedule = tracker.schedule
+            vc.editingEmoji = tracker.emoji
+            vc.editingColor = tracker.color
+            present(vc, animated: true)
+        } else {
+            print("Трекер \(id) не найден")
+        }
+        updateTrackerViews()
+    }
+    
+    func toRemove(id: UUID) {
+        if let trackerCD = trackerStore.fetchTracker(withID: id) {
+            trackerCategoryStore.deleteTracker(trackerCoreData: trackerCD)
+        }
+        updateTrackerViews()
+    }
+    
+
+    
     func completeTracker(id: UUID, indexPath: IndexPath) {
         if let createdDate = trackerStore.fetchTracker(withID: id)?.createdDate {
             let calendar = Date()
@@ -398,6 +460,12 @@ extension TrackerViewController: CreatingTrackersDelegate {
         collectionView.reloadData()
 //        updateViewController()
         updateVisibleTrackers(forDate: datePicker.date)
+    }
+}
+
+extension TrackerViewController: NewHabitViewControllerDelegate {
+    func createNewHabit(header: String, tracker: Tracker) {
+        print("Заглушка")
     }
 }
 

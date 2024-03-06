@@ -19,7 +19,16 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 //Привычка
 class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegate {
             
-    var habit: Bool = true
+    var categ: Bool = true
+    var shedul: Bool = true
+    var habit = ""
+    var dayCount = ""
+    lazy var editingText = ""
+    lazy var editingCategory = ""
+    lazy var editingSchedule: [Weekday] = []
+    var editingEmoji: String?
+    var editingColor: UIColor?
+    
     var isEdit: Bool = false
     private var pickedCategory: TrackerCategory?
     private var settings: Array<Setting> = []
@@ -28,6 +37,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
             updateButtonCondition()
         }
     }
+    
+    var isPinned: Bool = false
     
     var lastSectionIndexPath: IndexPath?
     var lastIndexPath: IndexPath?
@@ -78,9 +89,9 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         tableView.backgroundColor = .udBackground
         tableView.layer.cornerRadius = 16
         tableView.isScrollEnabled = false
-        if habit {
+        if habit == "CategoryAndSchedule" || habit == "Edit" {
             tableView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        } else {
+        } else if habit == "Category" {
             tableView.heightAnchor.constraint(equalToConstant: 75).isActive = true
         }
         tableView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
@@ -131,16 +142,83 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         return stackView
     }()
     
+    private lazy var dayCountLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.heightAnchor.constraint(equalToConstant: 38).isActive = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
         allCellFilled.tableViewSchedule = true
-        title = "Новая привычка"
+        if habit == "CategoryAndSchedule" {
+            title = "Новая привычка"
+        } else if habit == "Category" {
+            title = "Новое нерегулярное событие"
+        } else if habit == "Edit" {
+            title = "Редактирование привычки"
+            dayCountLabel.text = dayCount
+        }
         textField.delegate = self
         setupAllViews()
         appendSettings()
         createButton.isEnabled = false
         print("Привычка")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !editingText.isEmpty {
+            textField.text = editingText
+        }
+        
+        // Проверяем, есть ли выбранная эмоджи
+        guard let selectedEmoji = editingEmoji else {
+            return
+        }
+        // Находим IndexPath для выбранной эмоджи в секции 0
+        if let indexOfSelectedEmoji = emojiSection.firstIndex(of: selectedEmoji), indexOfSelectedEmoji < emojiSection.count {
+            let indexPath = IndexPath(item: indexOfSelectedEmoji, section: 0)
+            
+            // Обновляем фоновый цвет ячейки
+            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                cell.contentView.backgroundColor = UIColor.udLightGray
+                lastSelectedEmoji = emojiSection[indexPath.item]
+                print(emojiSection[indexPath.item])
+                allCellFilled.collectionViewEmoji = true
+            }
+        }
+        
+        //Идентично для color
+        guard let selectedColor = editingColor else {
+            return
+        }
+
+        if let indexOfSelectedColor = colorSection.firstIndex(of: selectedColor), indexOfSelectedColor < colorSection.count {
+            let indexPath = IndexPath(item: indexOfSelectedColor, section: 1)
+
+            // Обновляем фоновый цвет ячейки
+            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                cell.contentView.layer.masksToBounds = true
+                cell.contentView.layer.borderWidth = 3.0
+                let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+                cell.contentView.layer.borderColor = borderColor
+                
+                lastSelectedColor = colorSection[indexPath.item]
+                print(colorSection[indexPath.item])
+                allCellFilled.collectionViewColor = true
+            }
+        }
+        allCellFilled.tableViewSchedule = true
+        allCellFilled.collectionViewColor = true
+        allCellFilled.collectionViewEmoji = true
+        allCellFilled.tableViewCategory = true
+        allCellFilled.textField = true
     }
     
     @objc
@@ -166,7 +244,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
         let irregularSchedule: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: habit ? schedule : irregularSchedule)
+        let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? schedule : irregularSchedule
+        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
         self.delegate?.createNewHabit(header: category, tracker: newHabit)
         dismiss(animated: true)
         print("Создать")
@@ -198,7 +277,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
                     self.setCategory()
                 }
             ))
-        if habit {
+        if habit == "CategoryAndSchedule" || habit == "Edit" {
             settings.append(
                 Setting(
                     name: NSLocalizedString("Расписание", comment: ""),
@@ -224,6 +303,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     }
     
     private func setupAllViews() {
+        view.addSubview(dayCountLabel)
         view.addSubview(textField)
         
         view.addSubview(tableView)
@@ -238,25 +318,50 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(createButton)
         
-        NSLayoutConstraint.activate([
+        if habit == "Edit" {
+            NSLayoutConstraint.activate([
+                dayCountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                dayCountLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                dayCountLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+                
+                textField.topAnchor.constraint(equalTo: dayCountLabel.bottomAnchor, constant: 40),
+                textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                
+                tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                tableView.heightAnchor.constraint(equalToConstant: 150),
+                
+                collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
+                
+                buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+                buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        } else {
+            NSLayoutConstraint.activate([
+                textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+                textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                
+                tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+                tableView.heightAnchor.constraint(equalToConstant: 150),
+                
+                collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
+                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
+                
+                buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+                buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
             
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-        
-            tableView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            tableView.heightAnchor.constraint(equalToConstant: 150),
-            
-            collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 32),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor, constant: -16),
-        
-            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+        }
     }
 }
 
@@ -284,11 +389,23 @@ extension NewHabitViewController: UITableViewDataSource {
     //экземпляр ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TablewViewCell
-        
         cell.textLabel?.text = settings[indexPath.row].name
-        cell.detailTextLabel?.text = userSelected[indexPath.row]
         cell.detailTextLabel?.textColor = .udGray
         cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+        if habit == "Edit" {
+            if categ || shedul {
+                if cell.textLabel?.text == "Категория" {
+                    cell.detailTextLabel?.text = editingCategory
+                    categ = false
+                }
+                if cell.textLabel?.text == "Расписание" {
+                    cell.detailTextLabel?.text = weekdaysToString(weekdays: editingSchedule)
+                    shedul = false
+                }
+            } else {
+                cell.detailTextLabel?.text = userSelected[indexPath.row]
+            }
+        }
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .udBackground
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
