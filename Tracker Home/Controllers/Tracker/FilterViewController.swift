@@ -23,7 +23,7 @@ final class FilterViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let filtred: [String] = ["Все трекеры", "Трекеры на сегодня", "Завершенные", "Не завершенные"]
+    let filtred: [String] = [localizedText(text: "allTrackers"), localizedText(text: "trackersToday"), localizedText(text: "closed"), localizedText(text: "notClosed")]
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
@@ -37,7 +37,7 @@ final class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
-        title = "Фильтры"
+        title = localizedText(text: "filters")
         
         tableView.delegate = self
         tableView.dataSource = self

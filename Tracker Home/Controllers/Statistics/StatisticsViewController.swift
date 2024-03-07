@@ -16,7 +16,7 @@ class StatisticsViewController: UIViewController {
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {
        let label = UILabel()
-        label.text = "Анализировать пока нечего"
+        label.text = localizedText(text: "emptyStatistics")
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .udBlackDay
         label.translatesAutoresizingMaskIntoConstraints = false

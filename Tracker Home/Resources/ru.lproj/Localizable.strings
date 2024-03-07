@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  Tracker Home
+
+  Created by Марат Хасанов on 07.03.2024.
+  
+*/
+
+//Плюрализация фразы "N дней"
+"completedDays" = "completedDays";
+
+//OnboardingViewController
+"onboardingOne" = "Отслеживайте только то, что хотите";
+"onboardingTwo" = "Даже если это не литры воды и йога";
+"onboardingButton" = "Вот это технологии!";
+
+//MainTabBarController
+"trackerTitleText" = "Трекеры";
+"statisticTitleText" = "Статистика";
+
+//TrackerViewController
+"emptyTraker" = "Что будем отслеживать?";
+"search" = "Поиск";
+"filters" = "Фильтры";
+"empteSearch" = "Ничего не найдено";
+"fixed" = "Закрепленные";
+
+//StatisticsViewController
+"emptyStatistics" = "Анализировать пока нечего";
+
+//CratingTrackersViewController
+"habbit" = "Привычка";
+"irregularHabbit" = "Нерегулярное событие";
+"trackerCrated" = "Создание трекера";
+
+//NewHabbitViewController
+"trackerName" = "Введите название трекера";
+"cancel" = "Отменить";
+"create" = "Создать";
+"newHabbit" = "Новая привычка";
+"newIrregular" = "Новое нерегулярное событие";
+"editHabit" = "Редактирование привычки";
+"category" = "Категория";
+"schedule" = "Расписание";
+"mon" = "Пн";
+"tues" = "Вт";
+"wed" = "Ср";
+"thurs" = "Чт";
+"fri" = "Пт";
+"sat" = "Сб";
+"sun" = "Вс";
+"color" = "Цвет";
+
+//AllCategoryViewController
+"categoryPlaceholder" = "Привычки и события можно объеденить по смыслу";
+"addCategory" = "Добавить категорию";
+"allCategory" = "Категория";
+
+//NewCategoryViewController
+"categoryName" = "Введите название категории";
+"ready" = "Готово";
+"newCategory" = "Новая категория";
+
+//NewScheduleViewController
+"monday" = "Понедельник";
+"tuesday" = "Вторник";
+"wednesday" = "Среда";
+"thursday" = "Четверг";
+"friday" = "Пятница";
+"saturday" = "Суббота";
+"sunday" = "Воскресенье";
+"schedule" = "Расписание";
+"ready" = "Готово";
+
+//FilterViewController
+"filters" = "Фильтры";
+"allTrackers" = "Все трекеры";
+"trackersToday" = "Трекеры на сегодня";
+"closed" = "Завершенные";
+"notClosed" = "Не завершенные";

@@ -35,7 +35,7 @@ class TrackerViewController: UIViewController {
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {
         let label = UILabel()
-        label.text = "Что будем отслеживать?"
+        label.text = localizedText(text: "emptyTraker")
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .udBlackDay
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ class TrackerViewController: UIViewController {
         let search = UISearchTextField()
         search.delegate = self
         search.textColor = .udBlackDay
-        search.placeholder = "Поиск"
+        search.placeholder = localizedText(text: "search")
         search.translatesAutoresizingMaskIntoConstraints = false
         return search
     }()
@@ -77,7 +77,7 @@ class TrackerViewController: UIViewController {
     
     private lazy var filtrButton: UIButton = {
        let button = UIButton()
-        button.setTitle("Фильтры", for: .normal)
+        button.setTitle(localizedText(text: "filters"), for: .normal)
         button.backgroundColor = .udBlue
         button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -213,7 +213,7 @@ class TrackerViewController: UIViewController {
     
     private func errorView(_ result: Bool) {
         emptyImage.image = UIImage(named: "Error Image")
-        emptyLabel.text = "Ничего не найдено"
+        emptyLabel.text = localizedText(text: "empteSearch")
         
         if result {
             // to show
@@ -228,7 +228,7 @@ class TrackerViewController: UIViewController {
     
     private func emptyView(_ result: Bool) {
         emptyImage.image = UIImage(named: "Empty Image")
-        emptyLabel.text = "Что будем отслеживать?"
+        emptyLabel.text = localizedText(text: "emptyTraker")
         
         if result {
             // to show
@@ -325,7 +325,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
                 UserDefaults.standard.set(category.header, forKey: "\(id)")
                 UserDefaults.standard.synchronize()
                 let removedTracker = trackerStore.fetchTracker(withID: id)
-                createNewTracker(header: "Закрепленные", tracker: newTracker)
+                createNewTracker(header: localizedText(text: "fixed"), tracker: newTracker)
                 trackerCategoryStore.deleteTracker(trackerCoreData: removedTracker!)
             }
         } else {

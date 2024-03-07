@@ -30,7 +30,7 @@ class NewCategoryViewController: UIViewController {
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Введите название категории"
+        textField.placeholder = localizedText(text: "categoryName")
         textField.clearButtonMode = .whileEditing
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = leftView
@@ -45,7 +45,7 @@ class NewCategoryViewController: UIViewController {
     
     private lazy var readyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        button.setTitle(localizedText(text: "ready"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = .udGray
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -59,7 +59,7 @@ class NewCategoryViewController: UIViewController {
         super.viewDidLoad()
         let categories = [String]()
         userDefaults.set(categories, forKey: "CategoriesKey")
-        title = "Новая категория"
+        title = localizedText(text: "newCategory")
         textField.delegate = self
         view.backgroundColor = .udWhiteDay
         textField.delegate = self
@@ -73,7 +73,7 @@ class NewCategoryViewController: UIViewController {
         if text.count >= 1 {
             textField.rightViewMode = .always
             readyButton.backgroundColor = .udBlackDay
-            readyButton.setTitle("Добавить категорию", for: .normal)
+            readyButton.setTitle(localizedText(text: "addCategory"), for: .normal)
             readyButton.isEnabled = true
         } else {
             textField.rightViewMode = .never

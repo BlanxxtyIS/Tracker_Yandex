@@ -54,7 +54,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     let emojiSection = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝", "😪"]
     let colorSection: [UIColor] = [UIColor.color1, UIColor.color2, UIColor.color3, UIColor.color4, UIColor.color5, UIColor.color6, UIColor.color7, UIColor.color8, UIColor.color9, UIColor.color10, UIColor.color11, UIColor.color12, UIColor.color13, UIColor.color14, UIColor.color15, UIColor.color16, UIColor.color17, UIColor.color18]
     
-    var headerName: [String] = ["Emoji", "Цвет"]
+    var headerName: [String] = ["Emoji", localizedText(text: "color")]
     
     weak var delegate: NewHabitViewControllerDelegate?
     
@@ -69,7 +69,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var textField: UITextField = {
        let textField = UITextField()
-        textField.placeholder = "Введите название трекера"
+        textField.placeholder = localizedText(text: "trackerName")
         textField.clearButtonMode = .whileEditing
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = leftView
@@ -110,7 +110,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var cancelButton: UIButton = {
        let cancelButton = UIButton()
-        cancelButton.setTitle("Отменить", for: .normal)
+        cancelButton.setTitle(localizedText(text: "cancel"), for: .normal)
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.borderColor = UIColor.udRed.cgColor
         cancelButton.setTitleColor(.udRed, for: .normal)
@@ -124,7 +124,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private lazy var createButton: UIButton = {
         let createButton = UIButton()
-        createButton.setTitle("Создать", for: .normal)
+        createButton.setTitle(localizedText(text: "create"), for: .normal)
         createButton.backgroundColor = .udGray
         createButton.layer.cornerRadius = 16
         createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
@@ -157,11 +157,11 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         view.backgroundColor = .udWhiteDay
         allCellFilled.tableViewSchedule = true
         if habit == "CategoryAndSchedule" {
-            title = "Новая привычка"
+            title = localizedText(text: "newHabbit")
         } else if habit == "Category" {
-            title = "Новое нерегулярное событие"
+            title = localizedText(text: "newIrregular")
         } else if habit == "Edit" {
-            self.navigationItem.title = "Редактирование привычки"
+            self.navigationItem.title = localizedText(text: "editHabit")
             dayCountLabel.text = dayCount
         }
         textField.delegate = self
@@ -265,7 +265,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     private func appendSettings() {
         settings.append(
             Setting(
-                name: NSLocalizedString("Категория", comment: ""),
+                name: NSLocalizedString(localizedText(text: "category"), comment: ""),
                 pickedParameter: isEdit ? pickedCategory?.header : nil,
                 handler: { [weak self] in
                     guard let self = self else {
@@ -277,7 +277,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         if habit == "CategoryAndSchedule" || habit == "Edit" {
             settings.append(
                 Setting(
-                    name: NSLocalizedString("Расписание", comment: ""),
+                    name: NSLocalizedString(localizedText(text: "schedule"), comment: ""),
                     pickedParameter: nil,
                     handler: { [weak self] in
                         guard let self = self else {
@@ -390,11 +390,11 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.detailTextLabel?.textColor = .udGray
         cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
         if categ || shedul {
-            if cell.textLabel?.text == "Категория" {
+            if cell.textLabel?.text == localizedText(text: "category") {
                 cell.detailTextLabel?.text = editingCategory
                 categ = false
             }
-            if cell.textLabel?.text == "Расписание" {
+            if cell.textLabel?.text == localizedText(text: "schedule") {
                 cell.detailTextLabel?.text = weekdaysToString(weekdays: editingSchedule)
                 shedul = false
             }
@@ -573,13 +573,13 @@ extension NewHabitViewController {
     
     func weekdayToString(weekday: Weekday) -> String {
         switch weekday {
-        case .monday: return "Пн"
-        case .tuesday: return "Вт"
-        case .wednesday: return "Ср"
-        case .thursday: return "Чт"
-        case .friday: return "Пт"
-        case .saturday: return "Сб"
-        case .sunday: return "Вс"
+        case .monday: return localizedText(text: "mon")
+        case .tuesday: return localizedText(text: "tues")
+        case .wednesday: return localizedText(text: "wed")
+        case .thursday: return localizedText(text: "thurs")
+        case .friday: return localizedText(text: "fri")
+        case .saturday: return localizedText(text: "sat")
+        case .sunday: return localizedText(text: "sun")
         }
     }
 }

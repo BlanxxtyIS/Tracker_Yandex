@@ -102,19 +102,11 @@ class TrackerViewControllerCell: UICollectionViewCell {
     }
     
     private func completionCountDaysText(completedDays: Int){
-        let remainder = completedDays % 100
-        if (11...14).contains(remainder) {
-            dayLabel.text = "\(completedDays) дней"
-        } else {
-            switch remainder % 10 {
-            case 1:
-                dayLabel.text = "\(completedDays) день"
-            case 2...4:
-                dayLabel.text = "\(completedDays) дня"
-            default:
-                dayLabel.text = "\(completedDays) дней"
-            }
-        }
+        let formattedString = String.localizedStringWithFormat(
+            NSLocalizedString("completedDays", comment: "Completed days"),
+            completedDays
+        )
+        dayLabel.text = formattedString
     }
 
     @objc private func plusButtonClicked() {

@@ -13,11 +13,14 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         setupTabBar()
     }
+    //MainTabBarController
     
     private func setupTabBar() {
-        let tabBarItem0 = createTabBar(title: "Трекеры", image: UIImage(named: "ic 28x28"), vC: TrackerViewController())
+        let titleTrackers = localizedText(text: "trackerTitleText")
+        let titleStatistics = localizedText(text: "statisticTitleText")
+        let tabBarItem0 = createTabBar(title: titleTrackers, image: UIImage(named: "ic 28x28"), vC: TrackerViewController())
         
-        let tabBarItem1 = createTabBar(title: "Статистика", image: UIImage(named: "ic 28x28-2"), vC: StatisticsViewController())
+        let tabBarItem1 = createTabBar(title: titleStatistics, image: UIImage(named: "ic 28x28-2"), vC: StatisticsViewController())
         
         let tabBarSeparator = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
         tabBarSeparator.backgroundColor = .udGray

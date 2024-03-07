@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  Tracker Home
+
+  Created by Марат Хасанов on 07.03.2024.
+  
+*/
+
+//Плюрализация фразы "N дней"
+"completedDays" = "completedDays";
+
+//OnboardingViewController
+"onboardingOne" = "Track only what you want";
+"onboardingTwo" = "Even if it's not liters of water and yoga";
+"onboardingButton" = "These are technologies!";
+
+//MainTabBarController
+"trackerTitleText" = "Trackers";
+"statisticTitleText" = "Statistics";
+
+//TrackerViewController
+"emptyTraker" = "What are we going to track?";
+"search" = "Search";
+"filters" = "Filters";
+"empteSearch" = "Nothing was found";
+"fixed" = "Fixed";
+
+//StatisticsViewController
+"emptyStatistics" = "There is nothing to analyze yet";
+
+//CratingTrackersViewController
+"habbit" = "Habit";
+"irregularHabbit" = "An irregular event";
+"trackerCrated" = "Creating a tracker";
+
+//NewHabbitViewController
+"trackerName" = "Enter the name of the tracker";
+"cancel" = "Cancel";
+"create" = "To create";
+"newHabbit" = "A new habit";
+"newIrregular" = "A new irregular event";
+"editHabit" = "Editing a habit";
+"category" = "Category";
+"schedule" = "Schedule";
+"mon" = "Mon";
+"tues" = "Tues";
+"wed" = "Wed";
+"thurs" = "Thurs";
+"fri" = "Fri";
+"sat" = "Sat";
+"sun" = "Sun";
+"color" = "Color";
+
+//AllCategoryViewController
+"categoryPlaceholder" = "Habits and events can be combined in meaning";
+"addCategory" = "Add a category";
+"allCategory" = "Category";
+
+//NewCategoryViewController
+"categoryName" = "Enter the name of the category";
+"ready" = "Done";
+"newCategory" = "New category";
+
+//NewScheduleViewController
+"monday" = "Monday";
+"tuesday" = "Tuesday";
+"wednesday" = "Wednesday";
+"thursday" = "Thursday";
+"friday" = "Friday";
+"saturday" = "Saturday";
+"sunday" = "Sunday";
+"schedule" = "Schedule";
+"ready" = "Ready";
+
+//FilterViewController
+"filters" = "Filters";
+"allTrackers" = "All trackers";
+"trackersToday" = "Trackers for today";
+"closed" = "Completed";
+"notClosed" = "Unfinished";
