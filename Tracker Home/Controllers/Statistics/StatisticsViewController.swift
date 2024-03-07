@@ -10,6 +10,9 @@ import UIKit
 //Статистика
 
 class StatisticsViewController: UIViewController {
+    
+    let trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
+    
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {
        let label = UILabel()
@@ -26,11 +29,22 @@ class StatisticsViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var readyView: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .red
+        view.layer.cornerRadius = 16
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.red.cgColor
+        view.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-        print("Покааа ")
-        setupEmptyErrorViews()
+        print("\(trackerRecord.count)")
+        trackerRecord.isEmpty ? setupEmptyErrorViews() : setupViews()
     }
     
     //Установка пустого/ошибочного экрана (заглушка)
@@ -45,5 +59,13 @@ class StatisticsViewController: UIViewController {
             emptyLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             emptyLabel.topAnchor.constraint(equalTo: emptyImage.bottomAnchor, constant: 8),
             ])
+    }
+    //Установка экрана статистики
+    private func setupViews() {
+        view.addSubview(readyView)
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 77),
+            view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
     }
 }

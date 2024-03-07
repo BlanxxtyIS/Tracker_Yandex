@@ -24,6 +24,7 @@
 		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F457F4732B98D79A0050828B /* YandexMetrica.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B25DBB2B98D3210005C469 /* YandexMetrica.swift */; };
+		F457F4752B99A4C00050828B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457F4742B99A4C00050828B /* FilterViewController.swift */; };
 		F47487ED2B68D77F0039D671 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47487EC2B68D77F0039D671 /* Setting.swift */; };
 		F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */; };
 		F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */; };
@@ -88,6 +89,7 @@
 		F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionCell.swift; sourceTree = "<group>"; };
 		F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiColorCollectionHeader.swift; sourceTree = "<group>"; };
 		F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewControllerHeader.swift; sourceTree = "<group>"; };
+		F457F4742B99A4C00050828B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		F47487EC2B68D77F0039D671 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		F4789FD52B7129D8005016F8 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsStorage.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				F49973942B7601450040C883 /* AllCategoryViewController.swift */,
 				F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */,
 				F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */,
+				F457F4742B99A4C00050828B /* FilterViewController.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				F49973992B7655830040C883 /* CategoryStore.swift in Sources */,
 				F4A2F4862B47233D00D40710 /* NewHabitViewController.swift in Sources */,
 				F4102A642B35AEBC009E2D14 /* SceneDelegate.swift in Sources */,
+				F457F4752B99A4C00050828B /* FilterViewController.swift in Sources */,
 				F4102A762B35BB0F009E2D14 /* ExtensionUIColors.swift in Sources */,
 				F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */,
 				F4A2F48A2B472EEF00D40710 /* TablewViewCell.swift in Sources */,

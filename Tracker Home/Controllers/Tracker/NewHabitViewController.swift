@@ -19,8 +19,9 @@ protocol NewHabitViewControllerDelegate: AnyObject {
 //Привычка
 class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegate {
             
-    var categ: Bool = true
-    var shedul: Bool = true
+    var firstSelected = true
+    var categ: Bool = false
+    var shedul: Bool = false
     var habit = ""
     var dayCount = ""
     lazy var editingText = ""
@@ -160,7 +161,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         } else if habit == "Category" {
             title = "Новое нерегулярное событие"
         } else if habit == "Edit" {
-            title = "Редактирование привычки"
+            self.navigationItem.title = "Редактирование привычки"
             dayCountLabel.text = dayCount
         }
         textField.delegate = self
@@ -172,11 +173,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if !editingText.isEmpty {
-            textField.text = editingText
-        }
-        
+        textField.text = editingText
+    
         // Проверяем, есть ли выбранная эмоджи
         guard let selectedEmoji = editingEmoji else {
             return
@@ -187,18 +185,16 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
             
             // Обновляем фоновый цвет ячейки
             if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
-                cell.contentView.backgroundColor = UIColor.udLightGray
+                cell.contentView.backgroundColor = .udLightGray
                 lastSelectedEmoji = emojiSection[indexPath.item]
                 print(emojiSection[indexPath.item])
                 allCellFilled.collectionViewEmoji = true
             }
         }
-        
         //Идентично для color
         guard let selectedColor = editingColor else {
             return
         }
-
         if let indexOfSelectedColor = colorSection.firstIndex(of: selectedColor), indexOfSelectedColor < colorSection.count {
             let indexPath = IndexPath(item: indexOfSelectedColor, section: 1)
 
@@ -214,6 +210,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
                 allCellFilled.collectionViewColor = true
             }
         }
+        
         allCellFilled.tableViewSchedule = true
         allCellFilled.collectionViewColor = true
         allCellFilled.collectionViewEmoji = true
@@ -392,19 +389,17 @@ extension NewHabitViewController: UITableViewDataSource {
         cell.textLabel?.text = settings[indexPath.row].name
         cell.detailTextLabel?.textColor = .udGray
         cell.detailTextLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-        if habit == "Edit" {
-            if categ || shedul {
-                if cell.textLabel?.text == "Категория" {
-                    cell.detailTextLabel?.text = editingCategory
-                    categ = false
-                }
-                if cell.textLabel?.text == "Расписание" {
-                    cell.detailTextLabel?.text = weekdaysToString(weekdays: editingSchedule)
-                    shedul = false
-                }
-            } else {
-                cell.detailTextLabel?.text = userSelected[indexPath.row]
+        if categ || shedul {
+            if cell.textLabel?.text == "Категория" {
+                cell.detailTextLabel?.text = editingCategory
+                categ = false
             }
+            if cell.textLabel?.text == "Расписание" {
+                cell.detailTextLabel?.text = weekdaysToString(weekdays: editingSchedule)
+                shedul = false
+            }
+        } else {
+            cell.detailTextLabel?.text = userSelected[indexPath.row]
         }
         cell.accessoryType = .disclosureIndicator
         cell.backgroundColor = .udBackground
@@ -457,6 +452,19 @@ extension NewHabitViewController: UICollectionViewDataSource {
 extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
     //Выбор ячейки
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if firstSelected {
+            if indexPath.section == 0 {
+                if let previousCell = collectionView.cellForItem(at: IndexPath(item: emojiSection.firstIndex(of: lastSelectedEmoji) ?? 0, section: 0)) as? EmojiColorCollectionCell {
+                    previousCell.contentView.backgroundColor = .clear
+                }
+            } else {
+                if let previousCells = collectionView.cellForItem(at: IndexPath(item: colorSection.firstIndex(of: lastSelectedColor) ?? 1, section: 1)) as? EmojiColorCollectionCell {
+                    previousCells.contentView.layer.borderWidth = 0.0
+                    previousCells.contentView.layer.borderColor = nil
+                }
+                firstSelected = false
+            }
+        }
         guard var cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
         if indexPath.section == 0 {
             cell.contentView.backgroundColor = .udLightGray

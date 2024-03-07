@@ -16,6 +16,7 @@ protocol TrackerViewControllerDelegate: AnyObject {
 //Трекеры
 class TrackerViewController: UIViewController {
     
+    var nonCompletedTrackers: [TrackerCategory] = []
     let trackerStore = TrackerStore.shared
     let trackerCategoryStore = TrackerCategoryStore.shared
     let trackerRecordStore = TrackerRecordStore.shared
@@ -74,6 +75,17 @@ class TrackerViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var filtrButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("Фильтры", for: .normal)
+        button.backgroundColor = .udBlue
+        button.layer.cornerRadius = 16
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .systemFont(ofSize: 17, weight: .regular)
+        button.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
+        return button
+    }()
+    
     //MARK: - Functional
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +135,12 @@ class TrackerViewController: UIViewController {
         print("Добавляй трекер")
     }
     
+    @objc func filterButtonClicked(_ sender: UIButton) {
+        let vc = UINavigationController(rootViewController: FilterViewController(delegate: self))
+        present(vc, animated: true)
+        print("Фильтр, фильтр")
+    }
+    
     //Метод делегата на получение категории
     func categoryName(name: String) {
         print(name)
@@ -153,6 +171,7 @@ class TrackerViewController: UIViewController {
     private func setupAllViews(){
         view.addSubview(searchBar)
         view.addSubview(collectionView)
+        view.addSubview(filtrButton)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -169,7 +188,12 @@ class TrackerViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 24),
             collectionView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            filtrButton.heightAnchor.constraint(equalToConstant: 50),
+            filtrButton.widthAnchor.constraint(equalToConstant: 114),
+            filtrButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            filtrButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
     
@@ -311,19 +335,22 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     }
 
     
-    func toEdit(id: UUID) {
+    func toEdit(id: UUID, dayLabel: String) {
         if let (category, tracker) = trackerCategoryStore.getAllTrackerCategories()
             .flatMap({ category in category.tracker.map { (category, $0) } })
             .first(where: { $0.1.id == id }) {
             print("Найден трекер \(tracker) в категории \(category.header)")
             let vc = NewHabitViewController(delegate: self)
             vc.habit = "Edit"
-            vc.dayCount = "5 дней"
+
+            vc.dayCount = dayLabel
             vc.editingText = tracker.name
             vc.editingCategory = category.header
             vc.editingSchedule = tracker.schedule
             vc.editingEmoji = tracker.emoji
             vc.editingColor = tracker.color
+            vc.categ = true
+            vc.shedul = true
             present(vc, animated: true)
         } else {
             print("Трекер \(id) не найден")
@@ -388,7 +415,7 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
         let tracker = visibleTrackers[indexPath.section].tracker[indexPath.row]
         
         let allRecords = trackerRecordStore.fetchAllRecord()
-        var completedDay = allRecords.filter { $0.id == tracker.id}.count
+        let completedDay = allRecords.filter { $0.id == tracker.id}.count
         var completedToday = isTrackerCompletedToday(id: tracker.id)
         
         cell.setupData(traker: tracker, dayCount: completedDay, isCompletedToday: completedToday, indexPath: indexPath)
@@ -469,6 +496,62 @@ extension TrackerViewController: NewHabitViewControllerDelegate {
     }
 }
 
+extension TrackerViewController: FilterViewControllerProtocol {
+    func filterSetting(_ setting: Int) {
+        switch setting {
+        case 0:
+            //Отображаются все трекеры на выбранный день в клаендаре
+            print("Все трекеры")
+        case 1:
+            print("Трекеры на сегодня")
+            //Отображаются все трекеры на Текущую дату
+            datePicker.setDate(Date(), animated: false)
+            updateVisibleTrackers(forDate: Date())
+            collectionView.reloadData()
+        case 2:
+            print("Завершенные")
+            sortReadyOrNotTracker(isIt: true)
+        case 3:
+            print("Не завершенные")
+            collectionView.reloadData()
+        default:
+            var allTracker: [TrackerCategory] = []
+            categories = TrackerCategoryStore.shared.getAllTrackerCategories()
+            categories.forEach({
+                if $0.tracker.isEmpty {
+                    print("Пустой заголовок")
+                } else {
+                    allTracker.append($0)
+                }
+            })
+            visibleTrackers = allTracker
+            collectionView.reloadData()
+            print("Ошибочка")
+        }
+    }
+    
+    func sortReadyOrNotTracker(isIt: Bool) {
+        categories = TrackerCategoryStore.shared.getAllTrackerCategories()
+        var allRecord: [TrackerCategory] = []
+        visibleTrackers = []
+        
+        categories.forEach { category in
+            let filteredTrackers = category.tracker.filter { isTrackerCompletedToday(id: $0.id) }
+            if !filteredTrackers.isEmpty {
+                // Добавляем отфильтрованные трекеры в общий список
+                guard let trackerCD = trackerCategoryStore.fetchTrackerCategory(withID: category.id) else { return }
+                let filteredCategory = TrackerCategory(header: category.header, tracker: filteredTrackers, id: UUID())
+                print("Существуют завершенные трекеры в этот день в категории: \(category.header), \(filteredCategory)")
+                    allRecord.append(filteredCategory)
+            } else {
+                print("Нет завершенных трекеров в этот день в категории: \(category.header)")
+            }
+        }
+        visibleTrackers = allRecord
+        updateViewController()
+        collectionView.reloadData()
+    }
+}
 
 
 

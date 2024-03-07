@@ -11,7 +11,7 @@ protocol TrackerViewControllerCellDelegate: AnyObject {
     func completeTracker(id: UUID, indexPath: IndexPath)
     func uncompleteTracker(id: UUID, indexPath: IndexPath)
     func toFix(id: UUID)
-    func toEdit(id: UUID)
+    func toEdit(id: UUID, dayLabel: String)
     func toRemove(id: UUID)
 }
 
@@ -230,7 +230,8 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
             assertionFailure("Не найден айди или индекс")
             return
         }
-        delegate?.toEdit(id: trackerId)
+        let days = dayLabel.text!
+        delegate?.toEdit(id: trackerId, dayLabel: days)
         print("Изменить")
     }
     
