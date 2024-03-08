@@ -18,7 +18,7 @@ class StatisticsViewController: UIViewController {
        let label = UILabel()
         label.text = localizedText(text: "emptyStatistics")
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .udBlackDay
+        label.textColor = .udNightAndDay
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,7 +42,7 @@ class StatisticsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .udDayAndNight
         print("\(trackerRecord.count)")
         trackerRecord.isEmpty ? setupEmptyErrorViews() : setupViews()
     }

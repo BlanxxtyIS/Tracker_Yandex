@@ -78,3 +78,9 @@
 "trackersToday" = "Trackers for today";
 "closed" = "Completed";
 "notClosed" = "Unfinished";
+
+//ContextMenu
+"toPin" = "To pin";
+"unpin" = "Unpin";
+"toEdit" = "Edit";
+"toDelete" = "Delete";

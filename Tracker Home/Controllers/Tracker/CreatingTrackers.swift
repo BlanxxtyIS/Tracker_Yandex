@@ -27,7 +27,8 @@ class CreatingTrackers: UIViewController {
     
     private lazy var newHabitButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .udBlackDay
+        button.backgroundColor = .udNightAndDay
+        button.setTitleColor(.udDayAndNight, for: .normal)
         button.setTitle(localizedText(text: "habbit"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(newHabitClick), for: .touchUpInside)
@@ -39,7 +40,8 @@ class CreatingTrackers: UIViewController {
     
     private lazy var irregularEventButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .udBlackDay
+        button.backgroundColor = .udNightAndDay
+        button.setTitleColor(.udDayAndNight, for: .normal)
         button.setTitle(localizedText(text: "irregularHabbit"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(irregularEventClick), for: .touchUpInside)
@@ -60,7 +62,7 @@ class CreatingTrackers: UIViewController {
             
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .udWhiteDay
+        view.backgroundColor = .udDayAndNight
         title = localizedText(text: "trackerCrated")
         setupAllViews()
     }

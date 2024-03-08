@@ -73,7 +73,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
     let dayLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .udBlackDay
+        label.textColor = .udNightAndDay
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -191,15 +191,15 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         let boolean = trackerStore.fetchTracker(withID: trackerId)?.isPinned
         let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
         return UIMenu(children: [
-            UIAction(title: !boolean! ? "Закрепить" : "Открепить") { [weak self] _ in
+            UIAction(title: !boolean! ? localizedText(text: "toPin") : localizedText(text: "unpin")) { [weak self] _ in
                 if let indexPath = self?.indexPath {
                     self?.toFixed()
                 }},
-            UIAction(title: "Редактировать") { [weak self] _ in
+            UIAction(title: localizedText(text: "toEdit")) { [weak self] _ in
                 if let indexPath = self?.indexPath {
                     self?.toEdited()
                 }},
-            UIAction(title: "Удалить", attributes: [.destructive]) { [weak self] _ in
+            UIAction(title: localizedText(text: "toDelete"), attributes: [.destructive]) { [weak self] _ in
                 if let indexPath = self?.indexPath {
                     self?.toRemoved()
                 }},

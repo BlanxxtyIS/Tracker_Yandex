@@ -74,7 +74,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = leftView
         textField.leftViewMode = .always
-        textField.backgroundColor = .udBackground
+        textField.backgroundColor = .udBagroundWAD
         textField.layer.cornerRadius = 16
         textField.heightAnchor.constraint(equalToConstant: 75).isActive = true
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -105,6 +105,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         collection.register(EmojiColorCollectionCell.self, forCellWithReuseIdentifier: "emojiColorCollectionCell")
         collection.register(EmojiColorCollectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "emojiColorCollectionHeader")
         collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .udDayAndNight
         return collection
     }()
     
@@ -125,6 +126,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     private lazy var createButton: UIButton = {
         let createButton = UIButton()
         createButton.setTitle(localizedText(text: "create"), for: .normal)
+        createButton.setTitleColor(.udWhiteDay, for: .normal)
         createButton.backgroundColor = .udGray
         createButton.layer.cornerRadius = 16
         createButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
@@ -154,7 +156,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .udWhiteDay
+        view.backgroundColor = .udDayAndNight
         allCellFilled.tableViewSchedule = true
         if habit == "CategoryAndSchedule" {
             title = localizedText(text: "newHabbit")
@@ -255,7 +257,8 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     private func updateButtonCondition() {
         if allCellFilled.allValuesAreTrue() {
-            createButton.backgroundColor = .udBlackDay
+            createButton.backgroundColor = .udNightAndDay
+            createButton.setTitleColor(.udDayAndNight, for: .normal)
             createButton.isEnabled = true
         } else {
             createButton.isEnabled = false
@@ -402,7 +405,7 @@ extension NewHabitViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = userSelected[indexPath.row]
         }
         cell.accessoryType = .disclosureIndicator
-        cell.backgroundColor = .udBackground
+        cell.backgroundColor = .udBagroundWAD
         cell.heightAnchor.constraint(equalToConstant: 75).isActive = true
         return cell
     }

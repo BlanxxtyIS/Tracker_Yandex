@@ -78,3 +78,8 @@
 "trackersToday" = "Трекеры на сегодня";
 "closed" = "Завершенные";
 "notClosed" = "Не завершенные";
+
+//ContextMenu
+"toPin" = "Закрепить";
+"toEdit" = "Редактировать";
+"toDelete" = "Удалить";

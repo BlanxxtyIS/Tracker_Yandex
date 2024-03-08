@@ -37,7 +37,7 @@ class TrackerViewController: UIViewController {
         let label = UILabel()
         label.text = localizedText(text: "emptyTraker")
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .udBlackDay
+        label.textColor = .udNightAndDay
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -72,6 +72,7 @@ class TrackerViewController: UIViewController {
         collectionView.register(TrackerViewControllerCell.self, forCellWithReuseIdentifier: "trackerCell")
         collectionView.register(TrackerViewControllerHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .udDayAndNight
         return collectionView
     }()
     
@@ -90,7 +91,7 @@ class TrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         visibleTrackers = categories
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .udDayAndNight
         settingNavBarItems()
         setupAllViews()
         setupAllConstraints()
@@ -161,7 +162,7 @@ class TrackerViewController: UIViewController {
     //Настройка navigationBar (кнопка + и datePicker)
     private func settingNavBarItems() {
         let plusButton = UIBarButtonItem(image: UIImage(named: "Add tracker"), style: .plain, target: self, action: #selector(addTracker))
-        plusButton.tintColor = .udBlackDay
+        plusButton.tintColor = .udNightAndDay
         
         navigationItem.leftBarButtonItem = plusButton
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: datePicker)
