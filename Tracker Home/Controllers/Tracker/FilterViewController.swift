@@ -36,7 +36,7 @@ final class FilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .udWhiteDay
+        view.backgroundColor = .udDayAndNight
         title = localizedText(text: "filters")
         
         tableView.delegate = self
@@ -55,6 +55,9 @@ final class FilterViewController: UIViewController {
 
 extension FilterViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
+        UserDefaults.standard.setValue(true, forKey: "\(indexPath.row)")
+        cell.accessoryType = .checkmark
         delegate?.filterSetting(indexPath.row)
         dismiss(animated: true)
     }
@@ -67,9 +70,15 @@ extension FilterViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath)
+        print(indexPath.row, filtred[indexPath.row])
         cell.textLabel?.text = filtred[indexPath.row]
         cell.textLabel?.font = .systemFont(ofSize: 17, weight: .regular)
-        cell.backgroundColor = .udLightGray
+        cell.backgroundColor = .udBagroundWAD
+        if UserDefaults.standard.bool(forKey: "\(indexPath.row)") {
+            cell.accessoryType = .checkmark
+            UserDefaults.standard.setValue(false, forKey: "\(indexPath.row)")
+        }
+        print(indexPath.row)
         return cell
     }
     

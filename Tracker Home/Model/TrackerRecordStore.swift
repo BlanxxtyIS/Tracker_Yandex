@@ -60,7 +60,16 @@ final class TrackerRecordStore {
             print("ERRROR")
             return []
         }
-        
+    }
+    
+    func trackerRecordConver(_ trackerRecordCoreData: [TrackerRecordCoreData]) -> [TrackerRecord] {
+        var trackerRecord: [TrackerRecord] = []
+        for trackerRecordCoreDatum in trackerRecordCoreData {
+            let id = trackerRecordCoreDatum.id!
+            let date = trackerRecordCoreDatum.date!
+            trackerRecord.append(TrackerRecord(id: id, date: date))
+        } 
+        return trackerRecord
     }
     
 }

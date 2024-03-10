@@ -21,7 +21,6 @@ class MainTabBarController: UITabBarController {
         let tabBarItem0 = createTabBar(title: titleTrackers, image: UIImage(named: "ic 28x28"), vC: TrackerViewController())
         
         let tabBarItem1 = createTabBar(title: titleStatistics, image: UIImage(named: "ic 28x28-2"), vC: StatisticsViewController())
-        
         let tabBarSeparator = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
         tabBarSeparator.backgroundColor = .udGrayAndNight
         tabBar.addSubview(tabBarSeparator)

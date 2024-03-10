@@ -114,9 +114,12 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
+        let dayCount = UserDefaults.standard.integer(forKey: "DayCount")
         if completeCell {
+            UserDefaults.standard.setValue(dayCount - 1, forKey: "DayCount")
             delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
         } else {
+            UserDefaults.standard.setValue(dayCount + 1, forKey: "DayCount")
             delegate?.completeTracker(id: trackerId, indexPath: indexPath)
         }
     }
@@ -236,3 +239,4 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         print("Удалить")
     }
 }
+

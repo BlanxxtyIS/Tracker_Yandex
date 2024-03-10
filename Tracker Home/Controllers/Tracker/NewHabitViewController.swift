@@ -29,6 +29,7 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     lazy var editingSchedule: [Weekday] = []
     var editingEmoji: String?
     var editingColor: UIColor?
+    var editingID: UUID?
     
     var isEdit: Bool = false
     private var pickedCategory: TrackerCategory?
@@ -243,9 +244,17 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     private func createButtonClicked() {
         guard let trackerName = textField.text else { return }
         let irregularSchedule: [Weekday] = [.monday, .tuesday, .wednesday, .thursday, .friday, .saturday, .sunday]
-        let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? schedule : irregularSchedule
-        let newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
-        self.delegate?.createNewHabit(header: category, tracker: newHabit)
+        var newHabit: Tracker
+        if habit == "Edit" {
+            let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? editingSchedule : irregularSchedule
+            newHabit = Tracker(id: editingID!, name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
+            self.delegate?.createNewHabit(header: editingCategory, tracker: newHabit)
+        } else {
+            let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? schedule : irregularSchedule
+            newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
+            
+            self.delegate?.createNewHabit(header: category, tracker: newHabit)
+        }
         dismiss(animated: true)
         print("Создать")
     }
@@ -538,6 +547,7 @@ extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
 
 extension NewHabitViewController: NewScheduleViewControllerDelegate {
     func getDay(day: [Weekday]) {
+        editingSchedule = day
         schedule = day
         let scheduleString = weekdaysToString(weekdays: schedule)
         userSelected[1] = scheduleString
@@ -548,6 +558,7 @@ extension NewHabitViewController: NewScheduleViewControllerDelegate {
 
 extension NewHabitViewController {
     func categoryName(name: String) {
+        editingCategory = name
         category = name
         userSelected[0] = category
         allCellFilled.tableViewCategory = true

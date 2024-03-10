@@ -8,9 +8,9 @@
 import UIKit
 
 //Статистика
-
 class StatisticsViewController: UIViewController {
     
+    var dayCount = ""
     let trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
     
     //MARK: Empty and Error Views
@@ -30,21 +30,52 @@ class StatisticsViewController: UIViewController {
     }()
     
     private lazy var readyView: UIView = {
-       let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
+        let view = UIView()
+        view.backgroundColor = .udDayAndNight
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.red.cgColor
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.red.cgColor
         view.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var dayCuntLabel: UILabel = {
+       let label = UILabel()
+        label.text = dayCount
+        label.font = .systemFont(ofSize: 34, weight: .bold)
+        label.textColor = .udNightAndDay
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var endTracker: UILabel = {
+        let label = UILabel()
+        label.text = "Трекеров завершено"
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .udNightAndDay
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udDayAndNight
         print("\(trackerRecord.count)")
+        dayCount = "\(UserDefaults.standard.integer(forKey: "DayCount"))"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         trackerRecord.isEmpty ? setupEmptyErrorViews() : setupViews()
+        dayCount = "\(UserDefaults.standard.integer(forKey: "DayCount"))"
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        trackerRecord.isEmpty ? setupEmptyErrorViews() : setupViews()
+        dayCount = "\(UserDefaults.standard.integer(forKey: "DayCount"))"
     }
     
     //Установка пустого/ошибочного экрана (заглушка)
@@ -63,9 +94,21 @@ class StatisticsViewController: UIViewController {
     //Установка экрана статистики
     private func setupViews() {
         view.addSubview(readyView)
+        readyView.addSubview(dayCuntLabel)
+        readyView.addSubview(endTracker)
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 77),
-            view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)])
+            readyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 77),
+            readyView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            readyView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            readyView.heightAnchor.constraint(equalToConstant: 90),
+        
+            dayCuntLabel.topAnchor.constraint(equalTo: readyView.topAnchor, constant: 12),
+            dayCuntLabel.leadingAnchor.constraint(equalTo: readyView.leadingAnchor, constant: 12),
+            dayCuntLabel.trailingAnchor.constraint(equalTo: readyView.trailingAnchor, constant: -12),
+        
+            endTracker.topAnchor.constraint(equalTo: dayCuntLabel.bottomAnchor, constant: 7),
+            endTracker.leadingAnchor.constraint(equalTo: readyView.leadingAnchor, constant: 12),
+            endTracker.trailingAnchor.constraint(equalTo: readyView.trailingAnchor, constant: -12)
+        ])
     }
 }
