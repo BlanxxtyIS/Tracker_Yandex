@@ -23,7 +23,6 @@
 		F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */; };
 		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
-		F457F4732B98D79A0050828B /* YandexMetrica.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B25DBB2B98D3210005C469 /* YandexMetrica.swift */; };
 		F457F4752B99A4C00050828B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457F4742B99A4C00050828B /* FilterViewController.swift */; };
 		F457F47A2B99C7600050828B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F457F47C2B99C7600050828B /* Localizable.strings */; };
 		F457F47F2B9A11210050828B /* LocalizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457F47E2B9A11210050828B /* LocalizedText.swift */; };
@@ -115,7 +114,6 @@
 		F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		F4AC15C12B77A1C0001213DB /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewModel.swift; sourceTree = "<group>"; };
-		F4B25DBB2B98D3210005C469 /* YandexMetrica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexMetrica.swift; sourceTree = "<group>"; };
 		F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategory.swift; sourceTree = "<group>"; };
 		F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecord.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 				F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */,
 				F47487EC2B68D77F0039D671 /* Setting.swift */,
 				F41ECF532B6A2E0500BC0EDB /* AllCellFilled.swift */,
-				F4B25DBB2B98D3210005C469 /* YandexMetrica.swift */,
 				F457F47E2B9A11210050828B /* LocalizedText.swift */,
 			);
 			path = Extension;
@@ -511,7 +508,6 @@
 				F4102A7A2B35C4B7009E2D14 /* StatisticsViewController.swift in Sources */,
 				F4789FD62B7129D8005016F8 /* OnboardingViewController.swift in Sources */,
 				F41ECF542B6A2E0500BC0EDB /* AllCellFilled.swift in Sources */,
-				F457F4732B98D79A0050828B /* YandexMetrica.swift in Sources */,
 				F499738F2B75F9F90040C883 /* AppSettingsStorage.swift in Sources */,
 				F457F47F2B9A11210050828B /* LocalizedText.swift in Sources */,
 				F4C796FE2B678EAF00636046 /* CoreDataManager.swift in Sources */,

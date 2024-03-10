@@ -35,8 +35,6 @@ class StatisticsViewController: UIViewController {
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.red.cgColor
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.red.cgColor
         view.heightAnchor.constraint(equalToConstant: 90).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -112,3 +110,5 @@ class StatisticsViewController: UIViewController {
         ])
     }
 }
+
+

@@ -41,3 +41,5 @@ extension UIColor {
     static var color17: UIColor { UIColor(named: "Color selection 17")!}
     static var color18: UIColor { UIColor(named: "Color selection 18")!}
 }
+
+
