@@ -51,6 +51,7 @@
 		F4C797032B67966100636046 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797022B67966100636046 /* TrackerStore.swift */; };
 		F4C797052B67966C00636046 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797042B67966C00636046 /* TrackerCategoryStore.swift */; };
 		F4C797072B67967600636046 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797062B67967600636046 /* TrackerRecordStore.swift */; };
+		F4FA32F52B9ED6A900E8A99B /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FA32F42B9ED6A900E8A99B /* Gradient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		F4C797022B67966100636046 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
 		F4C797042B67966C00636046 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
 		F4C797062B67967600636046 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
+		F4FA32F42B9ED6A900E8A99B /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 				F47487EC2B68D77F0039D671 /* Setting.swift */,
 				F41ECF532B6A2E0500BC0EDB /* AllCellFilled.swift */,
 				F457F47E2B9A11210050828B /* LocalizedText.swift */,
+				F4FA32F42B9ED6A900E8A99B /* Gradient.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				F47487ED2B68D77F0039D671 /* Setting.swift in Sources */,
 				F49973972B760DD70040C883 /* AllCategoryViewControllerCell.swift in Sources */,
 				F4C797052B67966C00636046 /* TrackerCategoryStore.swift in Sources */,
+				F4FA32F52B9ED6A900E8A99B /* Gradient.swift in Sources */,
 				F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */,
 				F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */,
 				F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */,

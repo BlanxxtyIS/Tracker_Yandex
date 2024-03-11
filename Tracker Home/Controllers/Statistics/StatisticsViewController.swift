@@ -7,11 +7,13 @@
 
 import UIKit
 
+
 //Статистика
 class StatisticsViewController: UIViewController {
     
     var dayCount = ""
     let trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
+    let gradient = CAGradientLayer()
     
     //MARK: Empty and Error Views
     private lazy var emptyLabel: UILabel = {
@@ -33,8 +35,6 @@ class StatisticsViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .udDayAndNight
         view.layer.cornerRadius = 16
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.red.cgColor
         view.heightAnchor.constraint(equalToConstant: 90).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -69,6 +69,14 @@ class StatisticsViewController: UIViewController {
         super.viewWillAppear(animated)
         trackerRecord.isEmpty ? setupEmptyErrorViews() : setupViews()
         dayCount = "\(UserDefaults.standard.integer(forKey: "DayCount"))"
+        let gradietn = UIImage.gradientImage(bounds: readyView.bounds, colors: [.gradient1, .gradient2, .gradient3])
+        let gradientColor = UIColor(patternImage: gradietn)
+        readyView.layer.borderColor = gradientColor.cgColor
+        readyView.layer.borderWidth = 1
+        
+        var plusTapped = TrackerViewControllerCell()
+        plusTapped.twoDelegate = self
+        plusTapped.tapDelegate()
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -111,4 +119,9 @@ class StatisticsViewController: UIViewController {
     }
 }
 
+extension StatisticsViewController: UpdateStatisticsDaysDelegate {
+    func updateDays(count: String) {
+        dayCuntLabel.text = count
+    }
+}
 

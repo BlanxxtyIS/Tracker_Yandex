@@ -15,9 +15,15 @@ protocol TrackerViewControllerCellDelegate: AnyObject {
     func toRemove(id: UUID)
 }
 
+
+protocol UpdateStatisticsDaysDelegate: AnyObject {
+    func updateDays(count: String)
+}
+
 //Ячейки коллекции
 class TrackerViewControllerCell: UICollectionViewCell {
         
+    weak var twoDelegate: UpdateStatisticsDaysDelegate?
     weak var delegate: TrackerViewControllerCellDelegate?
     
     let trackerStore = TrackerStore.shared
@@ -114,7 +120,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
-        let dayCount = UserDefaults.standard.integer(forKey: "DayCount")
+        var dayCount = UserDefaults.standard.integer(forKey: "DayCount")
         if completeCell {
             UserDefaults.standard.setValue(dayCount - 1, forKey: "DayCount")
             delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
@@ -122,6 +128,11 @@ class TrackerViewControllerCell: UICollectionViewCell {
             UserDefaults.standard.setValue(dayCount + 1, forKey: "DayCount")
             delegate?.completeTracker(id: trackerId, indexPath: indexPath)
         }
+    }
+    
+    func tapDelegate() {
+        let dayCount = UserDefaults.standard.integer(forKey: "DayCount")
+        twoDelegate?.updateDays(count: String(dayCount))
     }
     
     func setupData(traker: Tracker, dayCount: Int, isCompletedToday: Bool, indexPath: IndexPath) {

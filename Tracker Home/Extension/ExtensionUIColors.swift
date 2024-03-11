@@ -22,6 +22,10 @@ extension UIColor {
     static var udBagroundWAD: UIColor { UIColor(named: "YP BacgroundDAN") ?? .gray}
     static var udEmojiColor: UIColor { UIColor(named: "YP EmojiColor") ?? .gray}
     
+    static var gradient1: UIColor { UIColor(named: "gradient1") ?? .white}
+    static var gradient2: UIColor { UIColor(named: "gradient2") ?? .white}
+    static var gradient3: UIColor { UIColor(named: "gradient3") ?? .white}
+    
     static var color1: UIColor { UIColor(named: "Color selection 1")!}
     static var color2: UIColor { UIColor(named: "Color selection 2")!}
     static var color3: UIColor { UIColor(named: "Color selection 3")!}
