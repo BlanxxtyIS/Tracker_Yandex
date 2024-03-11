@@ -26,6 +26,8 @@ class TrackerViewControllerCell: UICollectionViewCell {
     weak var twoDelegate: UpdateStatisticsDaysDelegate?
     weak var delegate: TrackerViewControllerCellDelegate?
     
+    private let analyticsService = AnalyticsService()
+    
     let trackerStore = TrackerStore.shared
     
     let currentDate = Date()
@@ -120,6 +122,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
+        analyticsService.report(event: "plus day button clicked", parameters: ["event": "click", "screen": "Main"])
         var dayCount = UserDefaults.standard.integer(forKey: "DayCount")
         if completeCell {
             UserDefaults.standard.setValue(dayCount - 1, forKey: "DayCount")
@@ -237,13 +240,9 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
             assertionFailure("Не найден айди или индекс")
             return
         }
+        analyticsService.report(event: "Chose edit option in tracker's context menu", parameters: ["event": "click", "screen": "Main", "item": "edit"])
         let days = dayLabel.text!
         delegate?.toEdit(id: trackerId, dayLabel: days)
-        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
-        AppMetrica.reportEvent(name: "Context EDITED TRACKER", parameters: params, onFailure: {( error) in
-            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
-            print("REPORT ERROR: %@", error.localizedDescription)
-        })
         print("Изменить")
     }
     
@@ -254,11 +253,7 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         }
         delegate?.toRemove(id: trackerId)
         print("Удалить")
-        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
-        AppMetrica.reportEvent(name: "Context DELETE TRACKER", parameters: params, onFailure: {( error) in
-            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
-            print("REPORT ERROR: %@", error.localizedDescription)
-        })
+        self.analyticsService.report(event: "Confirmed tracker deletion on TrackersViewController", parameters: ["event": "click", "screen": "Main", "item": "delete"])
     }
 }
 

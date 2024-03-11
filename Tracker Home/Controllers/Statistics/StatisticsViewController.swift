@@ -12,7 +12,7 @@ import UIKit
 class StatisticsViewController: UIViewController {
     
     var dayCount = ""
-    let trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
+    var trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
     let gradient = CAGradientLayer()
     
     //MARK: Empty and Error Views
@@ -121,7 +121,30 @@ class StatisticsViewController: UIViewController {
 
 extension StatisticsViewController: UpdateStatisticsDaysDelegate {
     func updateDays(count: String) {
+        var trackerRecord = TrackerRecordStore.shared.fetchAllRecord()
+        if trackerRecord.isEmpty {
+            setupEmptyErrorViews()
+            emptyRecord()
+        }else {
+            setupViews()
+            record()
+        }
         dayCuntLabel.text = count
+    }
+    
+    func emptyRecord() {
+        emptyLabel.isHidden = false
+        emptyImage.isHidden = false
+        readyView.isHidden = true
+        dayCuntLabel.isHidden = true
+        endTracker.isHidden = true
+    }
+    func record() {
+        emptyLabel.isHidden = true
+        emptyImage.isHidden = true
+        readyView.isHidden = false
+        dayCuntLabel.isHidden = false
+        endTracker.isHidden = false
     }
 }
 
