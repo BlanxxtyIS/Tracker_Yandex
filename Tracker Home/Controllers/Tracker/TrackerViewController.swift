@@ -8,6 +8,7 @@
 
 //16 Sprint
 import UIKit
+import AppMetricaCore
 
 //Трекеры
 class TrackerViewController: UIViewController {
@@ -99,7 +100,20 @@ class TrackerViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "OPEN Screen", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "CLOSED Screen", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
     }
         
     @objc func datePickerSelected(_ sender: UIDatePicker) {
@@ -140,12 +154,21 @@ class TrackerViewController: UIViewController {
     @objc private func addTracker() {
         let viewController = CreatingTrackers(delegate: self)
         present(UINavigationController(rootViewController: viewController), animated: true)
-        print("Добавляй трекер")
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "CREATE TRACKER", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
     }
     
     @objc func filterButtonClicked(_ sender: UIButton) {
         let vc = UINavigationController(rootViewController: FilterViewController(delegate: self))
         present(vc, animated: true)
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "FILTER TAP", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
         print("Фильтр, фильтр")
     }
     
@@ -441,6 +464,11 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(indexPath.row) нажали на ячейку реализация в дальнейшем мб")
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "TAP TRACKER", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {        return visibleTrackers.count

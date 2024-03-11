@@ -108,42 +108,10 @@
             filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "textFieldShouldReturn(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A8023AA8-C2B2-434D-A229-3F31400103B7 - 601214641ff0ee8c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.textFieldShouldReturn(__C.UITextField) -&gt; Swift.Bool"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "334"
-                  endingLineNumber = "334"
-                  offsetFromSymbolStart = "64">
-               </Location>
-               <Location
-                  uuid = "A8023AA8-C2B2-434D-A229-3F31400103B7 - 601214641ff0ee8c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.textFieldShouldReturn(__C.UITextField) -&gt; Swift.Bool"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "334"
-                  endingLineNumber = "334"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -172,57 +140,10 @@
             filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
             landmarkName = "toRemove(id:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E746A2C7-65F2-44A8-AFC9-118BE7E58B78 - 90ce71290f5d2597"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "404"
-                  endingLineNumber = "404"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "E746A2C7-65F2-44A8-AFC9-118BE7E58B78 - 90ce71290f5d2597"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "404"
-                  endingLineNumber = "404"
-                  offsetFromSymbolStart = "180">
-               </Location>
-               <Location
-                  uuid = "E746A2C7-65F2-44A8-AFC9-118BE7E58B78 - 90ce71290f5d2597"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "404"
-                  endingLineNumber = "404"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -235,57 +156,10 @@
             filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "toRemove(id:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "61B267E3-ED1B-492B-90D7-F6A1FB228630 - 90ce71290f5d25f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "405"
-                  endingLineNumber = "405"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "61B267E3-ED1B-492B-90D7-F6A1FB228630 - 90ce71290f5d25f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "405"
-                  endingLineNumber = "405"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "61B267E3-ED1B-492B-90D7-F6A1FB228630 - 90ce71290f5d25f6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "405"
-                  endingLineNumber = "405"
-                  offsetFromSymbolStart = "180">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -298,42 +172,10 @@
             filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
             landmarkName = "toRemove(id:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A231AA89-87F3-480D-89D3-CD21CAA1E02C - 90ce71290f5d25d5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "406"
-                  endingLineNumber = "406"
-                  offsetFromSymbolStart = "228">
-               </Location>
-               <Location
-                  uuid = "A231AA89-87F3-480D-89D3-CD21CAA1E02C - 90ce71290f5d25d5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.toRemove(id: Foundation.UUID) -&gt; ()"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "406"
-                  endingLineNumber = "406"
-                  offsetFromSymbolStart = "196">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -346,57 +188,10 @@
             filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "343"
-            endingLineNumber = "343"
+            startingLineNumber = "366"
+            endingLineNumber = "366"
             landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9666E83A-6CEC-4028-8FB6-7421C5027191 - ce8445fcb375b6b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "343"
-                  endingLineNumber = "343"
-                  offsetFromSymbolStart = "504">
-               </Location>
-               <Location
-                  uuid = "9666E83A-6CEC-4028-8FB6-7421C5027191 - ce8445fcb375b6b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "343"
-                  endingLineNumber = "343"
-                  offsetFromSymbolStart = "144">
-               </Location>
-               <Location
-                  uuid = "9666E83A-6CEC-4028-8FB6-7421C5027191 - ce8445fcb375b6b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
-                  moduleName = "Tracker Home"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "343"
-                  endingLineNumber = "343"
-                  offsetFromSymbolStart = "448">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -476,6 +271,22 @@
             endingLineNumber = "122"
             landmarkName = "StatisticsViewController"
             landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6021FC7D-6067-44AA-A8AD-BE14018469A0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "addTracker()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

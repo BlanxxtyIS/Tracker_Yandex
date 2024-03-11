@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppMetricaCore
 
 protocol TrackerViewControllerCellDelegate: AnyObject {
     func completeTracker(id: UUID, indexPath: IndexPath)
@@ -14,7 +15,6 @@ protocol TrackerViewControllerCellDelegate: AnyObject {
     func toEdit(id: UUID, dayLabel: String)
     func toRemove(id: UUID)
 }
-
 
 protocol UpdateStatisticsDaysDelegate: AnyObject {
     func updateDays(count: String)
@@ -222,6 +222,7 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         return configuration
     }
     
+    
     private func toFixed() {
         guard let trackerId = trackerId else {
             assertionFailure("Не найден айди или индекс")
@@ -238,6 +239,11 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         }
         let days = dayLabel.text!
         delegate?.toEdit(id: trackerId, dayLabel: days)
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "Context EDITED TRACKER", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
         print("Изменить")
     }
     
@@ -248,6 +254,11 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         }
         delegate?.toRemove(id: trackerId)
         print("Удалить")
+        let params : [AnyHashable : Any] = ["key1": "value1", "key2": "value2"]
+        AppMetrica.reportEvent(name: "Context DELETE TRACKER", parameters: params, onFailure: {( error) in
+            print("DID FAIL REPORT EVENT: %@", "ОШИБКА AppMetrica")
+            print("REPORT ERROR: %@", error.localizedDescription)
+        })
     }
 }
 
