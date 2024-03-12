@@ -45,7 +45,7 @@
 		F4A80B002B4D796A00FCCAEF /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */; };
 		F4AC15C22B77A1C0001213DB /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC15C12B77A1C0001213DB /* CategoryModel.swift */; };
 		F4AC15C42B77A22C001213DB /* AllCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */; };
-		F4B869642BA0EBDD00F99543 /* SelectedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B869632BA0EBDD00F99543 /* SelectedCell.swift */; };
+		F4B869692BA0FDB700F99543 /* Tracker HomeTestss.xctest in Resources */ = {isa = PBXBuildFile; fileRef = F40697492B98C93100427B2F /* Tracker HomeTestss.xctest */; };
 		F4BF2CA12B3A3A7900FC88DD /* Tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */; };
 		F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */; };
 		F4BF2CA52B3A3A8C00FC88DD /* TrackerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */; };
@@ -119,7 +119,6 @@
 		F4A80AFF2B4D796A00FCCAEF /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		F4AC15C12B77A1C0001213DB /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		F4AC15C32B77A22C001213DB /* AllCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoryViewModel.swift; sourceTree = "<group>"; };
-		F4B869632BA0EBDD00F99543 /* SelectedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCell.swift; sourceTree = "<group>"; };
 		F4BF2CA02B3A3A7900FC88DD /* Tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tracker.swift; sourceTree = "<group>"; };
 		F4BF2CA22B3A3A8300FC88DD /* TrackerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategory.swift; sourceTree = "<group>"; };
 		F4BF2CA42B3A3A8C00FC88DD /* TrackerRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecord.swift; sourceTree = "<group>"; };
@@ -307,7 +306,6 @@
 				F499738E2B75F9F90040C883 /* AppSettingsStorage.swift */,
 				F49973982B7655830040C883 /* CategoryStore.swift */,
 				F4AC15C12B77A1C0001213DB /* CategoryModel.swift */,
-				F4B869632BA0EBDD00F99543 /* SelectedCell.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -426,6 +424,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B869692BA0FDB700F99543 /* Tracker HomeTestss.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,7 +523,6 @@
 				F4C796FE2B678EAF00636046 /* CoreDataManager.swift in Sources */,
 				F4A80AFE2B4D189500FCCAEF /* ScheduleTableViewCell.swift in Sources */,
 				F4A2F4842B46DB7200D40710 /* CreatingTrackers.swift in Sources */,
-				F4B869642BA0EBDD00F99543 /* SelectedCell.swift in Sources */,
 				F4C797032B67966100636046 /* TrackerStore.swift in Sources */,
 				F4A138ED2B3A459E006FE0C0 /* TrackerViewControllerCell.swift in Sources */,
 				F4340C512B9F847D00CB8453 /* AnalyticsService.swift in Sources */,
