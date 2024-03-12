@@ -111,16 +111,15 @@ class TrackerViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        analyticsService.report(event: "open TrackersViewController", parameters: ["event": "open", "screen": "Main"])
+        analyticsService.report(event: "open", parameters: ["screen": "Main"])
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        analyticsService.report(event: "closed TrackersViewController", parameters: ["event": "close", "screen": "Main"])
+        analyticsService.report(event: "close", parameters: ["screen": "Main"])
     }
     
     @objc func datePickerSelected(_ sender: UIDatePicker) {
-        analyticsService.report(event: "Date picker date changed on TrackersViewController", parameters: ["event": "change", "screen": "Main"])
         selectedDate = sender.date
         updateVisibleTrackers(forDate: selectedDate)
         visibleTrackers.isEmpty ? emptyView(true) : errorView(false)
@@ -158,13 +157,13 @@ class TrackerViewController: UIViewController {
     @objc private func addTracker() {
         let viewController = CreatingTrackers(delegate: self)
         present(UINavigationController(rootViewController: viewController), animated: true)
-        analyticsService.report(event: "Add tracker tapped on TrackersViewController", parameters: ["event": "click", "screen": "Main", "item": "add_track"])
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "add_track"])
     }
     
     @objc func filterButtonClicked(_ sender: UIButton) {
         let vc = UINavigationController(rootViewController: FilterViewController(delegate: self))
         present(vc, animated: true)
-        analyticsService.report(event: "Did press the filters button on TrackersViewController", parameters: ["event": "click", "screen": "Main", "item": "filter"])
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "filter"])
         print("Фильтр, фильтр")
     }
     
@@ -465,7 +464,6 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.analyticsService.report(event: "Did tap tracker cell", parameters: ["event": "click", "screen": "Main", "item": "cell"])
         print("\(indexPath.row) нажали на ячейку реализация в дальнейшем мб")
     }
     

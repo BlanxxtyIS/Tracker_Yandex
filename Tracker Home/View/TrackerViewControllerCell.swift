@@ -122,7 +122,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
-        analyticsService.report(event: "plus day button clicked", parameters: ["event": "click", "screen": "Main"])
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "track"])
         var dayCount = UserDefaults.standard.integer(forKey: "DayCount")
         if completeCell {
             UserDefaults.standard.setValue(dayCount - 1, forKey: "DayCount")
@@ -240,7 +240,7 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
             assertionFailure("Не найден айди или индекс")
             return
         }
-        analyticsService.report(event: "Chose edit option in tracker's context menu", parameters: ["event": "click", "screen": "Main", "item": "edit"])
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "edit"])
         let days = dayLabel.text!
         delegate?.toEdit(id: trackerId, dayLabel: days)
         print("Изменить")
@@ -253,7 +253,7 @@ extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
         }
         delegate?.toRemove(id: trackerId)
         print("Удалить")
-        self.analyticsService.report(event: "Confirmed tracker deletion on TrackersViewController", parameters: ["event": "click", "screen": "Main", "item": "delete"])
+        self.analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "delete"])
     }
 }
 
