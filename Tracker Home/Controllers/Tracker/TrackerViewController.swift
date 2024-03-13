@@ -418,6 +418,8 @@ extension TrackerViewController: UICollectionViewDataSource, TrackerViewControll
             vc.categ = true
             vc.shedul = true
             vc.editingID = id
+            vc.lastSelectedColor = tracker.color
+            vc.lastSelectedEmoji = tracker.emoji
             present(vc, animated: true)
         } else {
             print("Трекер \(id) не найден")

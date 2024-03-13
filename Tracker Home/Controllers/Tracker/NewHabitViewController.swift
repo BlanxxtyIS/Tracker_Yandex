@@ -42,12 +42,9 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     
     var isPinned: Bool = false
     
-    var lastSectionIndexPath: IndexPath?
-    var lastIndexPath: IndexPath?
-    
-    var lastSelectedEmoji: String = ""
-    var lastSelectedColor: UIColor = .color1
-    
+    var lastSelectedEmoji: String?
+    var lastSelectedColor: UIColor?
+
     var category: String = ""
     var schedule: [Weekday] = []
     private lazy var userSelected: [String] = ["", ""]
@@ -177,48 +174,49 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         textField.text = editingText
-    
-        // Проверяем, есть ли выбранная эмоджи
-        guard let selectedEmoji = editingEmoji else {
-            return
-        }
-        // Находим IndexPath для выбранной эмоджи в секции 0
-        if let indexOfSelectedEmoji = emojiSection.firstIndex(of: selectedEmoji), indexOfSelectedEmoji < emojiSection.count {
-            let indexPath = IndexPath(item: indexOfSelectedEmoji, section: 0)
-            
-            // Обновляем фоновый цвет ячейки
-            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
-                cell.contentView.backgroundColor = .udLightGray
-                lastSelectedEmoji = emojiSection[indexPath.item]
-                print(emojiSection[indexPath.item])
-                allCellFilled.collectionViewEmoji = true
+        if habit == "Edit" {
+            // Проверяем, есть ли выбранная эмоджи
+            guard let selectedEmoji = editingEmoji else {
+                return
             }
-        }
-        //Идентично для color
-        guard let selectedColor = editingColor else {
-            return
-        }
-        if let indexOfSelectedColor = colorSection.firstIndex(of: selectedColor), indexOfSelectedColor < colorSection.count {
-            let indexPath = IndexPath(item: indexOfSelectedColor, section: 1)
-
-            // Обновляем фоновый цвет ячейки
-            if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
-                cell.contentView.layer.masksToBounds = true
-                cell.contentView.layer.borderWidth = 3.0
-                let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
-                cell.contentView.layer.borderColor = borderColor
+            // Находим IndexPath для выбранной эмоджи в секции 0
+            if let indexOfSelectedEmoji = emojiSection.firstIndex(of: selectedEmoji), indexOfSelectedEmoji < emojiSection.count {
+                let indexPath = IndexPath(item: indexOfSelectedEmoji, section: 0)
                 
-                lastSelectedColor = colorSection[indexPath.item]
-                print(colorSection[indexPath.item])
-                allCellFilled.collectionViewColor = true
+                // Обновляем фоновый цвет ячейки
+                if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                    cell.contentView.backgroundColor = .udLightGray
+                    lastSelectedEmoji = emojiSection[indexPath.item]
+                    print(emojiSection[indexPath.item])
+                    allCellFilled.collectionViewEmoji = true
+                }
             }
+            //Идентично для color
+            guard let selectedColor = editingColor else {
+                return
+            }
+            if let indexOfSelectedColor = colorSection.firstIndex(of: selectedColor), indexOfSelectedColor < colorSection.count {
+                let indexPath = IndexPath(item: indexOfSelectedColor, section: 1)
+                
+                // Обновляем фоновый цвет ячейки
+                if let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell {
+                    cell.contentView.layer.masksToBounds = true
+                    cell.contentView.layer.borderWidth = 3.0
+                    let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+                    cell.contentView.layer.borderColor = borderColor
+                    
+                    lastSelectedColor = colorSection[indexPath.item]
+                    print(colorSection[indexPath.item])
+                    allCellFilled.collectionViewColor = true
+                }
+            }
+            
+            allCellFilled.tableViewSchedule = true
+            allCellFilled.collectionViewColor = true
+            allCellFilled.collectionViewEmoji = true
+            allCellFilled.tableViewCategory = true
+            allCellFilled.textField = true
         }
-        
-        allCellFilled.tableViewSchedule = true
-        allCellFilled.collectionViewColor = true
-        allCellFilled.collectionViewEmoji = true
-        allCellFilled.tableViewCategory = true
-        allCellFilled.textField = true
     }
     
     @objc
@@ -247,11 +245,11 @@ class NewHabitViewController: UIViewController, AllCategoryViewControllerDelegat
         var newHabit: Tracker
         if habit == "Edit" {
             let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? editingSchedule : irregularSchedule
-            newHabit = Tracker(id: editingID!, name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
+            newHabit = Tracker(id: editingID!, name: trackerName, color: lastSelectedColor!, emoji: lastSelectedEmoji!, schedule: screen, isPinned: false)
             self.delegate?.createNewHabit(header: editingCategory, tracker: newHabit)
         } else {
             let screen = habit == "CategoryAndSchedule" || habit == "Edit" ? schedule : irregularSchedule
-            newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor, emoji: lastSelectedEmoji, schedule: screen, isPinned: false)
+            newHabit = Tracker(id: UUID(), name: trackerName, color: lastSelectedColor!, emoji: lastSelectedEmoji!, schedule: screen, isPinned: false)
             
             self.delegate?.createNewHabit(header: category, tracker: newHabit)
         }
@@ -437,16 +435,34 @@ extension NewHabitViewController: UICollectionViewDataSource {
     
     //сама ячейка в выбранной indexPath
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiColorCollectionCell", for: indexPath) as? EmojiColorCollectionCell else {
-            preconditionFailure("Ошибка с ячейкой")
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiColorCollectionCell", for: indexPath) as! EmojiColorCollectionCell
         var data: String
+
+        // Обнуляем все свойства ячейки перед установкой новых значений
+        cell.emoji.text = nil
+        cell.color.backgroundColor = .clear
+        cell.contentView.backgroundColor = .clear
+        cell.contentView.layer.masksToBounds = false
+        cell.contentView.layer.borderWidth = 0.0
+
         if indexPath.section == 0 {
             data = emojiSection[indexPath.item]
             cell.emoji.text = data
-        } else {
+        } else if indexPath.section == 1 {
             cell.color.backgroundColor = colorSection[indexPath.item]
         }
+        
+        if emojiSection[indexPath.item] == lastSelectedEmoji {
+            cell.contentView.backgroundColor = .udLightGray
+            cell.layer.borderWidth = 0.0
+        } else if colorSection[indexPath.item] == lastSelectedColor {
+            cell.contentView.backgroundColor = .clear
+            cell.contentView.layer.masksToBounds = true
+            cell.contentView.layer.borderWidth = 3.0
+            let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
+            cell.contentView.layer.borderColor = borderColor
+        }
+        
         return cell
     }
     
@@ -464,56 +480,46 @@ extension NewHabitViewController: UICollectionViewDataSource {
 extension NewHabitViewController: UICollectionViewDelegateFlowLayout {
     //Выбор ячейки
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if firstSelected {
+        if let lastSelectedEmoji = lastSelectedEmoji {
             if indexPath.section == 0 {
-                if let previousCell = collectionView.cellForItem(at: IndexPath(item: emojiSection.firstIndex(of: lastSelectedEmoji) ?? 0, section: 0)) as? EmojiColorCollectionCell {
-                    previousCell.contentView.backgroundColor = .clear
+                for itemIndex in 0..<collectionView.numberOfItems(inSection: 0) {
+                    let cellIndexPath = IndexPath(item: itemIndex, section: 0)
+                    
+                    // Обновляем состояние всех ячеек
+                    if let cell = collectionView.cellForItem(at: cellIndexPath) as? EmojiColorCollectionCell {
+                        cell.contentView.backgroundColor = .clear
+                    }
                 }
-            } else {
-                if let previousCells = collectionView.cellForItem(at: IndexPath(item: colorSection.firstIndex(of: lastSelectedColor) ?? 1, section: 1)) as? EmojiColorCollectionCell {
-                    previousCells.contentView.layer.borderWidth = 0.0
-                    previousCells.contentView.layer.borderColor = nil
-                }
-                firstSelected = false
             }
         }
-        guard var cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
+        if let lastSelectedColor = lastSelectedColor {
+            if indexPath.section == 1 {
+                for itemIndex in 0..<collectionView.numberOfItems(inSection: 1) {
+                    let cellIndexPath = IndexPath(item: itemIndex, section: 1)
+                    
+                    // Обновляем состояние всех ячеек
+                    if let cell = collectionView.cellForItem(at: cellIndexPath) as? EmojiColorCollectionCell {
+                        cell.contentView.layer.masksToBounds = false
+                        cell.contentView.layer.borderWidth = 0.0
+                    }
+                }
+            }
+        }
         if indexPath.section == 0 {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
             cell.contentView.backgroundColor = .udLightGray
-            
-            lastSelectedEmoji = emojiSection[indexPath.item]
-            print(emojiSection[indexPath.item])
+            cell.layer.borderWidth = 0.0
             allCellFilled.collectionViewEmoji = true
-        } else {
+            lastSelectedEmoji = emojiSection[indexPath.row]
+        } else if indexPath.section == 1 {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiColorCollectionCell else { return }
             cell.contentView.layer.masksToBounds = true
+            cell.contentView.backgroundColor = .clear
             cell.contentView.layer.borderWidth = 3.0
             let borderColor = colorSection[indexPath.item].withAlphaComponent(0.3).cgColor
             cell.contentView.layer.borderColor = borderColor
-            
-            lastSelectedColor = colorSection[indexPath.item]
-            print(colorSection[indexPath.item])
             allCellFilled.collectionViewColor = true
-        }
-        
-        if lastIndexPath == nil {
-            lastIndexPath = indexPath
-        } else {
-            cell = (collectionView.cellForItem(at: lastIndexPath!) as! EmojiColorCollectionCell)
-            if indexPath.section == lastIndexPath?.section {
-                cell.destroyCell(lastIndexPath!)
-                lastIndexPath = indexPath
-            } else {
-                print("Разные секции")
-                if lastSectionIndexPath == nil {
-                    lastSectionIndexPath = lastIndexPath
-                    lastIndexPath = indexPath
-                } else {
-                    cell = (collectionView.cellForItem(at: lastSectionIndexPath!) as! EmojiColorCollectionCell)
-                    cell.destroyCell(lastSectionIndexPath!)
-                    lastSectionIndexPath = lastIndexPath
-                    lastIndexPath = indexPath
-                }
-            }
+            lastSelectedColor = colorSection[indexPath.row]
         }
     }
     

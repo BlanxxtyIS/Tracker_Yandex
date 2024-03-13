@@ -23,7 +23,6 @@
 		F433C4582B6387E800A9EF61 /* EmojiColorCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4572B6387E800A9EF61 /* EmojiColorCollectionCell.swift */; };
 		F433C45A2B6387F700A9EF61 /* EmojiColorCollectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F433C4592B6387F700A9EF61 /* EmojiColorCollectionHeader.swift */; };
 		F4340C512B9F847D00CB8453 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4340C502B9F847D00CB8453 /* AnalyticsService.swift */; };
-		F4340C532B9F94E300CB8453 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C796FD2B678EAF00636046 /* CoreDataManager.swift */; };
 		F439A9632B3B879C00E99BEE /* TrackerViewControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F439A9622B3B879C00E99BEE /* TrackerViewControllerHeader.swift */; };
 		F457F4752B99A4C00050828B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F457F4742B99A4C00050828B /* FilterViewController.swift */; };
 		F457F47A2B99C7600050828B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F457F47C2B99C7600050828B /* Localizable.strings */; };
@@ -54,6 +53,9 @@
 		F4C797032B67966100636046 /* TrackerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797022B67966100636046 /* TrackerStore.swift */; };
 		F4C797052B67966C00636046 /* TrackerCategoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797042B67966C00636046 /* TrackerCategoryStore.swift */; };
 		F4C797072B67967600636046 /* TrackerRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C797062B67967600636046 /* TrackerRecordStore.swift */; };
+		F4CC16D32BA1D6D60039D0D3 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4CC16D22BA1D6D60039D0D3 /* CellState.swift */; };
+		F4F604692BA25B1100E0F05B /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4340C502B9F847D00CB8453 /* AnalyticsService.swift */; };
+		F4F6046B2BA25BB200E0F05B /* Tracker HomeTestss.xctest in Resources */ = {isa = PBXBuildFile; fileRef = F40697492B98C93100427B2F /* Tracker HomeTestss.xctest */; };
 		F4FA32F52B9ED6A900E8A99B /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FA32F42B9ED6A900E8A99B /* Gradient.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +129,7 @@
 		F4C797022B67966100636046 /* TrackerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerStore.swift; sourceTree = "<group>"; };
 		F4C797042B67966C00636046 /* TrackerCategoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerCategoryStore.swift; sourceTree = "<group>"; };
 		F4C797062B67967600636046 /* TrackerRecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerRecordStore.swift; sourceTree = "<group>"; };
+		F4CC16D22BA1D6D60039D0D3 /* CellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
 		F4FA32F42B9ED6A900E8A99B /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,6 +260,7 @@
 				F4A2F48B2B4828AC00D40710 /* NewCategoryViewController.swift */,
 				F4A80AFB2B4D169400FCCAEF /* NewScheduleViewController.swift */,
 				F457F4742B99A4C00050828B /* FilterViewController.swift */,
+				F4CC16D22BA1D6D60039D0D3 /* CellState.swift */,
 			);
 			path = Tracker;
 			sourceTree = "<group>";
@@ -435,6 +439,7 @@
 				F4102A6E2B35AEBD009E2D14 /* LaunchScreen.storyboard in Resources */,
 				F457F4822B9A17970050828B /* Localizable.stringsdict in Resources */,
 				F457F47A2B99C7600050828B /* Localizable.strings in Resources */,
+				F4F6046B2BA25BB200E0F05B /* Tracker HomeTestss.xctest in Resources */,
 				F4102A6B2B35AEBD009E2D14 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,8 +500,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4340C532B9F94E300CB8453 /* CoreDataManager.swift in Sources */,
 				F406974C2B98C93100427B2F /* Tracker_HomeTestss.swift in Sources */,
+				F4F604692BA25B1100E0F05B /* AnalyticsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,6 +513,7 @@
 				F4A2F48C2B4828AC00D40710 /* NewCategoryViewController.swift in Sources */,
 				F4C797012B67908900636046 /* TrackerCoreData.xcdatamodeld in Sources */,
 				F4102A662B35AEBC009E2D14 /* MainTabBarController.swift in Sources */,
+				F4CC16D32BA1D6D60039D0D3 /* CellState.swift in Sources */,
 				F4C797072B67967600636046 /* TrackerRecordStore.swift in Sources */,
 				F4A80AFC2B4D169500FCCAEF /* NewScheduleViewController.swift in Sources */,
 				F4BF2CA32B3A3A8300FC88DD /* TrackerCategory.swift in Sources */,
