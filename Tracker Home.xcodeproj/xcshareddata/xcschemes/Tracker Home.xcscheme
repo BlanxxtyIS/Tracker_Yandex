@@ -34,7 +34,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F41B50282B98C04F00669A1F"
+               BlueprintIdentifier = "F44AA3852BA2BDDD00B46DAB"
                BuildableName = "Tracker HomeTests.xctest"
                BlueprintName = "Tracker HomeTests"
                ReferencedContainer = "container:Tracker Home.xcodeproj">
@@ -48,6 +48,17 @@
                BlueprintIdentifier = "F40697482B98C93100427B2F"
                BuildableName = "Tracker HomeTestss.xctest"
                BlueprintName = "Tracker HomeTestss"
+               ReferencedContainer = "container:Tracker Home.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F4F44FB42BA2C05100536BCF"
+               BuildableName = "ScreenTest.xctest"
+               BlueprintName = "ScreenTest"
                ReferencedContainer = "container:Tracker Home.xcodeproj">
             </BuildableReference>
          </TestableReference>

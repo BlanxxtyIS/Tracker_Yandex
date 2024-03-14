@@ -63,7 +63,6 @@ class EmojiColorCollectionCell: UICollectionViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        
     }
 }
     
