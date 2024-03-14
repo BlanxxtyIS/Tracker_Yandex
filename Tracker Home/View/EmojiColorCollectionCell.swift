@@ -10,7 +10,8 @@ import UIKit
 class EmojiColorCollectionCell: UICollectionViewCell {
     let identifier = "emojiColorCollectionCell"
     
-    var lastIndexPath: IndexPath? = nil
+    var lastSelectedIndex: IndexPath?
+    var lastSelectedNeedIndex: IndexPath?
     
     var emoji: UILabel = {
         let emoji = UILabel()
@@ -59,6 +60,9 @@ class EmojiColorCollectionCell: UICollectionViewCell {
             contentView.layer.masksToBounds = false
             contentView.layer.borderWidth = 0.0
         }
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 }
     

@@ -15,6 +15,16 @@ extension UIColor {
     static var udBackground: UIColor { UIColor(named: "YP Background") ?? UIColor.systemBackground}
     static var udRed: UIColor { UIColor(named: "YP Red") ?? UIColor.red}
     static var udLightGray: UIColor { UIColor(named: "YP Light Gray") ?? UIColor.gray}
+    static var udDayAndNight: UIColor { UIColor(named: "YP Day and Night") ?? UIColor.white}
+    static var udNightAndDay: UIColor { UIColor(named: "YP Night and Day") ?? UIColor.black}
+    static var udGrayAndNight: UIColor { UIColor(named: "YP Gray and Night") ?? .gray}
+    static var udDatePicker: UIColor { UIColor(named: "YP DatePicker") ?? .gray}
+    static var udBagroundWAD: UIColor { UIColor(named: "YP BacgroundDAN") ?? .gray}
+    static var udEmojiColor: UIColor { UIColor(named: "YP EmojiColor") ?? .gray}
+    
+    static var gradient1: UIColor { UIColor(named: "gradient1") ?? .white}
+    static var gradient2: UIColor { UIColor(named: "gradient2") ?? .white}
+    static var gradient3: UIColor { UIColor(named: "gradient3") ?? .white}
     
     static var color1: UIColor { UIColor(named: "Color selection 1")!}
     static var color2: UIColor { UIColor(named: "Color selection 2")!}
@@ -35,3 +45,5 @@ extension UIColor {
     static var color17: UIColor { UIColor(named: "Color selection 17")!}
     static var color18: UIColor { UIColor(named: "Color selection 18")!}
 }
+
+

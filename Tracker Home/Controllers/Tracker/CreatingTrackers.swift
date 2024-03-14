@@ -27,8 +27,9 @@ class CreatingTrackers: UIViewController {
     
     private lazy var newHabitButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .udBlackDay
-        button.setTitle("Привычка", for: .normal)
+        button.backgroundColor = .udNightAndDay
+        button.setTitleColor(.udDayAndNight, for: .normal)
+        button.setTitle(localizedText(text: "habbit"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(newHabitClick), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -39,8 +40,9 @@ class CreatingTrackers: UIViewController {
     
     private lazy var irregularEventButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .udBlackDay
-        button.setTitle("Нерегулярное событие", for: .normal)
+        button.backgroundColor = .udNightAndDay
+        button.setTitleColor(.udDayAndNight, for: .normal)
+        button.setTitle(localizedText(text: "irregularHabbit"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(irregularEventClick), for: .touchUpInside)
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -60,8 +62,8 @@ class CreatingTrackers: UIViewController {
             
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .udWhiteDay
-        title = "Создание трекера"
+        view.backgroundColor = .udDayAndNight
+        title = localizedText(text: "trackerCrated")
         setupAllViews()
     }
     
@@ -79,14 +81,14 @@ class CreatingTrackers: UIViewController {
     
     @objc private func newHabitClick() {
         let viewController = NewHabitViewController(delegate: self)
-        viewController.habit = true
+        viewController.habit = "CategoryAndSchedule"
         present(UINavigationController(rootViewController: viewController), animated:  true)
         print("Привычка")
     }
     
     @objc private func irregularEventClick() {
         let viewController = NewHabitViewController(delegate: self)
-        viewController.habit = false
+        viewController.habit = "Category"
         present(UINavigationController(rootViewController: viewController), animated:  true)
         print("Нерегулярное событие")
     }

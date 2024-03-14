@@ -29,7 +29,7 @@ final class OnboardingViewController: UIPageViewController {
         first.view.addSubview(firstBackgroundImage)
         
         let firstTitle = UILabel()
-        firstTitle.text = "Отслеживайте только то, что хотите"
+        firstTitle.text = localizedText(text: "onboardingOne")
         firstTitle.font = .systemFont(ofSize: 32, weight: .bold)
         firstTitle.numberOfLines = 2
         firstTitle.textAlignment = .center
@@ -38,7 +38,7 @@ final class OnboardingViewController: UIPageViewController {
         
         let onboardingFirstButton = UIButton()
         onboardingFirstButton.backgroundColor = .udBlackDay
-        onboardingFirstButton.setTitle("Вот это технологии!", for: .normal)
+        onboardingFirstButton.setTitle(localizedText(text: "onboardingButton"), for: .normal)
         onboardingFirstButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         onboardingFirstButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         onboardingFirstButton.layer.cornerRadius = 16
@@ -55,7 +55,7 @@ final class OnboardingViewController: UIPageViewController {
         second.view.addSubview(secondBackgroundImage)
         
         let secondTitle = UILabel()
-        secondTitle.text = "Даже если это не литры воды и йога"
+        secondTitle.text = localizedText(text: "onboardingTwo")
         secondTitle.font = .systemFont(ofSize: 32, weight: .bold)
         secondTitle.numberOfLines = 2
         secondTitle.textAlignment = .center
@@ -64,7 +64,7 @@ final class OnboardingViewController: UIPageViewController {
         
         let onboardingSecondButton = UIButton()
         onboardingSecondButton.backgroundColor = .udBlackDay
-        onboardingSecondButton.setTitle("Вот это технологии!", for: .normal)
+        onboardingSecondButton.setTitle(localizedText(text: "onboardingButton"), for: .normal)
         onboardingSecondButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         onboardingSecondButton.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
         onboardingSecondButton.layer.cornerRadius = 16
@@ -162,9 +162,7 @@ extension OnboardingViewController: UIPageViewControllerDelegate {
         if let currentViewController = pageViewController.viewControllers?.first, let currentIndex = pages.firstIndex(of: currentViewController) {
             pageControl.currentPage = currentIndex
         }
-        
     }
 }
-
 
 

@@ -40,7 +40,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
     
     private lazy var emptyLabel: UILabel = {
        let label = UILabel()
-        label.text = "Привычки и события можно объеденить по смыслу"
+        label.text = localizedText(text: "categoryPlaceholder")
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -67,7 +67,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
     private lazy var addCategoryButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .udBlackDay
-        button.setTitle("Добавить категорию", for: .normal)
+        button.setTitle(localizedText(text: "addCategory"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         button.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
         button.layer.cornerRadius = 16
@@ -79,7 +79,7 @@ class AllCategoryViewController: UIViewController, NewCategoryViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .udWhiteDay
-        title = "Категория"
+        title = localizedText(text: "allCategory")
         view.addSubview(addCategoryButton)
         categories = categoryStore.categoryGive()
         tableView.delegate = self

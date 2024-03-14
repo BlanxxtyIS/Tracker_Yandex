@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "1A13A56C-3477-47FA-872E-9E9F9FA84637"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FE851307-85C1-4A6F-8D5C-C7178B4FBAF2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Model/TrackerCategoryStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "toUpdateTrackerCategory(categoryId:trackerId:newHeader:newTracker:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FE851307-85C1-4A6F-8D5C-C7178B4FBAF2 - 41eebcb13a761e7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerCategoryStore.toUpdateTrackerCategory(id: Foundation.UUID, newHeader: Swift.String) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Model/TrackerCategoryStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "FE851307-85C1-4A6F-8D5C-C7178B4FBAF2 - 72d910e4953f084b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerCategoryStore.toUpdateTrackerCategory(categoryId: Foundation.UUID, trackerId: Foundation.UUID, newHeader: Swift.String) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Model/TrackerCategoryStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "FE851307-85C1-4A6F-8D5C-C7178B4FBAF2 - 72d910e4953f0828"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerCategoryStore.toUpdateTrackerCategory(categoryId: Foundation.UUID, trackerId: Foundation.UUID, newHeader: Swift.String) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Model/TrackerCategoryStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "FE851307-85C1-4A6F-8D5C-C7178B4FBAF2 - 44671ab0917a2547"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerCategoryStore.toUpdateTrackerCategory(categoryId: Foundation.UUID, trackerId: Foundation.UUID, newHeader: Swift.String, newTracker: Tracker_Home.Tracker) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Model/TrackerCategoryStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AA284CFB-BCBE-4094-B8A3-5B978A2E3AE0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Statistics/StatisticsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AA284CFB-BCBE-4094-B8A3-5B978A2E3AE0 - 846b9f654d5d45a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.StatisticsViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Statistics/StatisticsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "AA284CFB-BCBE-4094-B8A3-5B978A2E3AE0 - 846b9f654d5d45a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.StatisticsViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Statistics/StatisticsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "AA284CFB-BCBE-4094-B8A3-5B978A2E3AE0 - 846b9f654d5d5a45"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.StatisticsViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Statistics/StatisticsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B998AFA9-DC7D-4156-AFE8-849A59529AB6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Statistics/StatisticsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "StatisticsViewController"
+            landmarkType = "21">
+            <Locations>
+               <Location
+                  uuid = "B998AFA9-DC7D-4156-AFE8-849A59529AB6 - db179e4234fdd881"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.StatisticsViewController.updateDays(count: Swift.String) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Statistics/StatisticsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "B998AFA9-DC7D-4156-AFE8-849A59529AB6 - db179e4234fdd881"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.StatisticsViewController.updateDays(count: Swift.String) -&gt; ()"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Statistics/StatisticsViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A8DD1D50-EBAD-4A2F-BDEB-FD70C7017BBA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "datePickerSelected(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A90EEFC8-D4F1-4C5F-9428-40ED0D03B38C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
+            landmarkName = "TrackerViewController"
+            landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B6B5C2B3-CEB9-42E4-B03D-420D3BF5FB34"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Tracker/TrackerViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
+            landmarkName = "textField(_:shouldChangeCharactersIn:replacementString:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B6B5C2B3-CEB9-42E4-B03D-420D3BF5FB34 - ce8445fcb375b308"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "B6B5C2B3-CEB9-42E4-B03D-420D3BF5FB34 - ce8445fcb375b308"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "B6B5C2B3-CEB9-42E4-B03D-420D3BF5FB34 - ce8445fcb375b308"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "363"
+                  endingLineNumber = "363"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "B6B5C2B3-CEB9-42E4-B03D-420D3BF5FB34 - ce8445fcb375b36b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tracker_Home.TrackerViewController.textField(_: __C.UITextField, shouldChangeCharactersIn: __C._NSRange, replacementString: Swift.String) -&gt; Swift.Bool"
+                  moduleName = "Tracker Home"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marathasanov/Desktop/Tracker_Yandex_Osnova/Tracker%20Home/Controllers/Tracker/TrackerViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "360"
+                  endingLineNumber = "360"
+                  offsetFromSymbolStart = "216">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0085DF5A-95CD-45CF-BAF9-6C1202554048"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tracker Home/Controllers/Tracker/NewHabitViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

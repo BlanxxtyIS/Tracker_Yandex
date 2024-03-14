@@ -6,18 +6,29 @@
 //
 
 import UIKit
+import AppMetricaCore
 
 protocol TrackerViewControllerCellDelegate: AnyObject {
     func completeTracker(id: UUID, indexPath: IndexPath)
     func uncompleteTracker(id: UUID, indexPath: IndexPath)
+    func toFix(id: UUID)
+    func toEdit(id: UUID, dayLabel: String)
+    func toRemove(id: UUID)
+}
+
+protocol UpdateStatisticsDaysDelegate: AnyObject {
+    func updateDays(count: String)
 }
 
 //Ячейки коллекции
 class TrackerViewControllerCell: UICollectionViewCell {
         
+    weak var twoDelegate: UpdateStatisticsDaysDelegate?
     weak var delegate: TrackerViewControllerCellDelegate?
     
+    private let analyticsService = AnalyticsService()
     
+    let trackerStore = TrackerStore.shared
     
     let currentDate = Date()
     var selectedDate = Date()
@@ -70,7 +81,7 @@ class TrackerViewControllerCell: UICollectionViewCell {
     let dayLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .udBlackDay
+        label.textColor = .udNightAndDay
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -89,6 +100,9 @@ class TrackerViewControllerCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupAllViews()
+        
+        let contextMenu = UIContextMenuInteraction(delegate: self)
+        colorView.addInteraction(contextMenu)
     }
     
     required init?(coder: NSCoder) {
@@ -96,19 +110,11 @@ class TrackerViewControllerCell: UICollectionViewCell {
     }
     
     private func completionCountDaysText(completedDays: Int){
-        let remainder = completedDays % 100
-        if (11...14).contains(remainder) {
-            dayLabel.text = "\(completedDays) дней"
-        } else {
-            switch remainder % 10 {
-            case 1:
-                dayLabel.text = "\(completedDays) день"
-            case 2...4:
-                dayLabel.text = "\(completedDays) дня"
-            default:
-                dayLabel.text = "\(completedDays) дней"
-            }
-        }
+        let formattedString = String.localizedStringWithFormat(
+            NSLocalizedString("completedDays", comment: "Completed days"),
+            completedDays
+        )
+        dayLabel.text = formattedString
     }
 
     @objc private func plusButtonClicked() {
@@ -116,11 +122,20 @@ class TrackerViewControllerCell: UICollectionViewCell {
             assertionFailure("Не найден айди или индекс")
             return
         }
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "track"])
+        var dayCount = UserDefaults.standard.integer(forKey: "DayCount")
         if completeCell {
+            UserDefaults.standard.setValue(dayCount - 1, forKey: "DayCount")
             delegate?.uncompleteTracker(id: trackerId, indexPath: indexPath)
         } else {
+            UserDefaults.standard.setValue(dayCount + 1, forKey: "DayCount")
             delegate?.completeTracker(id: trackerId, indexPath: indexPath)
         }
+    }
+    
+    func tapDelegate() {
+        let dayCount = UserDefaults.standard.integer(forKey: "DayCount")
+        twoDelegate?.updateDays(count: String(dayCount))
     }
     
     func setupData(traker: Tracker, dayCount: Int, isCompletedToday: Bool, indexPath: IndexPath) {
@@ -182,3 +197,63 @@ class TrackerViewControllerCell: UICollectionViewCell {
         ])
     }
 }
+
+//MARK: - Контекстное меню
+extension TrackerViewControllerCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return nil
+        }
+        let boolean = trackerStore.fetchTracker(withID: trackerId)?.isPinned
+        let actionProvider: ([UIMenuElement]) -> UIMenu? = { _ in
+        return UIMenu(children: [
+            UIAction(title: !boolean! ? localizedText(text: "toPin") : localizedText(text: "unpin")) { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toFixed()
+                }},
+            UIAction(title: localizedText(text: "toEdit")) { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toEdited()
+                }},
+            UIAction(title: localizedText(text: "toDelete"), attributes: [.destructive]) { [weak self] _ in
+                if let indexPath = self?.indexPath {
+                    self?.toRemoved()
+                }},
+        ])}
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: actionProvider)
+        return configuration
+    }
+    
+    
+    private func toFixed() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        delegate?.toFix(id: trackerId)
+        print("Закрепить")
+    }
+    
+    private func toEdited() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "edit"])
+        let days = dayLabel.text!
+        delegate?.toEdit(id: trackerId, dayLabel: days)
+        print("Изменить")
+    }
+    
+    private func toRemoved() {
+        guard let trackerId = trackerId else {
+            assertionFailure("Не найден айди или индекс")
+            return
+        }
+        delegate?.toRemove(id: trackerId)
+        print("Удалить")
+        self.analyticsService.report(event: "click", parameters: ["screen": "Main", "item": "delete"])
+    }
+}
+

@@ -29,6 +29,7 @@ final class TrackerCategoryStore {
             trackerCoreData.color = tracker.color
             trackerCoreData.emoji = tracker.emoji
             trackerCoreData.createdDate = Date()
+            trackerCoreData.isPinned = tracker.isPinned
             if !tracker.schedule.isEmpty {
                 let schedule = tracker.schedule.map { $0.toData() }
                 trackerCoreData.schedule = schedule as NSObject?
@@ -103,6 +104,36 @@ final class TrackerCategoryStore {
         } catch {
             print("Ошибка в TrackerRecordStore в методе fetchTracker \(error)")
             return nil
+        }
+    }
+    
+    func toUpdateTrackerCategory(categoryId: UUID, trackerId: UUID, newHeader: String, newTracker: Tracker) {
+        if let existingTrackerCategory = fetchTrackerCategory(withID: categoryId) {
+            let category = trackerFromCoreData(existingTrackerCategory)
+            existingTrackerCategory.header = newHeader
+            let tracker = trackerStore.fetchTracker(withID: trackerId)
+            tracker?.name = newTracker.name
+            tracker?.color = newTracker.color
+            tracker?.emoji = newTracker.emoji
+            tracker?.schedule = newTracker.schedule as NSObject
+            tracker?.isPinned = newTracker.isPinned
+            do {
+                try coreDataManager.context.save()
+            } catch {
+                print("ERROOR")
+            }
+        } else {
+            print("Трекер с ID \(categoryId) не найден.")
+        }
+    }
+    
+    func deleteTracker(trackerCoreData: TrackerCoreData) {
+        do {
+            coreDataManager.context.delete(trackerCoreData)
+            try coreDataManager.context.save()
+            print("Трекер успешно удален")
+        } catch {
+            print("Ошибка при удалении трекера: \(error)")
         }
     }
 }
